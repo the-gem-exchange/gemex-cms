@@ -29,7 +29,7 @@ INSTALLED_APPS = [
     'home',
     'search',
     'comic',
-    'thegemexchange',
+    'gemex-cms',
 
     # API Related
     'wagtail.api.v2',
@@ -79,7 +79,7 @@ MIDDLEWARE = [
 # Access Control Allow Origin = *
 CORS_ORIGIN_ALLOW_ALL = True
 
-ROOT_URLCONF = 'thegemexchange.urls'
+ROOT_URLCONF = 'gemex-cms.urls'
 
 TEMPLATES = [
     {
@@ -99,7 +99,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'thegemexchange.wsgi.application'
+WSGI_APPLICATION = 'gemex-cms.wsgi.application'
 
 
 # Database
@@ -172,7 +172,7 @@ MEDIA_URL = '/media/'
 
 # Wagtail settings
 
-WAGTAIL_SITE_NAME = "thegemexchange"
+WAGTAIL_SITE_NAME = "The Gem Exchange"
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash

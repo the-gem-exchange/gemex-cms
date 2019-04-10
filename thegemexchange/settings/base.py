@@ -28,6 +28,13 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 INSTALLED_APPS = [
     'home',
     'search',
+    'comic',
+    'thegemexchange',
+
+    # API Related
+    'wagtail.api.v2',
+    'rest_framework',
+    'corsheaders',
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
@@ -53,6 +60,10 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    # API Related
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -64,6 +75,9 @@ MIDDLEWARE = [
     'wagtail.core.middleware.SiteMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
+
+# Access Control Allow Origin = *
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'thegemexchange.urls'
 

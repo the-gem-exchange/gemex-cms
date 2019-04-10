@@ -1,19 +1,27 @@
-*.swp
-*.pyc
+# System Files
 .DS_Store
-/.coverage
-/dist/
-/build/
-/MANIFEST
-/wagtail.egg-info/
-/docs/_build/
-/.tox/
-/venv
-/node_modules/
-npm-debug.log*
-*.idea/
-/*.egg/
-/.cache/
-/.pytest_cache/
+*/**/.DS_Store
 
+# Database
+db.sqlite3
+
+# Sensitive Info
 config.py
+
+# Logs
+debug.log
+
+# PIP
+src/
+
+# Python config
+*.pyc
+*/**/*.pyc
+page/migrations/*.pyc
+
+# NPM
+node_modules/
+
+# Django Files
+/static/
+media/

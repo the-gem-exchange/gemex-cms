@@ -1,0 +1,55 @@
+{% extends "wagtailadmin/login.html" %}
+{% load static %}
+
+{% block above_login %}
+<style media="screen">
+  .wrapper{
+    width: 450px;
+    max-width: 100%;
+    margin: auto;
+  }
+
+  img.login-img{
+    display:   block;
+    margin:    0 auto;
+    max-width: 250px;
+  }
+
+  h1{
+    font-size:      3em;
+    text-transform: uppercase;
+    text-align:     center;
+  }
+
+  .fields li.full input{
+    padding-left: 4em;
+  }
+  .full .iconfield .input:before{
+    left: 1em;
+  }
+
+  .fields li.full {
+    position:  relative;
+    width:     500px;
+    margin:    auto;
+    padding:   0;
+    max-width: 100%;
+    overflow:  hidden;
+  }
+  .fields li.full:nth-child(1){
+    border-top-left-radius:  5px;
+    border-top-right-radius: 5px;
+  }
+  .fields li.full:nth-child(2){
+    border-bottom-left-radius:  5px;
+    border-bottom-right-radius: 5px;
+  }
+
+  .submit button{
+    width:100%;
+  }
+</style>
+<img class="login-img" src="{% static 'img/admin-logo.png' %}"  alt="The Gem Exchange">
+{% endblock %}
+
+{% block branding_login %}GemEx Admin{% endblock %}

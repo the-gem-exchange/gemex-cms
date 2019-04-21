@@ -1,0 +1,26 @@
+{% load wagtailcore_tags menu_tags %}
+
+<div class="row">
+  {% if value.block.name == 'One_Column' %}
+    <div class="col-md-{% if value.column.colspan %}{{value.column.colspan}}{% else %}12{% endif %}">
+      {{ value.column.content }}
+    </div>
+  {% elif value.block.name == 'Two_Columns' %}
+    <div class="col-md-{% if value.left_column.colspan %}{{value.left_column.colspan}}{% else %}7{% endif %}">
+      {{ value.left_column.content }}
+    </div>
+    <div class="col-md-{% if value.right_column.colspan %}{{value.right_column.colspan}}{% else %}5{% endif %}">
+      {{ value.right_column.content }}
+    </div>
+  {% elif value.block.name == 'Three_Columns' %}
+    <div class="col-md-{% if value.left_column.colspan %}{{value.left_column.colspan}}{% else %}4{% endif %}">
+      {{ value.left_column.content }}
+    </div>
+    <div class="col-md-{% if value.center_column.colspan %}{{value.center_column.colspan}}{% else %}4{% endif %}">
+      {{ value.center_column.content }}
+    </div>
+    <div class="col-md-{% if value.right_column.colspan %}{{value.right_column.colspan}}{% else %}4{% endif %}">
+      {{ value.right_column.content }}
+    </div>
+  {% endif %}
+</div>

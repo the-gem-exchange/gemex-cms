@@ -13,6 +13,9 @@ AWS_STORAGE_BUCKET_NAME = 'static.thegemexchange.net'
 AWS_S3_REGION_NAME = 'us-east-1'
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = False
+AWS_HEADERS = {
+    'Access-Control-Allow-Origin': '*'
+}
 
 # Media Storage
 MEDIAFILES_LOCATION = 'media'

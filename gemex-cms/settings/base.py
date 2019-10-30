@@ -26,11 +26,20 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Application definition
 
 INSTALLED_APPS = [
-    'home',
     'search',
-    'comic',
-    'page',
     'gemex-cms',
+
+	# Pages
+	'comic',
+	'home',
+	'page',
+
+	# Files
+	'image',
+
+	# Snippets
+	'trait',
+	'species',
 
     # API Related
     'wagtail.api.v2',
@@ -177,7 +186,7 @@ MEDIA_URL = '/media/'
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "The Gem Exchange"
-# WAGTAILIMAGES_IMAGE_MODEL = 'images.CustomImage'
+WAGTAILIMAGES_IMAGE_MODEL = 'image.CustomImage'
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash

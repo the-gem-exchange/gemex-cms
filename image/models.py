@@ -59,7 +59,6 @@ class CustomImage(AbstractImage):
 		return self.height < self.width
 
 
-
 class CustomRendition(AbstractRendition):
 	image = models.ForeignKey(CustomImage, on_delete=models.CASCADE, related_name='renditions')
 

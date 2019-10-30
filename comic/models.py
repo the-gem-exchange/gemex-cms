@@ -14,7 +14,7 @@ from wagtail.api.v2.endpoints import BaseAPIEndpoint
 class ComicPage(Page):
     page_number = models.IntegerField()
     comic = models.ForeignKey(
-        'wagtailimages.Image',
+        'image.CustomImage',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,

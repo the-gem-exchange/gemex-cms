@@ -46,3 +46,14 @@ class ThreeColumns(blocks.StructBlock):
     class Meta:
         template       = 'blocks/blocks_row.html'
         form_classname = 'columns three-columns'
+
+stream_blocks = [
+    ('Title',         SectionTitle(icon='title')),
+    ('Subtitle',      SubTitle(icon='title')),
+    ('heading',       blocks.CharBlock(classname="full title")),
+    ('paragraph',     blocks.RichTextBlock()),
+    ('image',         ImageChooserBlock()),
+    ('One_Column',    OneColumn(icon='one-column')),
+    ('Two_Columns',   TwoColumns(icon='two-columns')),
+    ('Three_Columns', ThreeColumns(icon='three-columns')),
+]

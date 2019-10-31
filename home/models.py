@@ -1,35 +1,13 @@
-from django.db import models
+from page.models import ContentPage
 
-from wagtail.core.models import Page
-from wagtail.core.fields import StreamField
-from wagtail.core import blocks
-from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
-from wagtail.images.blocks import ImageChooserBlock
+class HomePage(ContentPage):
 
-from wagtail.api import APIField
-from wagtail.api.v2.endpoints import BaseAPIEndpoint
+	# Only available at root level
+	parent_page_types = ['wagtailcore.Page']
 
-import page.stream_blocks as StreamBlocks
+	content_panels = ContentPage.content_panels + []
 
-availableStreamBlocks = [
-    ('Title',         StreamBlocks.SectionTitle(icon='title')),
-    ('Subtitle',      StreamBlocks.SubTitle(icon='title')),
-    ('heading',       blocks.CharBlock(classname="full title")),
-    ('paragraph',     blocks.RichTextBlock()),
-    ('image',         ImageChooserBlock()),
-    ('One_Column',    StreamBlocks.OneColumn(icon='one-column')),
-    ('Two_Columns',   StreamBlocks.TwoColumns(icon='two-columns')),
-    ('Three_Columns', StreamBlocks.ThreeColumns(icon='three-columns')),
-]
-
-class HomePage(Page):
-    content = StreamField(availableStreamBlocks, blank=True)
-
-    content_panels = Page.content_panels + [
-        StreamFieldPanel('content'),
-    ]
-
-    api_fields = [
-        APIField('title'),
-        APIField('content'),
-    ]
+	# There can only be one HomePage
+	@classmethod
+	def can_create_at(cls, parent):
+		return super(HomePage, cls).can_create_at(parent) and not cls.objects.exists()

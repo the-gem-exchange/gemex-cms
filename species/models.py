@@ -32,4 +32,4 @@ class SubSpecies(Orderable):
 	]
 
 	def __str__(self):
-		return self.name
+		return self.name + self.species.name

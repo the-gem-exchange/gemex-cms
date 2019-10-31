@@ -1,27 +1,44 @@
-from django.db import models
+from page.stream_blocks import stream_blocks
 
-from wagtail.core.models import Page
 from wagtail.core.fields import StreamField
-from wagtail.core import blocks
+from wagtail.core.models import Page
 from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
-from wagtail.images.blocks import ImageChooserBlock
 
-import page.stream_blocks as StreamBlocks
 
-availableStreamBlocks = [
-    ('heading',       blocks.CharBlock(classname="full title")),
-    ('paragraph',     blocks.RichTextBlock()),
-    ('image',         ImageChooserBlock()),
-    ('Two_Columns',   StreamBlocks.TwoColumns(icon='two-columns')),
-    ('Three_Columns', StreamBlocks.ThreeColumns(icon='three-columns')),
-]
+# === Abstract Page Models ===
 
-class BasicPage(Page):
-    content = StreamField(availableStreamBlocks, blank=True)
+class AbstractFolder(Page):
 
-    content_panels = Page.content_panels + [
-        StreamFieldPanel('content'),
-    ]
+	content_panels = Page.content_panels
+	
+	class Meta:
+		abstract = True
 
-    class Meta:
-        verbose_name = 'Basic Page'
+
+class AbstractPage(Page):
+
+	content_panels = Page.content_panels
+
+	class Meta:
+		abstract = True
+
+
+# All pages that use StreamField content should inherit from this model
+class ContentPage(AbstractPage):
+
+	content = StreamField(stream_blocks, blank=True)
+
+	content_panels = AbstractPage.content_panels + [
+		StreamFieldPanel('content'),
+	]
+
+	class Meta:
+		abstract = True
+
+# === Basic Page Models ===
+
+class Folder(AbstractFolder):
+	pass
+
+class BasicPage(ContentPage):
+	pass

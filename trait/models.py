@@ -1,3 +1,4 @@
+from django import forms
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.files.images import ImageFile
@@ -7,6 +8,8 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from modelcluster.models import ClusterableModel
+
+from species.models import Species
 
 from wagtail.admin.edit_handlers import InlinePanel, FieldPanel, StreamFieldPanel, MultiFieldPanel
 from wagtail.core import blocks
@@ -20,7 +23,7 @@ from wagtail.snippets.models import register_snippet
 @register_snippet
 class Trait(index.Indexed, ClusterableModel):
 
-	name = models.CharField(max_length=255)
+	name  = models.CharField(max_length=255)
 	image = models.ForeignKey('image.CustomImage', null=True, blank=True, on_delete=models.SET_NULL)
 
 	type = models.CharField(
@@ -60,22 +63,8 @@ class Trait(index.Indexed, ClusterableModel):
 		]
 	)
 
-	species = models.CharField(
-		max_length=24,
-		blank=False,
-		null=True,
-		choices=[
-			('stareater',   'Stareater'),
-			('starsweeper', 'Starsweeper'),
-			('stardasher',  'Stardasher'),
-			('starfisher',  'Starfisher'),
-			('starweaver',  'Starweaver'),
-			('starrobber',  'Starrobber'),
-			('starcrafter', 'Starcrafter'),
-			('starshooter', 'Starshooter'),
-			('chimera',     'Chimera')
-		],
-	)
+	species = models.ForeignKey('species.Species', null=True, blank=True, on_delete=models.SET_NULL)
+
 	subspecies = models.CharField(
 		max_length=24,
 		blank=True,

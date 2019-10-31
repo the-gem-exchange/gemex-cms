@@ -24,17 +24,18 @@ INSTALLED_APPS = [
     'search',
     'gemex-cms',
 
-	# Pages
-	'comic',
-	'home',
-	'page',
-
 	# Files
 	'image',
 
 	# Snippets
-	'trait',
 	'species',
+	'trait',
+	'stardragon',
+
+	# Pages
+	'page',
+	'comic',
+	'home',
 
     # API Related
     'wagtail.api.v2',

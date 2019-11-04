@@ -26,18 +26,6 @@
 
 	{% if panels %}
 		{% for panel in panels %}
-			{% if forloop.counter == 2 %}
-				<div class="panel nice-padding" style="display:block; overflow:hidden;">
-				  <div class="comic-admin">
-					<div class="comic-admin-title">
-					  <h3>Comic</h3>
-					</div>
-					<a href="#">
-					  <img src="{% static 'img/comic-thumb.png'%}" alt="">
-					</a>
-				  </div>
-				</div>
-			{% endif %}
 			{{ panel.render }}
 		{% endfor %}
 	{% else %}

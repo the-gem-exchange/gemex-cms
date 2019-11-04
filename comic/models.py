@@ -33,6 +33,8 @@ class ComicChapter(AbstractFolder):
 
 class ComicPage(AbstractPage):
 
+	parent_page_types = ['ComicChapter']
+
 	page_number = models.IntegerField()
 
 	comic = models.ForeignKey(

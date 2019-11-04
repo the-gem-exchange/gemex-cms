@@ -42,8 +42,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
 
+	'wagtailfontawesome',
+
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
+	'wagtail.contrib.modeladmin',
     'wagtail.embeds',
     'wagtail.sites',
     'wagtail.users',

@@ -1,0 +1,34 @@
+<style media="screen">
+	.traits{
+		display: grid;
+		list-style-type: none;
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+	}
+	.trait{
+		text-align: center;
+	}
+	.trait img{
+		width: 200px;
+		height: 200px;
+		border-radius: 50%;
+	}
+</style>
+
+{% if species %}
+	<h1>{{species.name}} {{species.species.name}} Traits ({{traits|length}})</h1>
+{% else %}
+	<h1>All Traits ({{traits|length}})</h1>
+{% endif %}
+<a href="/species">Back</a>
+<ul class="traits">
+	{% for trait in traits %}
+		<li class="trait">
+			{{trait.thumbnail}}
+			<p>{{trait}}</p>
+			<p>{{trait.species}}</p>
+			<p>{{trait.type}}</p>
+			<p>{{trait.sex}}</p>
+			<p style="text-transform:capitalize">{{trait.rarity}}</p>
+		</li>
+	{% endfor %}
+</ul>

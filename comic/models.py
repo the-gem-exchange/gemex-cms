@@ -24,6 +24,12 @@ class ComicChapter(AbstractFolder):
 	subpage_types     = ['ComicPage']
 	parent_page_types = ['ComicFolder']
 
+	chapter_number = models.IntegerField()
+
+	content_panels = ComicFolder.content_panels + [
+		FieldPanel('chapter_number', classname="title full"),
+	]
+
 
 class ComicPage(AbstractPage):
 
@@ -38,7 +44,7 @@ class ComicPage(AbstractPage):
 	)
 
 	content_panels = AbstractPage.content_panels + [
-		FieldPanel('page_number'),
+		FieldPanel('page_number', classname="title full"),
 		ImageChooserPanel('comic'),
 	]
 
@@ -49,3 +55,9 @@ class ComicPage(AbstractPage):
 		APIField('comic'),
 		APIField('page_number'),
 	]
+
+	def chapter(self):
+		return self.get_parent()
+
+	class Meta:
+		ordering = ["page_number"]

@@ -3,8 +3,10 @@ from django.db import models
 from modelcluster.models import ClusterableModel
 
 from wagtail.admin.edit_handlers import InlinePanel, FieldPanel
+from wagtail.contrib.modeladmin.options import ModelAdmin, modeladmin_register
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
+
 
 @register_snippet
 class Stardragon(index.Indexed, ClusterableModel):
@@ -23,8 +25,17 @@ class Stardragon(index.Indexed, ClusterableModel):
 	# description
 
 	panels = [
-		FieldPanel('name'),
+		FieldPanel('name', classname="full title"),
 	]
 
 	def __str__(self):
 		return self.name
+
+
+class StardragonAdmin(ModelAdmin):
+	model = Stardragon
+	menu_icon = 'user'
+	list_display = ('name')
+	search_fields = ['name']
+
+modeladmin_register(StardragonAdmin)

@@ -1,0 +1,36 @@
+{% load static wagtailcore_tags wagtailimages_tags menu_tags %}
+
+<style media="screen">
+	.species, .species ul{
+		list-style-type: none;
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+	}
+	.subspecies{
+		height: 300px;
+		text-align: center;
+		margin-bottom: 1em;
+	}
+	.subspecies img{
+		height: 200px;
+		width: auto;
+		background: #ccc;
+		padding: 5px;
+	}
+</style>
+
+{% for s in species.all %}
+	<h1>{{s.name}}s</h1>
+	<ul class="species">
+		{% for sub in s.subspecies.all %}
+			<li class="subspecies">
+				<a href="/traits/{{sub.id}}">
+					{{sub.thumbnail}}
+				</a>
+				<p><b>{{sub.name}} {{sub.species.name}}s</b></p>
+				<p><em>{{sub.traits|length}} trait{{sub.traits|length|pluralize}}</em></p>
+			</li>
+		{% endfor %}
+	</ul>
+	<hr>
+{% endfor %}

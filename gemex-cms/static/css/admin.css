@@ -94,6 +94,25 @@ header, .page-explorer .listing .index, .breadcrumb{
   float: left;
 }
 
+.trait-thumbnail{
+	max-width: 75px;
+	display: block;
+	border-radius: 50%;
+}
+
+.species-thumbnail{
+	max-width: 100px;
+}
+
+.multi-field.trait-type .add-button,
+.multi-field.trait-type .add-button fieldset {
+	padding: 0;
+}
+
+.fields li.no-label label{
+	display: none;
+}
+
 footer{
   margin: 0;
   width: calc(100% - 180px);

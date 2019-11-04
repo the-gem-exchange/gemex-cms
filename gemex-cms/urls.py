@@ -7,6 +7,7 @@ from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
 from .api import api_router
+from .views import traits,species
 
 from search import views as search_views
 
@@ -21,14 +22,14 @@ urlpatterns = [
     # API Endpoints
     url(r'^api/', api_router.urls),
 
+	url(r'^traits/(?P<id>\d+)/$', traits),
+	url(r'^traits/', traits),
+	url(r'^species/', species),
+
     # For anything not caught by a more specific rule above, hand over to
     # Wagtail's page serving mechanism. This should be the last pattern in
     # the list:
     url(r'', include(wagtail_urls)),
-
-    # Alternatively, if you want Wagtail pages to be served from a subpath
-    # of your site, rather than the site root:
-    #    url(r'^pages/', include(wagtail_urls)),
 ]
 
 

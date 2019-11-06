@@ -1,11 +1,11 @@
 {% load i18n wagtailadmin_tags %}
 
 <li class="icon icon-doc-empty-inverse">
-    <a href="/">
-        {% blocktrans count counter=count with count|intcomma as total %}
-            <span>{{ total }}</span> Comic Chapter
-        {% plural %}
-            <span>{{ total }}</span> Comic Chapters
-        {% endblocktrans %}
-    </a>
+	<a href="/">
+		{% blocktrans count counter=count with count|intcomma as total %}
+			<span>{{ total }}</span> Comic Chapter
+		{% plural %}
+			<span>{{ total }}</span> Comic Chapters
+		{% endblocktrans %}
+	</a>
 </li>

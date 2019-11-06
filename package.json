@@ -7,9 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-autoprefixer": "~4.0.0",
     "gulp-cssnano": "^2.1.2",
+    "gulp-csso": "^3.0.1",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^4.0.1",
     "gulp-size": "^2.1.0",

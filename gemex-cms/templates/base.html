@@ -2,36 +2,45 @@
 
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>
-            {% block title %}
-                {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
-            {% endblock %}
-            {% block title_suffix %}
-                {% with self.get_site.site_name as site_name %}
-                    {% if site_name %}- {{ site_name }}{% endif %}
-                {% endwith %}
-            {% endblock %}
-        </title>
-        <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<head>
+		<meta charset="utf-8" />
+		<title>
+			{% block title %}
+				{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
+			{% endblock %}
+			{% block title_suffix %}
+				{% with self.get_site.site_name as site_name %}
+					{% if site_name %}- {{ site_name }}{% endif %}
+				{% endwith %}
+			{% endblock %}
+		</title>
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        {# Global stylesheets #}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/thegemexchange.css' %}">
+		<script type="text/javascript">
+			// Prevents FA from converting <i> tags to <svg> and breaking CSS
+			window.FontAwesomeConfig = { autoReplaceSvg: false }
+		</script>
 
-        {% block extra_css %}
-            {# Override this in templates to add extra stylesheets #}
-        {% endblock %}
-    </head>
+		{# Global stylesheets #}
+		<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+		<script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
 
-    <body class="{% block body_class %}{% endblock %}">
-        {% wagtailuserbar %}
+		{% block extra_css %}
+			{# Override this in templates to add extra stylesheets #}
+		{% endblock %}
+	</head>
 
-        {% block content %}{% endblock %}
+	<body class="{% block body_class %}{% endblock %}">
+		{% wagtailuserbar %}
 
-        {# Global javascript #}
-        <!-- <script type="text/javascript" src="{% static 'js/thegemexchange.js' %}"></script> -->
+		{% block content %}{% endblock %}
 
-    </body>
+		{# Global javascript #}
+
+		{% block extra_js %}
+			{# Override this in templates to add extra scripts #}
+		{% endblock %}
+	</body>
 </html>

@@ -40,13 +40,15 @@ class Species(index.Indexed, ClusterableModel):
 
 
 class SubSpecies(Orderable):
-	species = ParentalKey(Species, on_delete=models.CASCADE, related_name='subspecies')
-	name    = models.CharField(max_length=255)
-	image   = models.ForeignKey('image.CustomImage',  null=True, blank=True,  on_delete=models.SET_NULL)
+	species    = ParentalKey(Species, on_delete=models.CASCADE, related_name='subspecies')
+	name       = models.CharField(max_length=255)
+	image      = models.ForeignKey('image.CustomImage',  null=True, blank=True,  on_delete=models.SET_NULL, related_name="species_image")
+	background = models.ForeignKey('image.CustomImage',  null=True, blank=True,  on_delete=models.SET_NULL, related_name="species_background")
 
 	panels = [
 		FieldPanel('name'),
 		ImageChooserPanel('image'),
+		ImageChooserPanel('background'),
 	]
 
 	api_fields = [

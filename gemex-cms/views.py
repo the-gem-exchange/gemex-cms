@@ -28,12 +28,14 @@ def comic(request, page=1):
 	page_number = int(page)
 	page_count  = ComicPage.objects.live().all().count()
 
-	if not page or page_number < 1 or page_number > page_count:
+	if not page or page_number > page_count:
+		return HttpResponseRedirect('/comic/{}/'.format(page_count))
+	elif page_number < 1:
 		return HttpResponseRedirect('/comic/1/')
 	else:
 		comic_page = ComicPage.objects.live().get(page_number=page)
 
-	return render(request, 'comic.html', {
+	return render(request, 'comic/page.html', {
 		'comic':        comic_page,
 		'page_count':   page_count,
 		'next_page':    page_number + 1 if page_number < page_count else None,

@@ -1,0 +1,190 @@
+$home-content-width: 750px;
+
+// Link Brand Colors
+$toyhouse:    rgba(0,140,186,1);
+$deviantart:  #4e6252;
+$github:      #333;
+$furaffinity: #2e3b41;
+$patreon:     #f96854;
+$twitter:     #1DA1F2;
+$discord:     #7289DA;
+
+$btn-color: rgba(153,102,204,0.9);
+
+#homepage-parallax{
+	height:             100vh;
+	overflow-x:         hidden;
+	overflow-y:         auto;
+	position:           relative;
+	perspective:        1px;
+	perspective-origin: 0 100%;
+}
+
+#homepage-title{
+	// Background on both title and social links, display side by side
+	@media screen and (min-width: 1201px){
+		background: #000;
+		height:     4rem; // 1rem less than the text so the text overflows
+		h1.title-text {
+			float:      right;
+			font-size:  5rem;
+			text-align: right;
+		}
+	}
+
+	// Background on social links only, display stacked
+	@media screen and (max-width: 1200px){
+		height: auto;
+		overflow: hidden;
+
+		#social-links,
+		h1.title-text {
+			float:      right;
+			width:      100%;
+			text-align: center;
+			display:    block;
+		}
+
+		#social-links {
+			background: #000;
+		}
+
+		h1.title-text {
+			text-align: center;
+			font-size: 3rem;
+		}
+	}
+
+	// Hide social links (since they're in side nav) and remove all backgrounds
+	@media screen and (max-width: 766px){
+		background-color: transparent;
+
+		#social-links {
+			display: none;
+		}
+	}
+
+	position: absolute;
+	top:      20vh;
+	left:     0;
+	right:    0;
+	z-index:  1;
+
+	ul#social-links {
+		float:     left;
+		height:    4rem;
+		transform: skewX(-20deg); // Angle the background, but not the text
+
+		padding: 0;
+		margin: 0;
+
+		li {
+			overflow:       hidden;
+			height:         4rem;
+			transition:     all .2s ease; // Transition width to show link text on hover only
+			width:          4rem;
+			float:          left;
+			display:        inline;
+
+			div {
+				transform: skewX(20deg);
+				max-height: 100%;
+			}
+
+			a {
+				font-size:      1.5rem;
+				font-family:    "Futura";
+				font-weight:    normal;
+				text-transform: uppercase;
+				color:          #FFF;
+				padding:        0px 25px;
+				line-height:    4rem;
+
+				i {
+					color: #fff;
+				}
+
+				span{
+					margin-left: 5px;
+				}
+			}
+
+			&:hover{
+				width:      12rem;
+				box-shadow: inset  7px 0 5px -5px rgba(0,0,0,0.5),
+							inset -7px 0 5px -5px rgba(0,0,0,0.5);
+
+				&.toyhouse{    background-color: $toyhouse }
+				&.deviantart{  background-color: $deviantart }
+				&.github{      background-color: $github }
+				&.patreon{     background-color: $patreon }
+				&.furaffinity{ background-color: $furaffinity }
+				&.twitter{     background-color: $twitter }
+				&.discord{     background-color: $discord }
+			}
+
+		}
+
+	}
+
+	h1.title-text {
+		font-family:    "Verbena";
+		text-transform: capitalize;
+		text-shadow:    2px 2px 0 #000;
+		color:          #FFF;
+		margin:         0;
+		line-height:    1.2;
+	}
+}
+
+#multilayer-background{
+	position:        relative;
+	height:          130vh;
+	transform-style: preserve-3d;
+	z-index:         0;
+
+	img{
+		@media screen and (max-width: 766px){
+			object-position: 25%; // Show the interesting part of the image on mobile!
+		}
+
+		object-fit: cover;
+
+		width:  100%;
+		height: 130vh;
+
+		position: fixed;
+		left:   0;
+		right:  0;
+		top:    0;
+
+		transform-origin: 0 100%;
+
+		&#layer-1{transform: translateZ(-10px) scale(11)}
+		&#layer-2{transform: translateZ(-8px)  scale(9)}
+		&#layer-3{transform: translateZ(-6px)  scale(7)}
+		&#layer-4{transform: translateZ(-3px)  scale(4)}
+		&#layer-5{transform: translateZ(-2px)  scale(3)}
+		&#layer-6{transform: translateZ(-1px)  scale(2)}
+		&#layer-7{transform: translateZ(0)}
+	}
+}
+
+
+#homepage-content{
+	z-index:    1;
+	transform:  translateZ(0);
+	background: #000;
+	color:      #fff;
+	position:   relative;
+
+	a {
+		transition: all .2s ease;
+		font-weight: bold;
+	}
+
+	.grid{
+		overflow: hidden;
+		max-width: $home-content-width;
+	}
+}

@@ -1,36 +1,55 @@
 {% load static wagtailcore_tags wagtailimages_tags menu_tags %}
 
 <style media="screen">
+	body {
+		margin: 0;
+	}
 	.species, .species ul{
 		list-style-type: none;
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr 1fr;
+		margin: 0;
+		padding: 0;
 	}
 	.subspecies{
-		height: 300px;
+		position: relative;
 		text-align: center;
-		margin-bottom: 1em;
 	}
 	.subspecies img{
 		height: 200px;
 		width: auto;
-		background: #ccc;
 		padding: 5px;
+		filter: drop-shadow(1px 1px 10px #000);
+	}
+
+	.species-background{
+		height: 300px;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center;
+		background-color: 000;
+	}
+	.species, .species a {
+		color: #FFF;
+		font-weight: bold;
+		text-decoration: none;
+		text-shadow: 1px 1px 1px #000;
+		font-size: 20px;
 	}
 </style>
 
-{% for s in species.all %}
-	<h1>{{s.name}}s</h1>
-	<ul class="species">
+<ul class="species">
+	{% for s in species.all %}
 		{% for sub in s.subspecies.all %}
 			<li class="subspecies">
 				<a href="/traits/{{sub.id}}">
-					{{sub.thumbnail}}
+					<div class="species-background" {% if sub.background %}style="background-image:url('{{sub.background.file.url}}')"{% endif %}>
+						{{sub.thumbnail}}
+						<p><b>{{sub.name}} {{sub.species.name}}s</b></p>
+						<p><em>{{sub.traits|length}} trait{{sub.traits|length|pluralize}}</em></p>
+					</div>
 				</a>
-				<p><b>{{sub.name}} {{sub.species.name}}s</b></p>
-				<p><em>{{sub.traits|length}} trait{{sub.traits|length|pluralize}}</em></p>
 			</li>
 		{% endfor %}
-	</ul>
-	<hr>
-{% endfor %}
+	{% endfor %}
+</ul>

@@ -1,0 +1,29 @@
+<div style="font-size:20px;">
+
+	<a href="/comic/1/">Oldest</a>
+
+	<span>&nbsp;&nbsp;&nbsp;</span>
+
+	{% if prev_page %}
+		<a href="/comic/{{prev_page}}/"><< Prev</a>
+	{% else %}
+		<a href="#" disabled><< Prev</a>
+	{% endif %}
+
+	<span>&nbsp;&nbsp;&nbsp;</span>
+
+	<span>{{comic.page_number}}</span>
+
+	<span>&nbsp;&nbsp;&nbsp;</span>
+
+	{% if next_page %}
+		<a href="/comic/{{next_page}}/">Next >></a>
+	{% else %}
+		<a href="#" disabled>Next >></a>
+	{% endif %}
+
+	<span>&nbsp;&nbsp;&nbsp;</span>
+
+	<a href="/comic/{{page_count}}/">Newest</a>
+
+</div>

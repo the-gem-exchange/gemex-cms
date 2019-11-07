@@ -1,0 +1,16 @@
+footer{
+	display: flex;
+	flex-direction: row;
+	font-family: "Futura";
+	text-transform: uppercase;
+	background: $nav-background-color;
+	
+	a{
+		color:#EEE;
+	}
+
+	img{
+		margin: 0 auto;
+		display: block;
+	}
+}

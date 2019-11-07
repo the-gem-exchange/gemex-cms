@@ -1,25 +1,23 @@
 {% extends "base.html" %}
 {% load static wagtailcore_tags wagtailimages_tags menu_tags %}
 
-{% block body_class %}{% endblock %}
+{% block body_class %}comicpage{% endblock %}
 
 {% block content %}
-	<div class="grid" style="text-align:center;">
-		{% include "comic/header.html" %}
+	{% include "comic/header.html" %}
 
+	<div class="grid comic-grid">
 		<div class="col-12">
 			{% include "comic/navigation.html" %}
 		</div>
-
 		<div class="col-12 no-padding">
 			<a href="/comic/{{next_page}}/">
 				{% image comic.comic original %}
 			</a>
 		</div>
-
 		<div class="col-12">
 			{% include "comic/navigation.html" %}
 		</div>
-
 	</div>
+	
 {% endblock %}

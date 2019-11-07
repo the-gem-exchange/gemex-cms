@@ -1,20 +1,24 @@
-@import './typography.scss';
+// Vendor
 @import './reflex.scss';
+
+// Shared
+@import './colors.scss';
+@import './typography.scss';
+
+// Pages
 @import './home.scss';
 @import './comic.scss';
 
-$link-color:       #7E6693;
-$link-hover-color: #985F99;
+// Components
+@import './navigation/nav.scss';
+@import './navigation/footer.scss';
 
-$background-color: #FFF;
-$dark-background-color: #010103;
-
-$nav-background-color: #333333;
-$nav-border-color: 1px solid #222222;
+* {
+	box-sizing: border-box;
+}
 
 html, body {
 	margin: 0;
-	height: 100%;
 	display: flex;
 	flex-direction: column;
 }
@@ -41,6 +45,10 @@ body{
 	padding-bottom: 15px;
 }
 
+.grid {
+	max-width: 900px;
+}
+
 img{
 	max-width: 100%;
 	height: auto;
@@ -59,87 +67,12 @@ a{
 		cursor: not-allowed;
 		color: #aaa;
 	}
-
-	&:not([href]):not([tabindex]){
-		cursor: pointer;
-		color: $link-color;
-
-		&:hover{
-			color: $link-hover-color;
-		}
-	}
 }
 
 header, footer{
 	a, a:not([href]){
 		transition: all 0.3s ease;
 		text-decoration: none!important;
-	}
-}
-
-header{
-	text-align: center;
-	font-family: "Futura";
-	font-size: 1rem;
-	text-transform: uppercase;
-	letter-spacing: 2px;
-	position: fixed;
-	z-index: 9;
-	width: 100%;
-
-	nav.navbar{
-		width:100%;
-		background: $nav-background-color;
-		border-bottom: $nav-border-color;
-		transition: all 0.5s ease;
-		top: 0;
-		padding: 0;
-
-		#mobile-nav-title{
-			text-transform: capitalize;
-			transition: all 0.5s ease;
-			opacity: 1;
-		}
-
-		a, a:not([href]){
-			color:#FFF;
-		}
-
-		a:hover, a:not([href]):hover{
-			color: $link-hover-color;
-		}
-
-		&.hideNav{
-			top: -60px;
-		}
-
-		&.transparent{
-			text-shadow:   1px 1px 1px #000;
-			background:    transparent;
-			border-bottom: 1px transparent;
-			#mobile-nav-title{ opacity: 0;}
-		}
-	}
-}
-
-footer{
-	display: flex;
-	flex-direction: row;
-	text-align: center;
-	z-index: 1;
-	font-family: "Futura";
-	font-size: 1rem;
-	text-transform: uppercase;
-	background: $nav-background-color;
-	border-top: $nav-border-color;
-
-	a{
-		color:#EEE;
-	}
-
-	img{
-		margin: 0 auto;
-		display: block;
 	}
 }
 

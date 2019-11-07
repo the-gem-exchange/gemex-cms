@@ -1,0 +1,30 @@
+nav {
+	font-family: "Futura";
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	position: fixed;
+	z-index: 9;
+	width: 100%;
+	background: $nav-background-color;
+	transition: all 0.2s ease;
+	top: 0;
+	text-align: center;
+
+	a {
+		color:#FFF;
+		transition: all 0.2s linear;
+		&:hover {
+			color: $link-hover-color;
+		}
+	}
+
+	&.hidden{
+		top: -60px;
+	}
+
+	&.transparent{
+		text-shadow:   1px 1px 0px #000;
+		background:    transparent;
+		border-bottom: 1px transparent;
+	}
+}

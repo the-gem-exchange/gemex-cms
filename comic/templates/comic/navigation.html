@@ -1,29 +1,21 @@
-<div style="font-size:20px;">
+<div class="comic-navigation">
 
-	<a href="/comic/1/">Oldest</a>
+	<a title="First" href="/comic/1/" {% if comic.page_number == 1 %}class="disabled"{% endif %}>
+		<i class="fas fa-angle-double-left"></i>
+	</a>
 
-	<span>&nbsp;&nbsp;&nbsp;</span>
+	<a title="Previous" {% if prev_page %}href="/comic/{{prev_page}}/"{% else %}class="disabled"{% endif %}>
+		<i class="fas fa-angle-left"></i>
+	</a>
 
-	{% if prev_page %}
-		<a href="/comic/{{prev_page}}/"><< Prev</a>
-	{% else %}
-		<a href="#" disabled><< Prev</a>
-	{% endif %}
+	<span>Page {{comic.page_number}}</span>
 
-	<span>&nbsp;&nbsp;&nbsp;</span>
+	<a title="Next" {% if next_page %}href="/comic/{{next_page}}/"{% else %}class="disabled"{% endif %}>
+		<i class="fas fa-angle-right"></i>
+	</a>
 
-	<span>{{comic.page_number}}</span>
-
-	<span>&nbsp;&nbsp;&nbsp;</span>
-
-	{% if next_page %}
-		<a href="/comic/{{next_page}}/">Next >></a>
-	{% else %}
-		<a href="#" disabled>Next >></a>
-	{% endif %}
-
-	<span>&nbsp;&nbsp;&nbsp;</span>
-
-	<a href="/comic/{{page_count}}/">Newest</a>
+	<a title="Last" href="/comic/{{page_count}}/" {% if comic.page_number == page_count %}class="disabled"{% endif %}>
+		<i class="fas fa-angle-double-right"></i>
+	</a>
 
 </div>

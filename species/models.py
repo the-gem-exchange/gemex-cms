@@ -74,9 +74,6 @@ class SubSpecies(Orderable):
 	def __str__(self):
 		return self.species.name + " ("+self.name+")"
 
-	class Meta:
-		ordering = ["species"]
-
 
 class SpeciesAdmin(ModelAdmin):
 	model         = Species

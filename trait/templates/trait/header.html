@@ -1,0 +1,40 @@
+<header class="traits-header">
+
+	<div class="background">
+		{% if species.background %}
+			<img src="{{species.background.file.url}}" />
+		{% endif %}
+	</div>
+
+	<div class="title">
+		<div>
+			<h1>
+				{% if species %}
+					{{species.species.name}}s
+				{% else %}
+					Traits
+				{% endif %}
+			</h1>
+		</div>
+	</div>
+
+	<nav class="subspecies-nav">
+		<ul class="horizontal-links">
+			{% for s in species.species.subspecies.all %}
+			<li>
+				<a href="#">{{s.name}}</a>
+			</li>
+			{% endfor %}
+		</ul>
+	</nav>
+
+	<div class="species-info">
+		<h3>{{traits|length}} Trait{{traits|length|pluralize}}</h3>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vitae nisl lectus. Fusce congue ipsum non laoreet cursus. Integer non massa quis nisi varius finibus sed tempor tellus. Maecenas consequat dignissim porttitor. Cras viverra nunc a ligula consequat, id eleifend risus posuere. Nunc consequat nunc non hendrerit ultrices. Duis eget lobortis sem. Fusce interdum libero est, eu euismod magna pulvinar at. Maecenas quis mauris ullamcorper ipsum egestas pellentesque.</p>
+	</div>
+
+	<div class="characters">
+		{{species.thumbnail}}
+	</div>
+
+</header>

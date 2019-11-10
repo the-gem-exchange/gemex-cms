@@ -20,6 +20,8 @@ body {
 h1, h2, h3, h4, h5, h6 {
 	font-family:    "Futura", sans-serif;
 	text-transform: uppercase;
+	letter-spacing: 1px;
+	margin-top:     0;
 }
 
 a {
@@ -28,17 +30,4 @@ a {
 
 p:empty {
 	margin: 0;
-}
-
-/* Remove the top margin/padding from each content block */
-.page-content {
-	[class*="col-"]{
-		padding-top: 0;
-	}
-	h1, h2, h3, h4, h5, h6{
-		margin-top: 0;
-	}
-	p {
-		margin-top: 0;
-	}
 }

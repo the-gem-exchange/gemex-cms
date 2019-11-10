@@ -1,0 +1,75 @@
+.species, .species ul{
+	list-style-type: none;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	margin: 0;
+	padding: 0;
+	grid-gap: 1em;
+	padding: 50px 0;
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+.subspecies{
+	position: relative;
+	text-align: center;
+
+	&.standard {
+		grid-column-start: 1;
+		grid-column-end: 4;
+		.text{
+			font-size: 2em;
+		}
+		.species-background {
+			height: 300px;
+			border-radius: 15px;
+		}
+		img {
+			height: 300px;
+			right: 0;
+		}
+		.text {
+			left: 0;
+		}
+	}
+	&:not(.standard){
+		img {
+			height: 200px;
+		}
+		.species-background {
+			height: 200px;
+			border-radius: 50%;
+			width: 200px;
+		}
+	}
+}
+
+.text {
+	position: absolute;
+	bottom: 0;
+	padding: 1em;
+}
+
+.subspecies img{
+	position: absolute;
+	bottom: 0;
+	width: auto;
+	height: auto;
+	padding: 5px;
+	filter: drop-shadow(1px 1px 10px #000);
+}
+
+.species-background{
+	height: 200px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: #000;
+}
+.species, .species a {
+	color: #FFF;
+	font-weight: bold;
+	text-decoration: none;
+	text-shadow: 1px 1px 1px #000;
+	font-size: 20px;
+}

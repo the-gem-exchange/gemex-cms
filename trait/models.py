@@ -94,15 +94,9 @@ class Trait(index.Indexed, ClusterableModel):
 	]
 
 	def thumbnail(self):
-		color = "#FFF"
-		if(self.rarity == 'common'): color = '#b0f171'
-		if(self.rarity == 'uncommon'): color = '#ffe476'
-		if(self.rarity == 'rare'): color = '#ff855b'
-		if(self.rarity == 'legendary'): color = '#ff6fa2'
 		return format_html(
-			'<img class="trait-thumbnail" src="{}" style="border:2px solid {};"/>',
+			'<img class="trait-thumbnail" src="{}" />',
 			self.image.file.url,
-			color,
 		)
 
 	def __str__(self):
@@ -112,7 +106,7 @@ class Trait(index.Indexed, ClusterableModel):
 			return self.species.name
 
 	class Meta:
-		ordering = ["name"]
+		ordering = ["rarity", "name"]
 
 # ===== ModelAdmin Models =====
 
@@ -124,7 +118,7 @@ class TraitTypeAdmin(ModelAdmin):
 class TraitAdmin(ModelAdmin):
 	model         = Trait
 	list_display  = ('thumbnail', 'name', 'type', 'species', 'rarity', 'sex')
-	search_fields = ['name', 'type__name', 'species__name', 'rarity', 'sex']
+	search_fields = ['name', 'type__name', 'species__name', 'species__species__name', 'rarity', 'sex']
 	list_display_add_buttons = 'name'
 	menu_icon  = 'view'
 

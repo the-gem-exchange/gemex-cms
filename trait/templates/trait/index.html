@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block body_class %}traits-page{% endblock %}
+
+{% block content %}
+
+	{% include 'trait/navigation.html'%}
+
+	{% include 'trait/header.html'%}
+
+	<div class="traits-content">
+		{% include 'trait/filters.html'%}
+		{% include 'trait/list.html'%}
+	</div>
+
+{% endblock %}

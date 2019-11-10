@@ -26,7 +26,7 @@
 		</div>
 	</div>
 
-	<div id="multilayer-background">
+	<div id="multilayer-background" class="home-section-1">
 		<img id="layer-1" src="/static/img/home/1-background.png">
 		<img id="layer-2" src="/static/img/home/2-base-stars.png">
 		<img id="layer-3" src="/static/img/home/3-extra-stars.png">
@@ -37,11 +37,22 @@
 	</div>
 
 	<div id="homepage-content" class="page-content">
-		<div class="grid">
-			{% for block in page.content %}
+		{% for block in page.content %}
+		<div class="home-section-{{forloop.counter|add:1}}">
+			{% if forloop.first %}
+				<img class="background-after" src="/static/img/home/stardragon-space.jpg">
+			{% elif forloop.counter == 2%}
+				<img class="background-after" src="/static/img/comic/joarca-map.png">
+			{% endif %}
+			<div class="grid">
 				{% include_block block %}
-			{% endfor %}
+			</div>
 		</div>
+		{% endfor %}
 	</div>
 
 {% endblock content %}
+
+{% block extra_js %}
+	<script type="text/javascript" src="/static/js/home.js"></script>
+{% endblock %}

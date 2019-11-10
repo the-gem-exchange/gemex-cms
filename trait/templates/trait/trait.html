@@ -1,0 +1,14 @@
+<li class="trait {{trait.rarity}}">
+	{{trait.thumbnail}}
+	<p>
+		<span class="trait-rarity {{trait.rarity}}" title="{{trait.rarity}}">
+			<i class="fa fa-circle"></i>
+		</span>
+		<span class="trait-name">{{trait}}</span>
+		<span class="trait-sex" title="{{trait.sex}}">
+			{% if trait.sex == 'x' %}<i class="fa fa-transgender"></i>{% endif %}
+			{% if trait.sex == 'f' %}<i class="fa fa-venus"></i>{% endif %}
+			{% if trait.sex == 'm' %}<i class="fa fa-mars"></i>{% endif %}
+		</span>
+	</p>
+</li>

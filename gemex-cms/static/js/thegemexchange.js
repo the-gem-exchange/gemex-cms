@@ -7,17 +7,17 @@ function showHideNav() {
 
 	// User is scrolling down - Hide Nav
 	if (newScrollPos > currentPos && !scrollingUp && newScrollPos >= 70) { // Only hide if we are scrolled past the height of the header
-		$('nav').addClass('hidden');
+		$('nav.site-nav').addClass('hidden');
 		scrollingUp = !scrollingUp;
 	}
 	// User is scrolling up - Show Nav
 	else if(newScrollPos < currentPos && scrollingUp) {
-		$('nav').removeClass('hidden');
+		$('nav.site-nav').removeClass('hidden');
 		scrollingUp = !scrollingUp;
 	}
 
-	if(newScrollPos < 100) $('nav').addClass('transparent');
-	else                   $('nav').removeClass('transparent');
+	if(newScrollPos < 100) $('nav.site-nav').addClass('transparent');
+	else                   $('nav.site-nav').removeClass('transparent');
 
 	currentPos = newScrollPos;
 }
@@ -25,7 +25,3 @@ function showHideNav() {
 $(document).on('scroll', function() {
 	showHideNav();
 });
-
-$(document).ready(function(){
-
-})

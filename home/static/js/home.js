@@ -1,6 +1,12 @@
 var isScrolling    = false;
 var totalSections  = 0;
 var currentSection = 1;
+var scrollSpeed    = 0;
+
+
+function unbindArrowKeys(){
+	$(document).off('keydown.tabs');
+}
 
 function bindArrowKeys(){
 	$(document).on('keydown.tabs', function(e){
@@ -19,32 +25,40 @@ function bindArrowKeys(){
 	})
 }
 
+function unbindScroll(){
+	$('.homepage #content').off('mousewheel DOMMouseScroll');
+}
+
 function bindScroll(){
 	$('.homepage #content').bind('mousewheel DOMMouseScroll', function(e){
 		e.preventDefault();
-		if(!isScrolling){
-			// Scrolling Down
-			if (e.originalEvent.wheelDelta >= 0 || e.originalEvent.detail >= 0) {
-				scrollNext()
-			}
-			// Scrolling Up
-			else {
-				scrollPrevious()
-			}
+		let newScrollSpeed = e.originalEvent.wheelDelta || e.originalEvent.detail || 0;
+		// If previous scoll event finished and the new scroll is greater than the last recorded scroll event
+		if(!isScrolling && Math.abs(newScrollSpeed) > scrollSpeed+2){
+			// Scroll down
+			if (newScrollSpeed >= 1) scrollNext();
+			// Scroll up
+			else if(newScrollSpeed <= -1) scrollPrevious();
+			console.log("Scrolled")
 		}
+		scrollSpeed = Math.abs(newScrollSpeed)
 	})
 }
 
 function scrollToSection(number) {
 	isScrolling = true;
 	$('.homepage #content').scrollTo(
-		$('.home-section-'+number), 500,
-		onAfter=function(){
-			currentSection = getCurrentSection()
-			setTimeout(function(){
-				isScrolling = false;
-			}, 500)
-		}
+		$('.home-section-'+number), 300,
+		{
+			onAfter:function(){
+				getCurrentSection();
+				updateJumplinks();
+				setTimeout(function(){
+					isScrolling = false;
+				}, 300)
+			},
+			behavior: 'smooth'
+		},
 	)
 }
 
@@ -63,28 +77,44 @@ function scrollPrevious(){
 }
 
 function getCurrentSection(){
-	let current = 0;
 	$('[class*="home-section-"]').each(function(i){
 		let section_number = i+1;
 		let isCurrentSection = $(this)[0].getBoundingClientRect().top == 0;
 		if(isCurrentSection){
-			current = section_number
+			currentSection = section_number
 		}
-	})
-	return current
+	});
+}
+
+function updateJumplinks(){
+	$('[class*="home-link-"]').each(function(i){
+		if(i+1 == currentSection) $(this).addClass('active')
+		else $(this).removeClass('active')
+	});
+}
+
+/* Disable on mobile */
+function toggleHomeJsOnResize(){
+	$(window).resize(function(){
+		if(window.innerWidth > 991){
+			initHome();
+		}
+		if(window.innerWidth <= 991){
+			unbindScroll();
+			unbindArrowKeys();
+		}
+	});
+}
+
+function initHome(){
+	totalSections  = $('[class*="home-section-"]').length;
+	getCurrentSection();
+	bindArrowKeys();
+	bindScroll();
 }
 
 $(document).ready(function(){
-	totalSections  = $('[class*="home-section-"]').length
-	currentSection = getCurrentSection();
-
-	bindArrowKeys();
-	bindScroll();
-
-	$('img.background-after').on('load',function(e){
-		let img = $(this)
-		setTimeout(function(){
-			img.closest('div').addClass('background-loaded')
-		}, 600)
-	})
+	initHome();
+	toggleHomeJsOnResize();
+	updateJumplinks();
 });

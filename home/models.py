@@ -1,4 +1,5 @@
 from page.models import ContentPage
+from species.models import SubSpecies
 
 class HomePage(ContentPage):
 
@@ -52,5 +53,7 @@ class HomePage(ContentPage):
 				"link":"https://discord.gg/T9Xrjs5"
 			}
 		]
+
+		context['compendium_backgrounds'] = SubSpecies.objects.filter(name="Standard").exclude(background__isnull=True)[:3]
 
 		return context

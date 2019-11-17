@@ -24,33 +24,6 @@ header, .page-explorer .listing .index, .breadcrumb{
 }
 
 
-.comic-admin:hover{
-  background: #262626;
-}
-.comic-admin:hover h3{
-  color: #fff;
-}
-.comic-admin{
-  width: 33%;
-  overflow: hidden;
-  display: inline-block;
-  position: relative;
-  float: left;
-  transition: 0.3s ease;
-}
-.comic-admin-title{
-  position:absolute;
-  top:0;
-  left:0;
-}
-.comic-admin-title h3{
-  transition: 0.3s ease;
-  font-size: 5em;
-  margin: .6em .25em;
-  text-transform:uppercase;
-  font-weight:bold;
-}
-
 .icon.icon-one-column::before {
   content: "";
   background-image: url('/static/img/icons/columns.svg');
@@ -78,25 +51,69 @@ header, .page-explorer .listing .index, .breadcrumb{
   opacity: 0.8;
 }
 
+.Draftail-Toolbar {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.Draftail-Toolbar .Draftail-ToolbarGroup {
+	display: flex;
+	align-items: center;
+}
+
+.Draftail-Toolbar .Draftail-ToolbarGroup:nth-last-child(1)::after,
+.Draftail-Toolbar .Draftail-ToolbarGroup::before {
+	display: none!important;
+}
+
+.Draftail-Toolbar .Draftail-ToolbarGroup::after {
+	content: "";
+	display: inline-block;
+	width: 1px;
+	height: 1rem;
+	vertical-align: middle;
+	margin: 0 .125rem;
+	background-color: #666;
+}
+
 .columns.one-column    label,
 .columns.two-columns   label,
 .columns.three-columns label {
   display: none;
 }
 
-.columns.one-column > ul.fields > li {
+.columns.one-column > .field {
   width: 100%;
   float: left;
+  padding: 0 .25em !important;
 }
 
-.columns.two-columns > ul.fields > li {
+.columns.two-columns > .field {
   width: 50%;
   float: left;
+  padding: 0 .25em !important;
 }
 
-.columns.three-columns > ul.fields > li {
+.columns.three-columns > .field  {
   width: 33.3%;
   float: left;
+  padding: 0 .25em !important;
+}
+
+.column-options > .field + .field {
+	padding-top: 0!important;
+}
+
+.column-options .struct-block > .field {
+	height: 0;
+	overflow: hidden;
+	transition: 0.3s height ease-in-out;
+}
+
+.column-options .struct-block.show > .field {
+	height: 110px;
 }
 
 .trait-thumbnail{

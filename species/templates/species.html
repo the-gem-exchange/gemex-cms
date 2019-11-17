@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load static wagtailcore_tags wagtailimages_tags menu_tags %}
 
+{% block body_class %}species-page{% endblock %}
+
 {% block content %}
 <ul class="species">
 	{% for s in species.all %}
@@ -8,18 +10,19 @@
 			<li class="subspecies {% if forloop.first %}standard{% endif %}">
 				<a href="/traits/{{sub.id}}/">
 					<div class="species-background" {% if sub.background %}style="background-image:url('{{sub.background.file.url}}')"{% endif %}>
+
 						{{sub.thumbnail}}
+
 						<div class="text">
-							<p>
+							<h3>
 								{% if forloop.first %}
-								<b>{{sub.species.name}}s</b>
-								<br>
-								<em>{{sub.traits|length}} trait{{sub.traits|length|pluralize}}</em>
+									{{sub.species.name}}s
 								{% else %}
-									<b>{{sub.name}}</b>
+									{{sub.name}}
 								{% endif %}
-							</p>
+							</h3>
 						</div>
+
 					</div>
 				</a>
 			</li>

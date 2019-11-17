@@ -1,41 +1,54 @@
-.species, .species ul{
+.species-page {
+	background: #333;
+}
+
+.species,
+.species ul {
 	list-style-type: none;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	margin: 0;
 	padding: 0;
 	grid-gap: 1em;
-	padding: 50px 0;
 	max-width: 1000px;
 	margin: 0 auto;
 }
 
-.subspecies{
+.subspecies {
 	position: relative;
 	text-align: center;
 
 	&.standard {
 		grid-column-start: 1;
 		grid-column-end: 4;
+		margin: 100px 0 50px;
+
 		.text{
 			font-size: 2em;
+			left: 0;
+			padding: .5em 1em;
+			h3 {
+				margin: 0;
+			}
 		}
+
 		.species-background {
 			height: 300px;
+			border: 1px solid #CCC;
 			border-radius: 15px;
 		}
+
 		img {
-			height: 300px;
+			height: 400px;
 			right: 0;
-		}
-		.text {
-			left: 0;
+			bottom: -50px;
 		}
 	}
-	&:not(.standard){
+	&:not(.standard) {
 		img {
 			height: 200px;
 		}
+
 		.species-background {
 			height: 200px;
 			border-radius: 50%;
@@ -50,7 +63,7 @@
 	padding: 1em;
 }
 
-.subspecies img{
+.subspecies img {
 	position: absolute;
 	bottom: 0;
 	width: auto;
@@ -59,13 +72,14 @@
 	filter: drop-shadow(1px 1px 10px #000);
 }
 
-.species-background{
+.species-background {
 	height: 200px;
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center;
 	background-color: #000;
 }
+
 .species, .species a {
 	color: #FFF;
 	font-weight: bold;

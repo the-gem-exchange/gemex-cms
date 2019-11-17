@@ -12,12 +12,16 @@
 		</div>
 		<div class="col-12 no-padding">
 			<a href="/comic/{{next_page}}/">
-				{% image comic.comic original %}
+				{% image comic.comic width-800 %}
 			</a>
 		</div>
 		<div class="col-12">
 			{% include "comic/navigation.html" %}
 		</div>
 	</div>
-	
+
+{% endblock %}
+
+{% block extra_js %}
+	<script type="text/javascript" src="/static/js/comic.js"></script>
 {% endblock %}

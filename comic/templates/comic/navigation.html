@@ -4,13 +4,13 @@
 		<i class="fas fa-angle-double-left"></i>
 	</a>
 
-	<a title="Previous" {% if prev_page %}href="/comic/{{prev_page}}/"{% else %}class="disabled"{% endif %}>
+	<a title="Previous" {% if prev_page %}href="/comic/{{prev_page}}/" class="previous-page"{% else %}class="disabled"{% endif %}>
 		<i class="fas fa-angle-left"></i>
 	</a>
 
 	<span>Page {{comic.page_number}}</span>
 
-	<a title="Next" {% if next_page %}href="/comic/{{next_page}}/"{% else %}class="disabled"{% endif %}>
+	<a title="Next" {% if next_page %}href="/comic/{{next_page}}/" class="next-page"{% else %}class="disabled"{% endif %}>
 		<i class="fas fa-angle-right"></i>
 	</a>
 

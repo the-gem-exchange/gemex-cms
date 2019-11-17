@@ -23,10 +23,75 @@ $btn-color: rgba(153,102,204,0.9);
 	}
 }
 
+.home-jump-links {
+	position: fixed;
+	z-index: 111;
+	left: 1em;
+	top: 50%;
+	transform: translateY(-50%);
+
+	ul {
+		margin: 0;
+	}
+
+	&::before {
+		content: '';
+		border-left: 1px dashed #fff;
+		position: absolute;
+		top: .5em;
+		bottom: .5em;
+		left: .5em;
+		z-index: -2;
+	}
+
+	li {
+		position: relative;
+		width: 1.2em;
+		overflow: hidden;
+		transition: width 0.5s;
+
+		&+ li {
+			margin-top: 1em;
+		}
+
+		a{
+			color: #FFF;
+			padding: .5em 0 .5em 2em;
+			font-family: "Futura";
+			text-transform: uppercase;
+			letter-spacing: 1px;
+		}
+
+		&:hover:before,
+		&.active:before {
+			background-color: #fff;
+		}
+
+		&:hover {
+			width: 6em;
+		}
+
+		&::before{
+			display: inline-block;
+			content: '';
+			width: 1em;
+			height: 1em;
+			border: 1px solid #fff;
+			border-radius: 50%;
+			top: 50%;
+			transform: translateY(-50%);
+			position: absolute;
+			transition: .2s ease background-color;
+			background: #000;
+			z-index: -2;
+		}
+	}
+}
+
 #homepage-title{
 	// Background on both title and social links, display side by side
 	@media screen and (min-width: 1201px){
-		background: rgba(0,0,0,0.75);
+		background: rgba(51,51,51,0.75);
 		height:     4rem; // 1rem less than the text so the text overflows
 		h1.title-text {
 			float:      right;
@@ -181,12 +246,8 @@ $btn-color: rgba(153,102,204,0.9);
 }
 
 #homepage-content{
-	z-index:    -1;
-	transform:  translateZ(0);
-
 	color:      #fff;
 	text-shadow: 1px 1px 1px #000;
-	position:   relative;
 
 	a {
 		transition:  all .2s ease;
@@ -195,58 +256,124 @@ $btn-color: rgba(153,102,204,0.9);
 
 	.rich-text{
 		padding: 1em 2em;
-		background: rgba(0,0,0,0.5);
 		border-radius: 5px;
-		max-width: 750px;
+		max-width: 600px;
 	}
 
 	[class*="home-section-"] {
-		font-size:  1.2em;
 		height:     100vh;
 		overflow:   hidden;
 		display:    flex;
+		text-shadow: none;
 
-		&:nth-child(1), &:nth-child(2){
+		h2, h3 {
+			font-size: 40px;
+			letter-spacing: 1px;
+			line-height: 1;
+			position: relative;
+			text-align: center;
 
-			&:before,
-			&:after{
+			a {
+				&:not(:hover){
+					color: #FFF;
+				}
+			}
+
+			&::after{
+				position: absolute;
+				top: -.5em;
+				bottom: -.35em;
+				right: -.75em;
+				left: -.75em;
 				content: '';
-				position: fixed;
-				width: 100%;
-				height: 100vh;
-			}
-
-			&:after{
-				background-attachment: fixed;
-				background-position: top center;
-				background-size: cover;
 				z-index: -1;
-				transition: 0.3s linear opacity;
-				opacity: 1;
-				background-image: url('/static/img/home/stardragon-space.jpg');
-			}
-			&.background-loaded:after{
-				opacity: 1;
-			}
-
-			&:before{
-				background: rgba(0,0,0,0.5);
-				mask: linear-gradient(to bottom, black, transparent 30%, transparent 70%, black);
+				background: #333;
+				transform: skew(-20deg);
 			}
 		}
 
-		&:nth-child(2):after{
-			background-image: url('/static/img/comic/joarca-map.png');
+		p {
+			font-size: 18px;
+			line-height: 1.75;
+			margin: 0 0 18px 0;
+		}
+
+		&:nth-child(1){
+			.rich-text{
+				text-align: justify;
+			}
+		}
+
+		&:nth-last-child(1){
+			.rich-text {
+				text-align: justify;
+			}
+			.col-3 .rich-text{
+				padding: 0;
+				background: transparent;
+			}
 		}
 
 		.grid {
 			align-content: center;
-			max-width: 1100px;
+			z-index: 2;
+
+			[class*="col-"] {
+				justify-content: center;
+				align-items: center;
+				display: flex;
+				flex-direction: column;
+			}
 		}
 	}
 }
 
-.background-after{
+.skewed-backgrounds {
+	display: grid;
+	padding: 0;
+	margin: 0;
+	grid-template-columns: 1fr 1fr 1fr;
+	transform: translateX(-50%);
+	width: 120vw;
+	left: 50%;
+
+	li {
+		position: relative;
+		overflow: hidden;
+		transform: skew(-20deg);
+		div {
+			height:      100%;
+			transform:   skew(20deg);
+			width:       300%;
+			margin-left: -7em;
+		}
+		img {
+			object-fit: cover;
+			height: 100%;
+			object-position: left;
+		}
+	}
+}
+
+.skewed-backgrounds,
+.section-background {
 	position: fixed;
-	opacity: 0;
+	height: 100vh;
+	width: 100vw;
+	background-attachment: fixed;
+	background-size: cover;
+	z-index: -1;
+
+	&:before{
+		position: absolute;
+		content: '';
+		z-index: 1;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		width: 100%;
+		height: 100vh;
+		background: rgba(0,0,0,.5);
+	}
 }

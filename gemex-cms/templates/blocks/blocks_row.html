@@ -1,24 +1,24 @@
 {% load wagtailcore_tags menu_tags %}
 
 {% if value.block.name == 'One_Column' %}
-	<div class="col-{% if value.column.colspan %}{{value.column.colspan}}{% else %}12{% endif %}">
+	<div class="col-{% if value.column_options.colspan %}{{value.column.column_options.colspan}}{% else %}12{% endif %}">
 		{{ value.column.content }}
 	</div>
 {% elif value.block.name == 'Two_Columns' %}
-	<div class="col-{% if value.left_column.colspan %}{{value.left_column.colspan}}{% else %}7{% endif %}">
+	<div class="col-{% if value.left_column.column_options.colspan %}{{value.left_column.column_options.colspan}}{% else %}7{% endif %}">
 		{{ value.left_column.content }}
 	</div>
-	<div class="col-{% if value.right_column.colspan %}{{value.right_column.colspan}}{% else %}5{% endif %}">
+	<div class="col-{% if value.right_column.column_options.colspan %}{{value.right_column.column_options.colspan}}{% else %}5{% endif %}">
 		{{ value.right_column.content }}
 	</div>
 {% elif value.block.name == 'Three_Columns' %}
-	<div class="col-{% if value.left_column.colspan %}{{value.left_column.colspan}}{% else %}4{% endif %}">
+	<div class="col-{% if value.left_column.column_options.colspan %}{{value.left_column.column_options.colspan}}{% else %}4{% endif %}">
 		{{ value.left_column.content }}
 	</div>
-	<div class="col-{% if value.center_column.colspan %}{{value.center_column.colspan}}{% else %}4{% endif %}">
+	<div class="col-{% if value.center_column.column_options.colspan %}{{value.center_column.column_options.colspan}}{% else %}4{% endif %}">
 		{{ value.center_column.content }}
 	</div>
-	<div class="col-{% if value.right_column.colspan %}{{value.right_column.colspan}}{% else %}4{% endif %}">
+	<div class="col-{% if value.right_column.column_options.colspan %}{{value.right_column.column_options.colspan}}{% else %}4{% endif %}">
 		{{ value.right_column.content }}
 	</div>
 {% endif %}

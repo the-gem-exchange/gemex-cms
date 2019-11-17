@@ -1,9 +1,13 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags %}
+{% load static wagtailcore_tags wagtailimages_tags %}
 
 {% block body_class %}homepage{% endblock %}
 
 {% block extra_css %}
+{% endblock %}
+
+{% block extra_nav %}
+	{% include "home/jump_links.html" %}
 {% endblock %}
 
 {% block content %}
@@ -40,9 +44,18 @@
 		{% for block in page.content %}
 		<div class="home-section-{{forloop.counter|add:1}}">
 			{% if forloop.first %}
-				<img class="background-after" src="/static/img/home/stardragon-space.jpg">
-			{% elif forloop.counter == 2%}
-				<img class="background-after" src="/static/img/comic/joarca-map.png">
+				<div class="section-background" style="background-image:url(/static/img/home/stardragon-space.jpg)"></div>
+			{% elif forloop.counter == 2 %}
+				<div class="section-background" style="background-image:url(/static/img/comic/joarca-map.png)"></div>
+			{% elif forloop.counter == 3 %}
+				{% image compendium_backgrounds.0.background original as bg0 %}
+				<div class="section-background" style="background-image:url({{bg0.url}})"></div>
+			{% elif forloop.counter == 4 %}
+				{% image compendium_backgrounds.1.background original as bg1 %}
+				<div class="section-background" style="background-image:url({{bg1.url}})"></div>
+			{% elif forloop.counter == 5 %}
+				{% image compendium_backgrounds.2.background original as bg2 %}
+				<div class="section-background" style="background-image:url({{bg2.url}})"></div>
 			{% endif %}
 			<div class="grid">
 				{% include_block block %}

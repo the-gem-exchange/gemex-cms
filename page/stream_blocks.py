@@ -5,7 +5,6 @@ from wagtail.snippets.blocks  import SnippetChooserBlock
 
 class ColumnOptions(blocks.StructBlock):
 	column_options = blocks.StructBlock([
-		('colspan', blocks.CharBlock(required=False, max_length=255, help_text="Enter a number between 1 and 12, or 'auto'.")),
 		('classes', blocks.CharBlock(required=False, max_length=255, help_text="Apply custom classes to this column.")),
 	])
 	content = blocks.RichTextBlock(required=False, classname="column-content")
@@ -14,49 +13,57 @@ class ColumnOptions(blocks.StructBlock):
 		form_classname = "column-options"
 
 class RowOptions(blocks.StructBlock):
+	background_image = ImageChooserBlock(required=False)
+
 	class Meta:
 		form_classname = "row-options"
 
-class SectionTitle(blocks.StructBlock):
-	title = blocks.CharBlock(required=False, max_length=255)
-	class Meta:
-		template = 'blocks/blocks_title.html'
-
-class SubTitle(blocks.StructBlock):
-	subtitle = blocks.CharBlock(required=False, max_length=255)
-	class Meta:
-		template = 'blocks/blocks_subtitle.html'
-
 class OneColumn(blocks.StructBlock):
-	column      = ColumnOptions(required=False, classname="field-one_column")
 	row_options = RowOptions(required=False)
+
+	column      = ColumnOptions(required=False, classname="field-one_column")
+
+	def get_context(self, value, parent_context=None):
+		context = super().get_context(value, parent_context=parent_context)
+		context['background_image'] = value['row_options']['background_image']
+		return context
+
 	class Meta:
 		template       = 'blocks/blocks_row.html'
 		form_classname = 'columns one-column'
 
 class TwoColumns(blocks.StructBlock):
+	row_options  = RowOptions(required=False)
+
 	left_column  = ColumnOptions(required=False, classname="field-two_columns_left")
 	right_column = ColumnOptions(required=False, classname="field-two_columns_right")
-	row_options  = RowOptions(required=False)
+
+	def get_context(self, value, parent_context=None):
+		context = super().get_context(value, parent_context=parent_context)
+		context['background_image'] = value['row_options']['background_image']
+		return context
+
 	class Meta:
 		template       = 'blocks/blocks_row.html'
 		form_classname = 'columns two-columns'
 
 class ThreeColumns(blocks.StructBlock):
+	row_options   = RowOptions(required=False)
+
 	left_column   = ColumnOptions(required=False, classname="field-three_columns_left")
 	center_column = ColumnOptions(required=False, classname="field-three_columns_center")
 	right_column  = ColumnOptions(required=False, classname="field-three_columns_right")
-	row_options   = RowOptions(required=False)
+
+	def get_context(self, value, parent_context=None):
+		context = super().get_context(value, parent_context=parent_context)
+		context['background_image'] = value['row_options']['background_image']
+		return context
+
 	class Meta:
 		template       = 'blocks/blocks_row.html'
 		form_classname = 'columns three-columns'
 
 stream_blocks = [
-	('Title',         SectionTitle(icon='title')),
-	('Subtitle',      SubTitle(icon='title')),
-	('heading',       blocks.CharBlock(classname="full title")),
-	('paragraph',     blocks.RichTextBlock()),
-	('image',         ImageChooserBlock()),
 	('One_Column',    OneColumn(icon='one-column')),
 	('Two_Columns',   TwoColumns(icon='two-columns')),
 	('Three_Columns', ThreeColumns(icon='three-columns')),

@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 from trait.models import Trait, TraitType
 from species.models import Species, SubSpecies
-from comic.models import ComicPage
+from comic.models import ComicPage, ComicFolder
 
 def traits(request, id=None):
 	if id:
@@ -56,5 +56,6 @@ def comic(request, page=1):
 		'page_count':   page_count,
 		'next_page':    page_number + 1 if page_number < page_count else None,
 		'prev_page':    page_number - 1 if page_number > 1 else None,
-		'current_page': page_number
+		'current_page': page_number,
+		'banner_image': ComicFolder.objects.first().banner_image
 	})

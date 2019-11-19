@@ -11,56 +11,15 @@
 {% endblock %}
 
 {% block content %}
-
-	<div id="homepage-title">
-		<div style="max-width:1200px; margin:0 auto; padding:0 1em;">
-			<h1 class="title-text">The Gem Exchange</h1>
-			<ul id="social-links">
-				{% for link in links %}
-				<li class="{{link.name|lower}}">
-					<div>
-						<a href="{{link.link}}" target="_blank">
-							<i class="{{link.icon}}"></i>
-							<span>{{link.name}}</span>
-						</a>
-					</div>
-				</li>
-				{% endfor %}
-			</ul>
-		</div>
-	</div>
-
-	<div id="multilayer-background" class="home-section-1">
-		<img id="layer-1" src="/static/img/home/1-background.png">
-		<img id="layer-2" src="/static/img/home/2-base-stars.png">
-		<img id="layer-3" src="/static/img/home/3-extra-stars.png">
-		<img id="layer-4" src="/static/img/home/4-planets.png">
-		<img id="layer-5" src="/static/img/home/5-mountains.png">
-		<img id="layer-6" src="/static/img/home/6-trees.png">
-		<img id="layer-7" src="/static/img/home/7-characters.png">
-	</div>
-
 	<div id="homepage-content" class="page-content">
+		<div class="home-section-1">
+			{% include "home/parallax_background.html" %}
+			{% include "home/title_nav.html" %}
+		</div>
 		{% for block in page.content %}
-		<div class="home-section-{{forloop.counter|add:1}}">
-			{% if forloop.first %}
-				<div class="section-background" style="background-image:url(/static/img/home/stardragon-space.jpg)"></div>
-			{% elif forloop.counter == 2 %}
-				<div class="section-background" style="background-image:url(/static/img/comic/joarca-map.png)"></div>
-			{% elif forloop.counter == 3 %}
-				{% image compendium_backgrounds.0.background original as bg0 %}
-				<div class="section-background" style="background-image:url({{bg0.url}})"></div>
-			{% elif forloop.counter == 4 %}
-				{% image compendium_backgrounds.1.background original as bg1 %}
-				<div class="section-background" style="background-image:url({{bg1.url}})"></div>
-			{% elif forloop.counter == 5 %}
-				{% image compendium_backgrounds.2.background original as bg2 %}
-				<div class="section-background" style="background-image:url({{bg2.url}})"></div>
-			{% endif %}
-			<div class="grid">
+			<div class="home-section-{{forloop.counter|add:1}}">
 				{% include_block block %}
 			</div>
-		</div>
 		{% endfor %}
 	</div>
 

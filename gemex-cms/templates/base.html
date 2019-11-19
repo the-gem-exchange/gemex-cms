@@ -17,24 +17,12 @@
 		<meta name="description" content="" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-		<script type="text/javascript">
-			// Prevents FA from converting <i> tags to <svg> and breaking CSS
-			window.FontAwesomeConfig = { autoReplaceSvg: false }
-		</script>
+		<link rel="icon" type="image/x-icon" href="/static/img/favicon.ico">
 
 		{# Global stylesheets #}
 		<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-
-		{% block extra_css %}
-			{# Override this in templates to add extra stylesheets #}
-		{% endblock %}
-
-		{# Vendor JS #}
-		<script src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
-		<script src="/static/js/vendor/jquery.3.4.1.min.js" type="text/javascript"></script>
-		<script src="/static/js/vendor/isInViewport.js" type="text/javascript"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
+		{% block extra_css %}{% endblock %}
 	</head>
 
 	<body class="{% block body_class %}{% endblock %}">
@@ -50,11 +38,16 @@
 		</div>
 
 		{# Global javascript #}
+		{# Vendor JS #}
+		<script src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
+		<script src="/static/js/vendor/jquery.3.4.1.min.js" type="text/javascript"></script>
+		<script src="/static/js/vendor/isInViewport.js" type="text/javascript"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
+
+		{# Global JS #}
 		<script type="text/javascript" src="/static/js/thegemexchange.js"></script>
 
-		{% block extra_js %}
-			{# Override this in templates to add extra scripts #}
-		{% endblock %}
+		{% block extra_js %}{% endblock %}
 	</body>
 
 </html>

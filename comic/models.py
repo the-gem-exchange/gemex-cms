@@ -19,6 +19,11 @@ class ComicFolder(AbstractFolder):
 	subpage_types     = ['ComicChapter']
 	parent_page_types = ['home.HomePage']
 
+	banner_image = models.ForeignKey('image.CustomImage', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+
+	content_panels = AbstractFolder.content_panels + [
+		ImageChooserPanel('banner_image')
+	]
 
 class ComicChapter(AbstractFolder):
 	subpage_types     = ['ComicPage']
@@ -26,7 +31,7 @@ class ComicChapter(AbstractFolder):
 
 	chapter_number = models.IntegerField()
 
-	content_panels = ComicFolder.content_panels + [
+	content_panels = AbstractFolder.content_panels + [
 		FieldPanel('chapter_number', classname="title full"),
 	]
 

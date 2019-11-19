@@ -1,4 +1,8 @@
-<div id="comic-header">
+{% load wagtailimages_tags %}
+
+{% image banner_image format-jpeg width-1080 as banner %}
+
+<div id="comic-header" style="background-image:url({{banner.url}});">
 
 	<img src="/static/img/comic/elliott-headshot.png" alt="">
 

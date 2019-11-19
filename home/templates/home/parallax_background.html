@@ -1,0 +1,12 @@
+{% load wagtailimages_tags menu_tags %}
+
+<div id="parallax-background">
+	{% for layer in page.hero_image_layers.all %}
+		{% if forloop.first %}
+			{# Bottom layer should be a .jpg since it has no transparency #}
+			{% image layer.image format-jpeg %}
+		{% else %}
+			{% image layer.image width-1080 %}
+		{% endif %}
+	{% endfor %}
+</div>

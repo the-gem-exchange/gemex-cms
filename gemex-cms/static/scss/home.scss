@@ -1,5 +1,3 @@
-$home-content-width: 750px;
-
 // Link Brand Colors
 $toyhouse:    rgba(0,140,186,1);
 $deviantart:  #4e6252;
@@ -153,6 +151,7 @@ $btn-color: rgba(153,102,204,0.9);
 			width:          4rem;
 			float:          left;
 			display:        inline;
+			text-align:     center;
 
 			div {
 				transform: skewX(20deg);
@@ -165,7 +164,7 @@ $btn-color: rgba(153,102,204,0.9);
 				font-weight:    normal;
 				text-transform: uppercase;
 				color:          #FFF;
-				padding:        0px 25px;
+				padding:        0px;
 				line-height:    4rem;
 
 				i {
@@ -205,10 +204,11 @@ $btn-color: rgba(153,102,204,0.9);
 	}
 }
 
-#multilayer-background {
+#parallax-background {
 	z-index:         -2;
-	position:        relative;
+	position:        fixed;
 	height:          100vh;
+	width: 100%;
 	transform-style: preserve-3d;
 
 	img {
@@ -231,18 +231,6 @@ $btn-color: rgba(153,102,204,0.9);
 		&:nth-child(6) { transform: translateZ(-1px)  scale(2)  }
 		&:nth-child(7) { transform: translateZ(0) }
 	}
-
-	// overflow:hidden breaks the parallax effect since it doesn't work with translateZ
-	// To compromise, mask out everything after 100vh
-	&:after{
-		content: '';
-		mask: linear-gradient(to bottom, transparent 0, transparent 100vh, black 100vh);
-		height: 1000vh;
-		width: 100%;
-		position: fixed;
-		z-index: 11;
-		background: #000;
-	}
 }
 
 #homepage-content{
@@ -261,9 +249,10 @@ $btn-color: rgba(153,102,204,0.9);
 	}
 
 	[class*="home-section-"] {
-		height:     100vh;
-		overflow:   hidden;
-		display:    flex;
+		height:      100vh;
+		overflow:    hidden;
+		position:    relative;
+		display:     flex;
 		text-shadow: none;
 
 		h2, h3 {
@@ -298,19 +287,10 @@ $btn-color: rgba(153,102,204,0.9);
 			margin: 0 0 18px 0;
 		}
 
-		&:nth-child(1){
-			.rich-text{
-				text-align: justify;
-			}
-		}
-
+		&:nth-child(1),
 		&:nth-last-child(1){
 			.rich-text {
 				text-align: justify;
-			}
-			.col-3 .rich-text{
-				padding: 0;
-				background: transparent;
 			}
 		}
 
@@ -328,34 +308,6 @@ $btn-color: rgba(153,102,204,0.9);
 	}
 }
 
-.skewed-backgrounds {
-	display: grid;
-	padding: 0;
-	margin: 0;
-	grid-template-columns: 1fr 1fr 1fr;
-	transform: translateX(-50%);
-	width: 120vw;
-	left: 50%;
-
-	li {
-		position: relative;
-		overflow: hidden;
-		transform: skew(-20deg);
-		div {
-			height:      100%;
-			transform:   skew(20deg);
-			width:       300%;
-			margin-left: -7em;
-		}
-		img {
-			object-fit: cover;
-			height: 100%;
-			object-position: left;
-		}
-	}
-}
-
-.skewed-backgrounds,
 .section-background {
 	position: fixed;
 	height: 100vh;
@@ -363,6 +315,7 @@ $btn-color: rgba(153,102,204,0.9);
 	background-attachment: fixed;
 	background-size: cover;
 	z-index: -1;
+	background-color: #000;
 
 	&:before{
 		position: absolute;

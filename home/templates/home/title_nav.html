@@ -1,0 +1,17 @@
+<div id="homepage-title">
+	<div style="max-width:1200px; margin:0 auto; padding:0 1em;">
+		<h1 class="title-text">The Gem Exchange</h1>
+		<ul id="social-links">
+			{% for link in links %}
+			<li class="{{link.name|lower}}">
+				<div>
+					<a href="{{link.link}}" target="_blank">
+						<i class="{{link.icon}}"></i>
+						<span>{{link.name}}</span>
+					</a>
+				</div>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+</div>

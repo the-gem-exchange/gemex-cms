@@ -1,6 +1,6 @@
 <div class="comic-navigation">
 
-	<a title="First" href="/comic/1/" {% if comic.page_number == 1 %}class="disabled"{% endif %}>
+	<a title="First" href="/comic/1/" {% if page.page_number == 1 %}class="disabled"{% endif %}>
 		<i class="fas fa-angle-double-left"></i>
 	</a>
 
@@ -8,13 +8,13 @@
 		<i class="fas fa-angle-left"></i>
 	</a>
 
-	<span>Page {{comic.page_number}}</span>
+	<span>Page {{page.page_number}}</span>
 
 	<a title="Next" {% if next_page %}href="/comic/{{next_page}}/" class="next-page"{% else %}class="disabled"{% endif %}>
 		<i class="fas fa-angle-right"></i>
 	</a>
 
-	<a title="Last" href="/comic/{{page_count}}/" {% if comic.page_number == page_count %}class="disabled"{% endif %}>
+	<a title="Last" href="/comic/{{page_count}}/" {% if page.page_number == page_count %}class="disabled"{% endif %}>
 		<i class="fas fa-angle-double-right"></i>
 	</a>
 

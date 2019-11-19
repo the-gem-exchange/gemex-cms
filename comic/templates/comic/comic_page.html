@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static wagtailcore_tags wagtailimages_tags menu_tags %}
 
-{% block title %}Tales of Jo'Arca - Page {{comic.page_number}}{% endblock %}
+{% block title %}Tales of Jo'Arca - Page {{page.page_number}}{% endblock %}
 
 {% block body_class %}comicpage{% endblock %}
 
@@ -14,7 +14,7 @@
 		</div>
 		<div class="col-12 no-padding">
 			<a href="/comic/{{next_page}}/">
-				{% image comic.comic width-800 %}
+				{% image page.comic width-800 %}
 			</a>
 		</div>
 		<div class="col-12">

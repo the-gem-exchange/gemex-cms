@@ -7,7 +7,9 @@ from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
 from .api import api_router
-from .views import traits,species, comic
+from .views import traits, species
+
+from comic.views import comic_page
 
 from search import views as search_views
 
@@ -22,13 +24,12 @@ urlpatterns = [
     # API Endpoints
     url(r'^api/', api_router.urls),
 
+	url(r'^comic/(?P<page_number>\d+)/$', comic_page),
+
 	url(r'^traits/(?P<id>\d+)/$', traits),
 	url(r'^traits/', traits),
 
 	url(r'^species/', species),
-
-	url(r'^comic/(?P<page>\d+)/$', comic),
-	url(r'^comic/', comic),
 
     # For anything not caught by a more specific rule above, hand over to
     # Wagtail's page serving mechanism. This should be the last pattern in

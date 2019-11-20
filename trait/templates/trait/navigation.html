@@ -1,9 +1,9 @@
 <nav class="traits-nav">
 	<ul class="horizontal-links">
-		{% for species in species_list %}
-		<li>
-			<a href="">{{species}}s</a>
-		</li>
+		{% for s in species_list %}
+			<li {% if species_name == s.name|lower %}class="active"{% endif %}>
+				<a href="/traits/?species={{s|lower}}">{{s}}s</a>
+			</li>
 		{% endfor %}
 	</ul>
 </nav>

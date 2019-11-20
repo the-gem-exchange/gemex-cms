@@ -11,14 +11,10 @@ $btn-color: rgba(153,102,204,0.9);
 
 .homepage #content{
 	height:             100vh;
-	overflow:           hidden;
+	overflow:           scroll;
 	position:           relative;
 	perspective:        1px;
 	perspective-origin: 0 100%;
-
-	footer {
-		margin-top: -44px;
-	}
 }
 
 .home-jump-links {
@@ -87,6 +83,13 @@ $btn-color: rgba(153,102,204,0.9);
 }
 
 #homepage-title{
+	.title-container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 1em;
+		text-align: center;
+	}
+
 	// Background on both title and social links, display side by side
 	@media screen and (min-width: 1201px){
 		background: rgba(51,51,51,0.75);
@@ -105,8 +108,6 @@ $btn-color: rgba(153,102,204,0.9);
 
 		#social-links,
 		h1.title-text {
-			float:      right;
-			width:      100%;
 			text-align: center;
 			display:    block;
 		}
@@ -121,12 +122,11 @@ $btn-color: rgba(153,102,204,0.9);
 		}
 	}
 
-	// Hide social links (since they're in side nav) and remove all backgrounds
 	@media screen and (max-width: 766px){
 		background-color: transparent;
 
 		#social-links {
-			display: none;
+			display: none!important;
 		}
 	}
 
@@ -137,9 +137,9 @@ $btn-color: rgba(153,102,204,0.9);
 	z-index:  1;
 
 	ul#social-links {
-		float:     left;
 		height:    4rem;
 		transform: skewX(-20deg); // Angle the background, but not the text
+		display:   inline-block;
 
 		padding: 0;
 		margin: 0;
@@ -199,7 +199,7 @@ $btn-color: rgba(153,102,204,0.9);
 		text-transform: capitalize;
 		text-shadow:    2px 2px 0 #000;
 		color:          #FFF;
-		margin:         0;
+		margin:         0 0 1em 0;
 		line-height:    1.2;
 	}
 }
@@ -233,9 +233,16 @@ $btn-color: rgba(153,102,204,0.9);
 	}
 }
 
-#homepage-content{
+#homepage-content {
 	color:      #fff;
-	text-shadow: 1px 1px 1px #000;
+	text-shadow: 2px 2px 0 #000;
+
+	@media screen and (max-width: 766px){
+		.richtext-image {
+			max-height: 40vh;
+			width: auto;
+		}
+	}
 
 	a {
 		transition:  all .2s ease;
@@ -243,24 +250,23 @@ $btn-color: rgba(153,102,204,0.9);
 	}
 
 	.rich-text{
-		padding: 1em 2em;
-		border-radius: 5px;
 		max-width: 600px;
 	}
 
 	[class*="home-section-"] {
-		height:      100vh;
+		min-height:  100vh;
 		overflow:    hidden;
 		position:    relative;
 		display:     flex;
-		text-shadow: none;
 
 		h2, h3 {
-			font-size: 40px;
+			font-size: 35px;
 			letter-spacing: 1px;
 			line-height: 1;
 			position: relative;
 			text-align: center;
+			margin: 1em auto;
+			max-width: 90%;
 
 			a {
 				&:not(:hover){
@@ -272,8 +278,8 @@ $btn-color: rgba(153,102,204,0.9);
 				position: absolute;
 				top: -.5em;
 				bottom: -.35em;
-				right: -.75em;
-				left: -.75em;
+				right: -15px;
+				left: -15px;
 				content: '';
 				z-index: -1;
 				background: #333;
@@ -287,16 +293,9 @@ $btn-color: rgba(153,102,204,0.9);
 			margin: 0 0 18px 0;
 		}
 
-		&:nth-child(1),
-		&:nth-last-child(1){
-			.rich-text {
-				text-align: justify;
-			}
-		}
-
 		.grid {
+			padding: 2em 0;
 			align-content: center;
-			z-index: 2;
 
 			[class*="col-"] {
 				justify-content: center;
@@ -309,13 +308,14 @@ $btn-color: rgba(153,102,204,0.9);
 }
 
 .section-background {
-	position: fixed;
-	height: 100vh;
-	width: 100vw;
+	position: absolute;
+	height: 100%;
+	width: 100%;
 	background-attachment: fixed;
 	background-size: cover;
 	z-index: -1;
 	background-color: #000;
+	background-position: center;
 
 	&:before{
 		position: absolute;
@@ -325,8 +325,8 @@ $btn-color: rgba(153,102,204,0.9);
 		left: 0;
 		right: 0;
 		bottom: 0;
-		width: 100%;
-		height: 100vh;
+		min-width: 100%;
+		height: 100%;
 		background: rgba(0,0,0,.5);
 	}
 }

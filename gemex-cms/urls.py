@@ -7,11 +7,13 @@ from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
 from .api import api_router
-from .views import traits, species
+from .views import species
 
 from comic.views import comic_page
 
 from search import views as search_views
+
+from trait.views import trait_page
 
 urlpatterns = [
     url(r'^django-admin/', admin.site.urls),
@@ -26,10 +28,10 @@ urlpatterns = [
 
 	url(r'^comic/(?P<page_number>\d+)/$', comic_page),
 
-	url(r'^traits/(?P<id>\d+)/$', traits),
-	url(r'^traits/', traits),
+	url(r'^traits/$', trait_page),
 
-	url(r'^species/', species),
+	# TODO: Clean up this view
+	# url(r'^species/', species),
 
     # For anything not caught by a more specific rule above, hand over to
     # Wagtail's page serving mechanism. This should be the last pattern in

@@ -1,16 +1,7 @@
-<nav class="site-nav transparent">
+<nav class="site-nav {% if request.path == '/' %}transparent{% endif %}">
 	<ul class="horizontal-links">
-		<li>
-			<a href="/">Home</a>
-		</li>
-		<li>
-			<a href="/traits">Traits</a>
-		</li>
-		<li>
-			<a href="/species">Species</a>
-		</li>
-		<li>
-			<a href="/comic">Comic</a>
-		</li>
+		<li><a href="/">Home</a></li>
+		<li><a href="/traits">Traits</a></li>
+		<li><a href="/comic">Comic</a></li>
 	</ul>
 </nav>

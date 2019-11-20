@@ -25,11 +25,18 @@ class Species(index.Indexed, ClusterableModel):
 		InlinePanel('subspecies', label="Subspecies"),
 	]
 
+	def background(self):
+		return self.subspecies.get(name="Standard").background
+
 	def thumbnail(self):
 		return self.subspecies.get(name="Standard").thumbnail()
 
 	def subspecies_(self):
 		return ', '.join(x.name for x in self.subspecies.all())
+
+	def traits(self):
+		traits = Trait.objects.filter(species__species=self)
+		return traits
 
 	def __str__(self):
 		return self.name

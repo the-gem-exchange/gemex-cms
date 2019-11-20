@@ -1,0 +1,52 @@
+// Customizations and fixes for Sweetalert 2 modals.
+
+// Prevent body from shrinking below 100% screen height when modal appears
+body.swal2-shown.swal2-height-auto{
+	height: 100%!important;
+}
+
+body .swal2-container{
+
+}
+
+body .swal2-popup {
+	padding-bottom: 35px;
+
+	&.swal2-trait{
+		&.common{
+			background: linear-gradient($common, #FFF 10%);
+			button{ background-color: $common; }
+		}
+
+		&.uncommon{
+			background: linear-gradient($uncommon, #FFF 10%);
+			button{ background-color: $uncommon; }
+		}
+
+		&.rare{
+			background: linear-gradient($rare, #FFF 10%);
+			button{ background-color: $rare; }
+		}
+
+		&.legendary{
+			background: linear-gradient($legendary, #FFF 10%);
+			button{ background-color: $legendary; }
+		}
+
+		.swal2-title{
+			i{ margin: 0 5px;}
+		}
+	}
+
+	.swal2-actions{
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		transform: translateY(50%);
+
+		button, button.swal2-styled:focus{
+			box-shadow:3px 3px #666;
+		}
+	}
+}

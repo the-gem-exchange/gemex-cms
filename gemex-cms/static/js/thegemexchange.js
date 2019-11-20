@@ -1,32 +1,35 @@
-var currentPos  = $(document).scrollTop();
-var scrollingUp = false;
-var newScrollPos;
+var scrollSpeed;
 
-function showHideNav() {
-	newScrollPos = $(document).scrollTop();
-
-	// User is scrolling down - Hide Nav
-	if (newScrollPos > currentPos && !scrollingUp && newScrollPos >= 70) { // Only hide if we are scrolled past the height of the header
-		$('nav.site-nav').addClass('hidden');
-		scrollingUp = !scrollingUp;
-	}
-	// User is scrolling up - Show Nav
-	else if(newScrollPos < currentPos && scrollingUp) {
-		$('nav.site-nav').removeClass('hidden');
-		scrollingUp = !scrollingUp;
-	}
-
-	if(newScrollPos < 100) $('nav.site-nav').addClass('transparent');
-	else                   $('nav.site-nav').removeClass('transparent');
-
-	currentPos = newScrollPos;
+function showNav() {
+	$('nav.site-nav').removeClass('hidden');
 }
 
-$(document).on('scroll', function() {
-	showHideNav();
-});
+function hideNav() {
+	$('nav.site-nav').addClass('hidden');
+}
+
+function showHideNav() {
+	$(document).bind('mousewheel DOMMouseScroll', function(e){
+		scrollSpeed = e.originalEvent.wheelDelta || e.originalEvent.detail || 0;
+
+		let down = scrollSpeed >= 1;
+		let up   = scrollSpeed <= -1;
+
+		if (down)   { hideNav(); }
+		else if(up) { showNav(); }
+
+		if($('#content').scrollTop() == 0 && $('#homepage-content').length){
+			$('nav.site-nav').addClass('transparent');
+		}
+		else{
+			$('nav.site-nav').removeClass('transparent');
+		}
+	});
+}
 
 $(document).ready(function(){
 	// Prevents FA from converting <i> tags to <svg> and breaking CSS
 	window.FontAwesomeConfig = { autoReplaceSvg: false }
+	showHideNav();
+	$('body.basic-page nav.site-nav').removeClass('transparent');
 })

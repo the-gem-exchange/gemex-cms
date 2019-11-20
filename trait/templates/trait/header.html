@@ -1,19 +1,25 @@
-{% if species %}
-	<header class="traits-header">
+{% load wagtailimages_tags %}
+
+<header class="traits-header">
+	{% if species %}
 
 		<div class="background">
 			{% if species.background %}
-				<img src="{{species.background.file.url}}" />
+				{% image species.background width-1080 format-jpeg as background %}
+				<img src="{{background.url}}" />
+			{% elif species.species.background %}
+				{% image species.species.background width-1080 format-jpeg as background %}
+				<img src="{{background.url}}" />
 			{% endif %}
 		</div>
 
 		<div class="title">
 			<div>
 				<h1>
-					{% if species %}
-						{{species.species.name}}s
+					{% if species.species.name %}
+						{{species.name}} {{species.species.name}}s
 					{% else %}
-						Traits
+						{{species.name}}s
 					{% endif %}
 				</h1>
 			</div>
@@ -21,10 +27,10 @@
 
 		<nav class="subspecies-nav">
 			<ul class="horizontal-links">
-				{% for s in species.species.subspecies.all %}
-				<li>
-					<a href="#">{{s.name}}</a>
-				</li>
+				{% for s in subtypes %}
+					<li {% if s.name == species.name %}class="active"{% endif %}>
+						<a href="/traits/?species={{species_name}}&subspecies={{s.name|lower}}">{{s.name}}</a>
+					</li>
 				{% endfor %}
 			</ul>
 		</nav>
@@ -38,11 +44,30 @@
 			{{species.thumbnail}}
 		</div>
 
-	</header>
-{% else %}
-	<div class="grid">
-		<div class="col-12">
-			<h1>Traits</h1>
+	{% else %}
+
+		<div class="background skewed">
+			<ul>
+				{% for s in species_list %}
+				{% if s.background%}
+				<li>
+					<img src="{{s.background.file.url}}">
+				</li>
+				{% endif %}
+				{% endfor %}
+			</ul>
 		</div>
-	</div>
-{% endif %}
+
+		<div class="title">
+			<div>
+				<h1>Traits Compendium</h1>
+			</div>
+		</div>
+
+		<div class="species-info">
+			<h3>{{traits|length}} Trait{{traits|length|pluralize}} | {{species_list|length}} Species | {{subtypes|length|add:-8}} Subspecies</h3>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vitae nisl lectus. Fusce congue ipsum non laoreet cursus. Integer non massa quis nisi varius finibus sed tempor tellus. Maecenas consequat dignissim porttitor. Cras viverra nunc a ligula consequat, id eleifend risus posuere. Nunc consequat nunc non hendrerit ultrices. Duis eget lobortis sem. Fusce interdum libero est, eu euismod magna pulvinar at. Maecenas quis mauris ullamcorper ipsum egestas pellentesque.</p>
+		</div>
+
+	{% endif %}
+</header>

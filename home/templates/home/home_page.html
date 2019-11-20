@@ -6,10 +6,6 @@
 {% block extra_css %}
 {% endblock %}
 
-{% block extra_nav %}
-	{% include "home/jump_links.html" %}
-{% endblock %}
-
 {% block content %}
 	<div id="homepage-content" class="page-content">
 		<div class="home-section-1">
@@ -22,9 +18,4 @@
 			</div>
 		{% endfor %}
 	</div>
-
 {% endblock content %}
-
-{% block extra_js %}
-	<script type="text/javascript" src="/static/js/home.js"></script>
-{% endblock %}

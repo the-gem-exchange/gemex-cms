@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block title %}{{title}}{% endblock %}
+
 {% block body_class %}traits-page{% endblock %}
 
 {% block content %}
@@ -13,4 +15,9 @@
 		{% include 'trait/list.html'%}
 	</div>
 
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript" src="/static/js/vendor/livefilter.js"></script>
+<script type="text/javascript" src="/static/js/traits.js"></script>
 {% endblock %}

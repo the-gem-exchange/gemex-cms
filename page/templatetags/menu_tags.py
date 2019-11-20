@@ -9,3 +9,13 @@ def get_vars(value):
 @register.simple_tag()
 def get_dir(value):
     return dir(value)
+
+@register.filter()
+def sex(value):
+	if value == 'm':
+		return 'Male'
+	if value == 'f':
+		return 'Female'
+	if value == 'x':
+		return 'Unisex'
+	return ''

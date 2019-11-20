@@ -63,7 +63,14 @@ class ThreeColumns(blocks.StructBlock):
 		template       = 'blocks/blocks_row.html'
 		form_classname = 'columns three-columns'
 
+class HTMLBlock(blocks.StructBlock):
+	html_content = blocks.TextBlock()
+
+	class Meta:
+		template = 'blocks/blocks_html.html'
+
 stream_blocks = [
+	('HTML',          HTMLBlock(icon='fa-code')),
 	('One_Column',    OneColumn(icon='one-column')),
 	('Two_Columns',   TwoColumns(icon='two-columns')),
 	('Three_Columns', ThreeColumns(icon='three-columns')),

@@ -1,11 +1,15 @@
 {% extends "base.html" %}
 {% load wagtailcore_tags wagtailimages_tags menu_tags %}
 
+{% block body_class %}basic-page{% endblock %}
+
 {% block content %}
 	<div class="grid">
-		<div class="col-12">
+		<div class="col-12" style="padding-bottom:0;">
 			<h1>{{page.title}}</h1>
 		</div>
-		{{page.content}}
 	</div>
+	{% for block in page.content %}
+		{% include_block block %}
+	{% endfor %}
 {% endblock %}

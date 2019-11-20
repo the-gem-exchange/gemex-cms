@@ -18,6 +18,16 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 		<link rel="icon" type="image/x-icon" href="/static/img/favicon.ico">
+		
+		{# Google Analytics #}
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-152963694-1"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'UA-152963694-1');
+		</script>
 
 		{# Global stylesheets #}
 		<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
@@ -41,8 +51,7 @@
 		{# Vendor JS #}
 		<script src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
 		<script src="/static/js/vendor/jquery.3.4.1.min.js" type="text/javascript"></script>
-		<script src="/static/js/vendor/isInViewport.js" type="text/javascript"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 		{# Global JS #}
 		<script type="text/javascript" src="/static/js/thegemexchange.js"></script>

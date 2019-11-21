@@ -15,6 +15,7 @@
 // Components
 @import './navigation/nav.scss';
 @import './navigation/footer.scss';
+@import './navigation/mobile-nav.scss';
 @import './sweetalert.scss';
 
 * {
@@ -139,15 +140,35 @@ ul.horizontal-links{
 
 	li{
 		display: inline-block;
+		position: relative;
 
 		a{
 			display: block;
 			padding: 10px;
-
-			text-align:      center;
+			text-align: center;
 			text-decoration: none;
 		}
+
+		&::after {
+			content: '';
+			position: absolute;
+			width: 0;
+			height: 3px;
+			background: #fff;
+			-webkit-transform: translateX(-50%);
+			transform: translateX(-50%);
+			left: 50%;
+			transition: .3s ease-in-out width;
+			text-shadow: 1px 1px 3px #000;
+			bottom: 0;
+		}
+
+		&.active::after,
+		&:hover::after {
+			width: 30%;
+		}
 	}
+
 	.dropdown-menu{
 		min-width: 11rem;
 

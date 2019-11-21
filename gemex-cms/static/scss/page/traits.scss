@@ -13,25 +13,6 @@
 				position: relative;
 			}
 
-			li::after {
-				content: '';
-				position: absolute;
-				width: 0;
-				height: 3px;
-				background: #fff;
-				-webkit-transform: translateX(-50%);
-				transform: translateX(-50%);
-				left: 50%;
-				transition: .3s ease-in-out width;
-				text-shadow: 1px 1px 3px #000;
-				bottom: 0;
-			}
-
-			li.active::after,
-			li:hover::after {
-				width: 30%;
-			}
-
 			a {
 				text-transform: uppercase;
 				color: #FFFFFF;
@@ -40,7 +21,7 @@
 
 		&.traits-nav {
 			position:   absolute;
-			top:        44px;
+			bottom:     0;
 			width:      100%;
 			text-align: center;
 			z-index:    8;
@@ -76,33 +57,6 @@
 		left: 0;
 	}
 
-	.title {
-		position: absolute;
-		text-align: center;
-		z-index: 1;
-		transform: skew(-20deg);
-		left: -1.5em;
-		top: 10em;
-		padding: 1em 2em 1em 3em;
-		background: $nav-background-color;
-		min-width: 600px;
-
-		div {
-			transform: skew(20deg);
-		}
-
-		h1{
-			font-size: 3em;
-			letter-spacing: 5px;
-			margin: 0;
-			color: #FFF;
-		}
-
-		h1, a {
-			text-shadow: 1px 1px 3px #000;
-		}
-	}
-
 	header.traits-header {
 		position:   relative;
 		box-shadow: inset 0px  10px 10px -10px #000,
@@ -117,7 +71,6 @@
 			width:         100%;
 			min-width:     100%;
 			height:        100vh;
-			border-bottom: 1px solid #e5e5e5;
 
 			background:          transparent;
 			background-repeat:   no-repeat;
@@ -128,74 +81,91 @@
 
 			z-index: -1;
 
-			@media(max-width: 679px) {
-				max-height: 60vh;
-			}
-
-			@media(max-width: 1100px) {
-				background-attachment: inherit;
-			}
-
-			@media(min-width: 1101px) {
-				background-attachment: fixed;
-				background-size:       cover;
-			}
-
 			> img {
 				min-width:  100%;
 				max-height: 100%;
 				min-height: 100vh;
+				position: fixed;
 				object-fit: cover;
-				position:   fixed;
-			}
-		}
-
-		.background.skewed {
-			overflow: hidden;
-			max-width: 100%;
-			display: block;
-			position: fixed;
-
-			ul {
-				width: 150%;
-				height: 100%;
-				position: absolute;
-				display: flex;
-				flex-flow: nowrap row;
-				left: 50%;
-				transform: translateX(-50%) skew(-20deg);
-
-				li {
-					position: relative;
-					overflow: hidden;
-					height: 100%;
-					display: flex;
-					flex-flow: column;
-					width: calc(100% / 6);
-
-					img {
-						transform: skew(20deg);
-						position: absolute;
-						min-height: 100vh;
-						object-fit: cover;
-						min-width: 200%;
-						object-position: center;
-						left: -50%;
-					}
-				}
+				object-position: center;
 			}
 		}
 
 		.characters {
 			position: absolute;
 			right: 25%;
-			bottom: 15px;
-			transform: translateX(50%);
+			top: 50%;
+			transform: translate(50%, -50%);
 
 			img {
 				height:     auto;
 				width:      auto;
 				max-height: 75vh;
+			}
+		}
+
+		.title {
+			position: absolute;
+			text-align: center;
+			z-index: 1;
+			transform: skew(-20deg);
+			left: -1.5em;
+			top: 10em;
+			padding: 1em 2em 1em 3em;
+			background: $nav-background-color;
+			min-width: 500px;
+
+			&.center {
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%) skew(-20deg);
+				padding: 1em 2em;
+			}
+
+			div {
+				transform: skew(20deg);
+			}
+
+			h1{
+				font-size: 3em;
+				letter-spacing: 5px;
+				margin: 0;
+				color: #FFF;
+			}
+
+			h1, a {
+				text-shadow: 1px 1px 3px #000;
+			}
+		}
+
+
+		@media screen and (max-width: 768px){
+			.title {
+				bottom: 2em;
+				top: unset;
+				min-width: auto;
+				max-width: 100%;
+
+				h1 {
+					font-size: 1.5em;
+				}
+			}
+
+			.characters {
+				width: 100%;
+				left: 0;
+				right: 0;
+				top: 50%;
+				transform: translateY(-50%);
+				text-align: center;
+
+				img {
+					height: 60vh;
+					width: auto;
+					margin: 0 auto;
+					display: block;
+					max-width: unset;
+				}
 			}
 		}
 	}
@@ -205,6 +175,8 @@
 	}
 
 	.trait-filters {
+		background-color: #efefef;
+
 		input {
 			width: 100%;
 			border: 0;

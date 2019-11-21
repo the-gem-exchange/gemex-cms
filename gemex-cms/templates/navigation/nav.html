@@ -1,7 +1,20 @@
-<nav class="site-nav {% if request.path == '/' %}transparent{% endif %}">
-	<ul class="horizontal-links">
-		<li><a href="/">Home</a></li>
-		<li><a href="/traits">Traits</a></li>
-		<li><a href="/comic">Comic</a></li>
-	</ul>
+<nav class="site-nav transparent">
+	<div class="grid">
+		<div class="col-12 col-sm-4 no-padding">
+			<ul class="horizontal-links hidden-sm hidden-md hidden-lg hidden-xlg">
+				<li><a class="toggle-mobile-menu"><i class="fa fa-bars"></i></a></li>
+				<li><a href="/">The Gem Exchange</a></li>
+			</ul>
+		</div>
+		<div class="col-4 no-padding">
+			<ul class="horizontal-links hidden-xs hidden-xxs">
+				{% include "navigation/menu-items.html" %}
+			</ul>
+		</div>
+		<div class="hidden-xs hidden-xxs col-sm-4 no-padding"></div>
+	</div>
 </nav>
+
+{% include "navigation/mobile-nav.html" %}
+
+<div class="mobile-overlay"></div>

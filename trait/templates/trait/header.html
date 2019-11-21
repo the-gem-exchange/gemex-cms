@@ -1,7 +1,9 @@
 {% load wagtailimages_tags %}
 
-<header class="traits-header">
-	{% if species %}
+{% if species %}
+	<header class="traits-header">
+
+		{% include 'trait/navigation.html'%}
 
 		<div class="background">
 			{% if species.background %}
@@ -25,7 +27,7 @@
 			</div>
 		</div>
 
-		<nav class="subspecies-nav">
+		<nav class="subspecies-nav hidden-xs hidden-xxs">
 			<ul class="horizontal-links">
 				{% for s in subtypes %}
 					<li {% if s.name == species.name %}class="active"{% endif %}>
@@ -35,39 +37,25 @@
 			</ul>
 		</nav>
 
-		<div class="species-info">
+		<!-- <div class="species-info">
 			<h3>{{traits|length}} Trait{{traits|length|pluralize}}</h3>
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vitae nisl lectus. Fusce congue ipsum non laoreet cursus. Integer non massa quis nisi varius finibus sed tempor tellus. Maecenas consequat dignissim porttitor. Cras viverra nunc a ligula consequat, id eleifend risus posuere. Nunc consequat nunc non hendrerit ultrices. Duis eget lobortis sem. Fusce interdum libero est, eu euismod magna pulvinar at. Maecenas quis mauris ullamcorper ipsum egestas pellentesque.</p>
-		</div>
+		</div> -->
 
 		<div class="characters">
 			{{species.thumbnail}}
 		</div>
-
-	{% else %}
-
-		<div class="background skewed">
-			<ul>
-				{% for s in species_list %}
-				{% if s.background%}
-				<li>
-					<img src="{{s.background.file.url}}">
-				</li>
-				{% endif %}
-				{% endfor %}
-			</ul>
+	</header>
+{% else %}
+	<div style="width:100%; padding-top:44px;"></div>
+	<div
+	 	class="hidden-xs hidden-xxs"
+		style="min-height:44px; position:relative; overflow:hidden; width:100%">
+		{% include 'trait/navigation.html'%}
+	</div>
+	<div class="grid">
+		<div class="col-12">
+			<h1>Traits Compendium</h1>
 		</div>
-
-		<div class="title">
-			<div>
-				<h1>Traits Compendium</h1>
-			</div>
-		</div>
-
-		<div class="species-info">
-			<h3>{{traits|length}} Trait{{traits|length|pluralize}} | {{species_list|length}} Species | {{subtypes|length|add:-8}} Subspecies</h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vitae nisl lectus. Fusce congue ipsum non laoreet cursus. Integer non massa quis nisi varius finibus sed tempor tellus. Maecenas consequat dignissim porttitor. Cras viverra nunc a ligula consequat, id eleifend risus posuere. Nunc consequat nunc non hendrerit ultrices. Duis eget lobortis sem. Fusce interdum libero est, eu euismod magna pulvinar at. Maecenas quis mauris ullamcorper ipsum egestas pellentesque.</p>
-		</div>
-
-	{% endif %}
-</header>
+	</div>
+{% endif %}

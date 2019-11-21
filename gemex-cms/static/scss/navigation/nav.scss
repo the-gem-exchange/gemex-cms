@@ -1,7 +1,4 @@
 nav.site-nav {
-	font-family: "Futura";
-	text-transform: uppercase;
-	letter-spacing: 1px;
 	position: fixed;
 	z-index: 9;
 	width: 100%;
@@ -11,11 +8,20 @@ nav.site-nav {
 	text-align: center;
 
 	a {
+		font-family: "Futura";
+		text-transform: uppercase;
+		letter-spacing: 1px;
+
 		color:#FFF;
 		transition: all 0.2s linear;
 		&:hover {
 			color: $link-hover-color;
 		}
+	}
+
+	> .grid .col-12 .horizontal-links {
+		margin: 0;
+		text-align: left;
 	}
 
 	&.hidden{

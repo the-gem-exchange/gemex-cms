@@ -1,0 +1,16 @@
+<hr>
+<ul>
+	<li style="font-weight:bold;">TRAITS COMPENDIUM</li>
+	{% for s in species_list %}
+		<li {% if species_name == s.name|lower %}class="active"{% endif %}>
+			<a href="/traits/?species={{s|lower}}">{{s}}s</a>
+			<ul>
+				{% for sub in s.subspecies.all %}
+				<li>
+					<a href="/traits/?species={{s|lower}}&subspecies={{sub.name|lower}}">{{sub.name}}</a>
+				</li>
+				{% endfor %}
+			</ul>
+		</li>
+	{% endfor %}
+</ul>

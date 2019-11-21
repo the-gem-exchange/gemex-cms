@@ -11,7 +11,8 @@ $btn-color: rgba(153,102,204,0.9);
 
 .homepage #content{
 	height:             100vh;
-	overflow:           scroll;
+	overflow-y:         scroll;
+	overflow-x:         hidden;
 	position:           relative;
 	perspective:        1px;
 	perspective-origin: 0 100%;

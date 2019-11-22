@@ -3,6 +3,13 @@ from wagtail.images.blocks    import ImageChooserBlock
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.snippets.blocks  import SnippetChooserBlock
 
+class FullSizeImage(blocks.StructBlock):
+	image = ImageChooserBlock(help_text="Full width, full height")
+
+	class Meta:
+		template = 'blocks/info_sheet.html'
+		form_classname = "info-sheet"
+
 class ColumnOptions(blocks.StructBlock):
 	column_options = blocks.StructBlock([
 		('classes', blocks.CharBlock(required=False, max_length=255, help_text="Apply custom classes to this column.")),
@@ -63,6 +70,7 @@ class ThreeColumns(blocks.StructBlock):
 		template       = 'blocks/blocks_row.html'
 		form_classname = 'columns three-columns'
 
+
 class HTMLBlock(blocks.StructBlock):
 	html_content = blocks.TextBlock()
 
@@ -70,8 +78,9 @@ class HTMLBlock(blocks.StructBlock):
 		template = 'blocks/blocks_html.html'
 
 stream_blocks = [
-	('HTML',          HTMLBlock(icon='fa-code')),
-	('One_Column',    OneColumn(icon='one-column')),
-	('Two_Columns',   TwoColumns(icon='two-columns')),
-	('Three_Columns', ThreeColumns(icon='three-columns')),
+	('HTML',            HTMLBlock(icon='fa-code')),
+	('One_Column',      OneColumn(icon='one-column')),
+	('Two_Columns',     TwoColumns(icon='two-columns')),
+	('Three_Columns',   ThreeColumns(icon='three-columns')),
+	('Full_Size_Image', FullSizeImage(icon='form'))
 ]

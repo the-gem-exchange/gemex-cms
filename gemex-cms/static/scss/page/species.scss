@@ -6,9 +6,9 @@
 .species ul {
 	list-style-type: none;
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr;
 	margin: 0;
-	padding: 0;
+	padding: 100px 0;
 	grid-gap: 1em;
 	max-width: 1000px;
 	margin: 0 auto;
@@ -19,9 +19,24 @@
 	text-align: center;
 
 	&.standard {
-		grid-column-start: 1;
-		grid-column-end: 4;
-		margin: 100px 0 50px;
+		margin: 50px 0;
+
+		.species-background {
+			height: 200px;
+			border: 1px solid #CCC;
+			border-radius: 15px;
+		}
+
+		&:nth-child(odd){
+			.text{
+				left: unset;
+				right: 0;
+			}
+			img {
+				right: unset;
+				left: 0;
+			}
+		}
 
 		.text{
 			font-size: 2em;
@@ -32,29 +47,25 @@
 			}
 		}
 
-		.species-background {
-			height: 300px;
-			border: 1px solid #CCC;
-			border-radius: 15px;
-		}
 
 		img {
-			height: 400px;
-			right: 0;
+			height: 300px;
+			right: -50px;
 			bottom: -50px;
 		}
 	}
-	&:not(.standard) {
-		img {
-			height: 200px;
-		}
-
-		.species-background {
-			height: 200px;
-			border-radius: 50%;
-			width: 200px;
-		}
-	}
+	// SubSpecies css - will change later
+	// &:not(.standard) {
+	// 	img {
+	// 		height: 200px;
+	// 	}
+	//
+	// 	.species-background {
+	// 		height: 200px;
+	// 		border-radius: 50%;
+	// 		width: 200px;
+	// 	}
+	// }
 }
 
 .text {

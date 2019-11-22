@@ -1,6 +1,9 @@
 <li {% if request.path == '/' %}class="active"{% endif %}>
 	<a href="/">Home</a>
 </li>
+<li {% if '/stardragons' in request.path %}class="active"{% endif %}>
+	<a href="/stardragons">Stardragons</a>
+</li>
 <li {% if '/traits' in request.path %}class="active"{% endif %}>
 	<a href="/traits">Traits</a>
 </li>

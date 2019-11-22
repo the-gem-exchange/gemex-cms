@@ -1,3 +1,5 @@
+from species.views import species
+
 from page.stream_blocks import stream_blocks
 
 from wagtail.core.fields import StreamField
@@ -10,7 +12,7 @@ from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
 class AbstractFolder(Page):
 
 	content_panels = Page.content_panels
-	
+
 	class Meta:
 		abstract = True
 
@@ -41,4 +43,9 @@ class Folder(AbstractFolder):
 	pass
 
 class BasicPage(ContentPage):
-	pass
+
+	def serve(self, request, *args, **kwargs):
+		if self.slug == 'stardragons':
+			return species(request)
+		else:
+			return super(BasicPage, self).serve(request, *args, **kwargs)

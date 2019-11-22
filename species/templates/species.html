@@ -6,27 +6,21 @@
 {% block content %}
 <ul class="species">
 	{% for s in species.all %}
-		{% for sub in s.subspecies.all %}
-			<li class="subspecies {% if forloop.first %}standard{% endif %}">
-				<a href="/traits/{{sub.id}}/">
+		{% with s.subspecies.all.0 as sub %}
+			<li class="subspecies standard">
+				<a href="/stardragons/{{s.name|lower}}s/">
 					<div class="species-background" {% if sub.background %}style="background-image:url('{{sub.background.file.url}}')"{% endif %}>
 
 						{{sub.thumbnail}}
 
 						<div class="text">
-							<h3>
-								{% if forloop.first %}
-									{{sub.species.name}}s
-								{% else %}
-									{{sub.name}}
-								{% endif %}
-							</h3>
+							<h3>{{sub.species.name}}s</h3>
 						</div>
 
 					</div>
 				</a>
 			</li>
-		{% endfor %}
+		{% endwith %}
 	{% endfor %}
 </ul>
 {% endblock %}

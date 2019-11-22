@@ -186,6 +186,7 @@ MEDIA_URL = '/media/'
 
 WAGTAIL_SITE_NAME = "The Gem Exchange"
 WAGTAILIMAGES_IMAGE_MODEL = 'image.CustomImage'
+WAGTAILIMAGES_MAX_UPLOAD_SIZE = 1024 * 1024 * 25   # 25mb
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash

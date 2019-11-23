@@ -10,9 +10,9 @@
 		{% for s in species.all %}{% with s.subspecies.all.0 as parent %}
 			<div class="species-item col-12 col-sm-6">
 
-				<a href="#" class="expand-subspecies">
+				<a class="expand-subspecies">
+					{{parent.thumbnail}}
 					<div class="species-container">
-						{{parent.thumbnail}}
 						{% image parent.background width-600 format-jpeg class="species-background" %}
 						<div class="text"><h3>{{parent.species.name}}s</h3></div>
 					</div>
@@ -42,5 +42,6 @@
 {% endblock %}
 
 {% block extra_js %}
+	<script type="text/javascript" src="{% static 'js/modernizr.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/species.js' %}"></script>
 {% endblock %}

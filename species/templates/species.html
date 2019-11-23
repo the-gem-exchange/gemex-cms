@@ -1,26 +1,46 @@
 {% extends "base.html" %}
 {% load static wagtailcore_tags wagtailimages_tags menu_tags %}
 
+{% block title %}Stardragons{% endblock %}
+
 {% block body_class %}species-page{% endblock %}
 
 {% block content %}
-<ul class="species">
-	{% for s in species.all %}
-		{% with s.subspecies.all.0 as sub %}
-			<li class="subspecies standard">
-				<a href="/stardragons/{{s.name|lower}}s/">
-					<div class="species-background" {% if sub.background %}style="background-image:url('{{sub.background.file.url}}')"{% endif %}>
+	<div class="species-list grid">
+		{% for s in species.all %}{% with s.subspecies.all.0 as parent %}
+			<div class="species-item col-12 col-sm-6">
 
-						{{sub.thumbnail}}
-
-						<div class="text">
-							<h3>{{sub.species.name}}s</h3>
-						</div>
-
+				<a href="#" class="expand-subspecies">
+					<div class="species-container">
+						{{parent.thumbnail}}
+						{% image parent.background width-600 format-jpeg class="species-background" %}
+						<div class="text"><h3>{{parent.species.name}}s</h3></div>
 					</div>
 				</a>
-			</li>
-		{% endwith %}
-	{% endfor %}
-</ul>
+
+				<div class="subspecies-list closed">
+					<div class="subspecies-list-container grid">
+						{% for subspecies in s.subspecies.all %}
+							<div class="col-auto">
+								<a href="/stardragons/{{subspecies.species.name|lower}}s">
+									<div class="subspecies-item">
+										{{subspecies.thumbnail}}
+										<div class="species-container">
+											{% image subspecies.background height-300 format-jpeg class="species-background" %}
+										</div>
+										<div class="text"><h4>{{subspecies.name}}</h4></div>
+									</div>
+								</a>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+
+			</div>
+		{% endwith %}{% endfor %}
+	</div>
+{% endblock %}
+
+{% block extra_js %}
+	<script type="text/javascript" src="{% static 'js/species.js' %}"></script>
 {% endblock %}

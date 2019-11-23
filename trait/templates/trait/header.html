@@ -1,6 +1,17 @@
 {% load wagtailimages_tags %}
 
 {% if species %}
+	{% if species.color %}
+	<style media="screen">
+		.traits-header .species-info a {
+			color: {{species.color}};
+		}
+		ul.horizontal-links li::after {
+			background: {{species.color}};
+		}
+	</style>
+	{% endif %}
+
 	<header class="traits-header">
 
 		{% include 'trait/navigation.html'%}
@@ -29,6 +40,9 @@
 
 		<nav class="subspecies-nav hidden-xs hidden-xxs">
 			<ul class="horizontal-links">
+				<li {% if not species.species %}class="active"{% endif %}>
+					<a href="/traits/?species={{species_name}}">All</a>
+				</li>
 				{% for s in subtypes %}
 					<li {% if s.name == species.name %}class="active"{% endif %}>
 						<a href="/traits/?species={{species_name}}&subspecies={{s.name|lower}}">{{s.name}}</a>
@@ -37,10 +51,19 @@
 			</ul>
 		</nav>
 
-		<!-- <div class="species-info">
-			<h3>{{traits|length}} Trait{{traits|length|pluralize}}</h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vitae nisl lectus. Fusce congue ipsum non laoreet cursus. Integer non massa quis nisi varius finibus sed tempor tellus. Maecenas consequat dignissim porttitor. Cras viverra nunc a ligula consequat, id eleifend risus posuere. Nunc consequat nunc non hendrerit ultrices. Duis eget lobortis sem. Fusce interdum libero est, eu euismod magna pulvinar at. Maecenas quis mauris ullamcorper ipsum egestas pellentesque.</p>
-		</div> -->
+		<div class="species-info">
+			<h3>{{traits|length}} Trait{{traits|length|pluralize}}
+				{% if species == parent_species %}
+					| {{subtypes.count|add:-1}} Subtype{{subtypes.count|add:-1|pluralize}}
+				{% endif %}
+			</h3>
+			<p>{{species.description}}</p>
+			<p>
+				<a href="/stardragons/{{species_name}}">
+					More info <i class="fa fa-external-link-alt"></i>
+				</a>
+			</p>
+		</div>
 
 		<div class="characters">
 			{{species.thumbnail}}

@@ -11,12 +11,8 @@ nav.site-nav {
 		font-family: "Futura";
 		text-transform: uppercase;
 		letter-spacing: 1px;
-
 		color:#FFF;
 		transition: all 0.2s linear;
-		&:hover {
-			color: $link-hover-color;
-		}
 	}
 
 	.mobile.horizontal-links {

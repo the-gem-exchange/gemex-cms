@@ -10,20 +10,23 @@ from trait.models import Trait, TraitType
 def trait_page(request):
 	species_name    = request.GET.get('species', None)
 	subspecies_name = request.GET.get('subspecies', None)
-	trait_types = TraitType.objects.all()
-	species  = None
-	title = "Traits Compendium"
+	trait_types     = TraitType.objects.all()
+	species         = None
+	parent_species  = None
+	title           = "Traits Compendium"
 
 	if species_name and subspecies_name:
 		species  = SubSpecies.objects.get(name__icontains=subspecies_name, species__name__icontains=species_name)
 		subtypes = species.species.subspecies.all()
 		traits   = species.traits()
 		title    += ' - ' + species.name + ' ' + species.species.name + 's'
+		parent_species = species.species
 	elif species_name:
 		species  = Species.objects.get(name__icontains=species_name)
 		subtypes = species.subspecies.all()
 		traits   = species.traits()
 		title    += ' - ' + species.name + 's'
+		parent_species = species
 	else:
 		subtypes = SubSpecies.objects.all()
 		traits   = Trait.objects.all()
@@ -45,7 +48,8 @@ def trait_page(request):
 		'subtypes':       subtypes,
 		'species_list':   Species.objects.all(),
 		'traits':         traits,
-		'title':          title
+		'title':          title,
+		'parent_species': parent_species
 	}
 
 	return render(request, 'trait/index.html', data)

@@ -18,12 +18,17 @@ from wagtail.snippets.models import register_snippet
 @register_snippet
 class Species(index.Indexed, ClusterableModel):
 
-	name = models.CharField(max_length=255)
+	name  = models.CharField(max_length=255)
+	color = models.CharField(max_length=255, blank=True)
 
 	panels = [
 		FieldPanel('name', classname='full title'),
+		FieldPanel('color'),
 		InlinePanel('subspecies', label="Subspecies"),
 	]
+
+	def description(self):
+		return self.subspecies.get(name="Standard").description
 
 	def background(self):
 		return self.subspecies.get(name="Standard").background
@@ -47,13 +52,15 @@ class Species(index.Indexed, ClusterableModel):
 
 
 class SubSpecies(Orderable):
-	species    = ParentalKey(Species, on_delete=models.CASCADE, related_name='subspecies')
-	name       = models.CharField(max_length=255)
-	image      = models.ForeignKey('image.CustomImage',  null=True, blank=True,  on_delete=models.SET_NULL, related_name="species_image")
-	background = models.ForeignKey('image.CustomImage',  null=True, blank=True,  on_delete=models.SET_NULL, related_name="species_background")
+	species     = ParentalKey(Species, on_delete=models.CASCADE, related_name='subspecies')
+	name        = models.CharField(max_length=255)
+	description = models.TextField(blank=True)
+	image       = models.ForeignKey('image.CustomImage',  null=True, blank=True,  on_delete=models.SET_NULL, related_name="species_image")
+	background  = models.ForeignKey('image.CustomImage',  null=True, blank=True,  on_delete=models.SET_NULL, related_name="species_background")
 
 	panels = [
 		FieldPanel('name'),
+		FieldPanel('description'),
 		ImageChooserPanel('image'),
 		ImageChooserPanel('background'),
 	]
@@ -62,6 +69,9 @@ class SubSpecies(Orderable):
 		'name',
 		'species'
 	]
+
+	def color(self):
+		return self.species.color
 
 	def traits(self):
 		return Trait.objects.filter(species=self)

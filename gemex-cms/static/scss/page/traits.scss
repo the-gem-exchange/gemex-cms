@@ -55,6 +55,8 @@
 		color: #fff;
 		background: #666;
 		left: 0;
+		max-height: 250px;
+		overflow-y: scroll;
 	}
 
 	header.traits-header {
@@ -166,6 +168,10 @@
 					display: block;
 					max-width: unset;
 				}
+			}
+
+			.species-info {
+				display: none;
 			}
 		}
 	}

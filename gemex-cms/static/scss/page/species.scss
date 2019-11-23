@@ -5,7 +5,6 @@ body.species-page {
 
 .species-container {
 	height: 200px;
-	border: 1px solid #CCC;
 	background-color: #000;
 
 	overflow: hidden;
@@ -15,8 +14,10 @@ body.species-page {
 		object-position: center;
 		object-fit: cover;
 		position: absolute;
-		height: 200px;
+		height: 100%;
 		left: 0;
+		min-width: 100%;
+		max-width: unset;
 	}
 }
 
@@ -24,17 +25,17 @@ body.species-page {
 .species-thumbnail {
 	height: auto;
 	width: auto;
-	filter: drop-shadow(1px 1px 10px #000);
+	filter: drop-shadow(1px 1px 5px #000);
 	z-index: 1;
 }
 
 .species-list {
-	padding: 50px 0;
+	padding-top: 44px;
 }
 
 .species-item {
 	position: static;
-	margin: 50px 0;
+	margin-bottom: 60px;
 	height: 200px;
 
 	&.open {
@@ -59,24 +60,24 @@ body.species-page {
 	> a .species-thumbnail {
 		position: absolute;
 		right: 0;
-		bottom: -50px;
 
-		max-height: 300px;
-		max-width: 50%;
+		max-height: 250px;
+		max-width: 250px;
 	}
 
 	> a .text {
 		position: absolute;
 		bottom: 0;
 		left: 0;
+		z-index: 2;
 
-		padding: .5em 1em;
+		padding: .5em;
 
 		font-weight: bold;
 		font-size: 2em;
 
 		color: #FFF;
-		text-shadow: 1px 1px 1px #000;
+		text-shadow: 0 0 10px #000;
 
 		h3 { margin: 0; }
 
@@ -85,6 +86,7 @@ body.species-page {
 
 	> a .species-container {
 		border-radius: 15px;
+		border: 1px solid #CCC;
 	}
 }
 
@@ -95,8 +97,8 @@ body.species-page {
 
 	height: auto;
 
-	background: #ccc;
-	margin: 75px 0;
+	background: #FFF;
+	margin-top: 75px;
 
 	&.closed{
 		height: 0;
@@ -120,7 +122,7 @@ body.species-page {
 			border: solid transparent;
 			height: 0;
 			width: 0;
-			border-bottom-color: #ccc;
+			border-bottom-color: #FFF;
 			border-width: 15px;
 
 			pointer-events: none;
@@ -150,13 +152,12 @@ body.species-page {
 		border-radius: 50%;
 		height: 200px;
 		width: 200px;
-
-		.species-background {
-		}
+		border: 1px solid #000;
 	}
 
 	> .text {
 		margin-top: 1em;
 		font-size: 1.25em;
+		color: #000;
 	}
 }

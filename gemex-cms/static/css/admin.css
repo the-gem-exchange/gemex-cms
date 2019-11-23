@@ -123,6 +123,7 @@ header, .page-explorer .listing .index, .breadcrumb{
 	max-width: 75px;
 	display: block;
 	border-radius: 50%;
+	border: 1px solid #000;
 }
 
 .species-thumbnail {

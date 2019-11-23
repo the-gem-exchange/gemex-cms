@@ -15,6 +15,10 @@ function showHideNav() {
 
 		let down = scrollSpeed >= 1;
 		let up   = scrollSpeed <= -1;
+		if(!isFirefox){
+			up   = scrollSpeed >= 1;
+			down = scrollSpeed <= -1;
+		}
 
 		if (down)   { hideNav(); }
 		else if(up) { showNav(); }

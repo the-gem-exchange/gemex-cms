@@ -1,100 +1,162 @@
-.species-page {
+body.species-page {
 	background: #333;
+	overflow-x: hidden;
 }
 
-.species,
-.species ul {
-	list-style-type: none;
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	margin: 0;
-	padding: 100px 0;
-	grid-gap: 1em;
-	max-width: 1000px;
-	margin: 0 auto;
-}
+.species-container {
+	height: 200px;
+	border: 1px solid #CCC;
+	background-color: #000;
 
-.subspecies {
+	overflow: hidden;
 	position: relative;
-	text-align: center;
 
-	&.standard {
-		margin: 50px 0;
+	.species-background {
+		object-position: center;
+		object-fit: cover;
+		position: absolute;
+		height: 200px;
+		left: 0;
+	}
+}
 
-		.species-background {
-			height: 200px;
-			border: 1px solid #CCC;
-			border-radius: 15px;
+
+.species-thumbnail {
+	height: auto;
+	width: auto;
+	filter: drop-shadow(1px 1px 10px #000);
+	z-index: 1;
+}
+
+.species-list {
+	padding: 50px 0;
+}
+
+.species-item {
+	position: static;
+	margin: 50px 0;
+	height: 200px;
+
+	&.open {
+		height: 600px;
+	}
+
+	// Alternate image/text positioning
+	&:nth-child(odd){
+		> a .text{
+			left: unset;
+			right: 0;
 		}
-
-		&:nth-child(odd){
-			.text{
-				left: unset;
-				right: 0;
-			}
-			img {
-				right: unset;
-				left: 0;
-			}
-		}
-
-		.text{
-			font-size: 2em;
+		> a .species-thumbnail {
+			right: unset;
 			left: 0;
-			padding: .5em 1em;
-			h3 {
-				margin: 0;
-			}
 		}
-
-
-		img {
-			height: 300px;
-			right: -50px;
-			bottom: -50px;
+		.subspecies-list-container::before{
+			left: 25%;
 		}
 	}
-	// SubSpecies css - will change later
-	// &:not(.standard) {
-	// 	img {
-	// 		height: 200px;
-	// 	}
-	//
-	// 	.species-background {
-	// 		height: 200px;
-	// 		border-radius: 50%;
-	// 		width: 200px;
-	// 	}
-	// }
+
+	> a .species-thumbnail {
+		position: absolute;
+		right: 0;
+		bottom: -50px;
+
+		max-height: 300px;
+		max-width: 50%;
+	}
+
+	> a .text {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+
+		padding: .5em 1em;
+
+		font-weight: bold;
+		font-size: 2em;
+
+		color: #FFF;
+		text-shadow: 1px 1px 1px #000;
+
+		h3 { margin: 0; }
+
+		a { text-decoration: none; }
+	}
+
+	> a .species-container {
+		border-radius: 15px;
+	}
 }
 
-.text {
+.subspecies-list {
 	position: absolute;
-	bottom: 0;
-	padding: 1em;
-}
+	left: -100em;
+	right: -100em;
 
-.subspecies img {
-	position: absolute;
-	bottom: 0;
-	width: auto;
 	height: auto;
-	padding: 5px;
-	filter: drop-shadow(1px 1px 10px #000);
+
+	background: #ccc;
+	margin: 75px 0;
+
+	&.closed{
+		height: 0;
+		padding: 0;
+		overflow: hidden;
+	}
+
+	.subspecies-list-container {
+		margin: 0 auto;
+		padding: 15px 0;
+		width: 100vw;
+
+		&::before {
+			content: " ";
+
+			position: absolute;
+			top: 0;
+			left: 75%;
+			transform: translate(-50%,-100%);
+
+			border: solid transparent;
+			height: 0;
+			width: 0;
+			border-bottom-color: #ccc;
+			border-width: 15px;
+
+			pointer-events: none;
+		}
+	}
 }
 
-.species-background {
-	height: 200px;
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-color: #000;
-}
+.subspecies-item {
+	position: relative;
+	text-align: center;
+	width: 200px;
+	margin: auto;
 
-.species, .species a {
-	color: #FFF;
-	font-weight: bold;
-	text-decoration: none;
-	text-shadow: 1px 1px 1px #000;
-	font-size: 20px;
+
+	.species-thumbnail {
+		position: absolute;
+		left: 50%;
+		top: 0;
+		height: 200px;
+		max-width: unset;
+
+		transform: translate(-50%);
+	}
+
+	.species-container {
+		max-width: 100%;
+		border-radius: 50%;
+		height: 200px;
+		width: 200px;
+
+		.species-background {
+		}
+	}
+
+	> .text {
+		margin-top: 1em;
+		font-size: 1.25em;
+	}
 }

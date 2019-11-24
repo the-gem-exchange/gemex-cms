@@ -41,7 +41,7 @@ $('.trait').on('click', function(){
 		type:        $(this).data('type'),
 		sex:         sex,
 		rarity:      rarity,
-		image:       $(this).find('img').attr('src'),
+		image:       $(this).find('.trait-img > img').attr('src'),
 		description: $(this).find('.trait-description')[0].innerHTML
 	});
 });

@@ -99,7 +99,7 @@ class Trait(index.Indexed, ClusterableModel):
 		return format_html(
 			'<img class="trait-thumbnail {}" src="{}" />',
 			self.rarity,
-			self.image.file.url,
+			self.image.file.url if self.image else None,
 		)
 
 	def rarity_icon(self, show_text=False):

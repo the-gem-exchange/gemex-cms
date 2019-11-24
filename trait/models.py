@@ -93,6 +93,9 @@ class Trait(index.Indexed, ClusterableModel):
 		'sex'
 	]
 
+	def emblem(self):
+		return self.species.species.emblem if self.species.species.emblem else None
+
 	def thumbnail(self):
 		return format_html(
 			'<img class="trait-thumbnail {}" src="{}" />',
@@ -100,14 +103,35 @@ class Trait(index.Indexed, ClusterableModel):
 			self.image.file.url,
 		)
 
-	def rarity_icon(self):
-		return format_html(
-		'<i class="icon icon-fa-circle fa fa-circle {}"></i> {}',
-		self.rarity,
-		self.rarity.capitalize()
-	)
+	def rarity_icon(self, show_text=False):
+		if self.rarity == 'legendary':
+			icon = 'fa-star'
+		elif self.rarity == 'rare':
+			icon = 'fa-play'
+		elif self.rarity == 'uncommon':
+			icon = 'fa-square'
+		else:
+			icon = 'fa-circle'
+
+		if show_text:
+			text = self.rarity.capitalize()
+			return format_html(
+				'<i class="icon icon-{} fa {} {}"></i> {}',
+				icon, icon, self.rarity, self.rarity.capitalize()
+			)
+		else:
+			return format_html(
+				'<i class="icon icon-{} fa {} {}"></i>',
+				icon, icon, self.rarity,
+			)
+
 	rarity_icon.admin_order_field = 'rarity'
 
+	# Admin column
+	def rarity_(self):
+		return self.rarity_icon(show_text=True)
+
+	# For determining sort order
 	def rarity_weighted(self):
 		if self.rarity == 'common':
 			return 1
@@ -118,14 +142,31 @@ class Trait(index.Indexed, ClusterableModel):
 		if self.rarity == 'legendary':
 			return 4
 
-	def sex_icon(self):
-		if(self.sex == 'm'):
-			return format_html('<i class="icon icon-fa-mars fa fa-mars"></i>&nbsp;&nbsp;Masculine')
-		if(self.sex == 'f'):
-			return format_html('<i class="icon icon-fa-venus fa fa-venus"></i>&nbsp;&nbsp;Feminine')
-		if(self.sex == 'x'):
-			return format_html('<i class="icon icon-fa-transgender fa fa-transgender"></i>&nbsp;&nbsp;Unisex')
-	sex_icon.admin_order_field = 'sex'
+	def sex_icon(self, show_text=False):
+		if self.sex == 'm':
+			icon = 'fa-mars'
+			text = 'Masculine'
+		elif self.sex == 'f':
+			icon = 'fa-venus'
+			text = 'Feminine'
+		else:
+			icon = 'fa-transgender'
+			text = 'Unisex'
+
+		if show_text:
+			return format_html('<i class="icon icon-{} fa {}"></i>&nbsp;&nbsp;{}',
+				icon, icon, text
+			)
+		else:
+			return format_html('<i class="icon icon-{} fa {}"></i>',
+				icon, icon
+			)
+
+	# Admin column
+	def sex_(self):
+		return self.sex_icon(show_text=True)
+
+	sex_.admin_order_field = 'sex'
 
 	def __str__(self):
 		if(self.name):
@@ -145,7 +186,7 @@ class TraitTypeAdmin(ModelAdmin):
 
 class TraitAdmin(ModelAdmin):
 	model         = Trait
-	list_display  = ('thumbnail', 'name', 'type', 'species', 'rarity_icon', 'sex_icon')
+	list_display  = ('thumbnail', 'name', 'type', 'species', 'rarity_', 'sex_')
 	search_fields = ['name', 'type__name', 'species__name', 'species__species__name', 'rarity', 'sex']
 	list_display_add_buttons = 'name'
 	menu_icon  = 'view'

@@ -152,7 +152,17 @@ i {
 
 	&.common { color: $common; }
 	&.uncommon { color: $uncommon; }
-	&.rare { color: $rare; }
+	&.rare {
+		color: $rare;
+		position: relative;
+		padding-right: 1em;
+		padding-left: .25em;
+
+		&::before {
+			position: absolute;
+			transform: rotate(30deg) translateY(33%);
+		}
+	}
 	&.legendary { color: $legendary; }
 }
 

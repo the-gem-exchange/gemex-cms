@@ -210,9 +210,11 @@
 				border:        5px solid transparent;
 				transition:    all .5s ease;
 				overflow:      hidden;
-				img{
-					transition: all .5s ease;
-				}
+
+			}
+			
+			img {
+				transition: all .5s ease;
 			}
 
 			&:hover {
@@ -220,26 +222,37 @@
 					border-color: transparent;
 					border-radius: 0;
 				}
+				.trait-emblem img {
+					opacity: 0;
+				}
 			}
 
 			&.common {
-				.trait-img { border-color: $common; }
-				&:hover img { background: $common; }
+				.trait-img {
+					border-color: $common;
+				}
+				&:hover .trait-img > img { background: $common; }
 			}
 
 			&.uncommon {
-				.trait-img { border-color: $uncommon; }
-				&:hover img { background: $uncommon; }
+				.trait-img {
+					border-color: $uncommon;
+				}
+				&:hover .trait-img > img { background: $uncommon; }
 			}
 
 			&.rare {
-				.trait-img { border-color: $rare; }
-				&:hover img { background: $rare; }
+				.trait-img {
+					border-color: $rare;
+				}
+				&:hover .trait-img > img { background: $rare; }
 			}
 
 			&.legendary {
-				.trait-img { border-color: $legendary; }
-				&:hover img { background: $legendary; }
+				.trait-img {
+					border-color: $legendary;
+				}
+				&:hover .trait-img > img { background: $legendary; }
 			}
 
 		}
@@ -247,15 +260,63 @@
 
 }
 
+.trait-emblem {
+	position: absolute;
+	top: 0;
+	left: 0;
+	max-width: 2em;
+	overflow: hidden;
+	max-height: 2em;
+	margin: 15px;
+}
+
+.trait-name {
+	padding: 0 .5em;
+	font-size: 1.2em;
+}
+
 .trait-sex {
-	.fa-mars { color: $male; }
-	.fa-venus{ color: $female; }
-	.fa-transgender { color: $nonbinary; }
+	color: #FFF;
+	position: relative;
+	width: 1.5em;
+	height: 1.5em;
+	display: inline-block;
+	margin-bottom: -5px;
+
+	&.m::after { background-color: $male; }
+	&.f::after { background-color: $female; }
+	&.x::after { background-color: $nonbinary; }
+
+	> svg {
+		z-index: 1;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	&::after {
+		content: '';
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		background: red;
+		left: 0;
+		bottom: 0;
+		border-radius: 50%;
+	}
 }
 
 .trait-rarity {
+	font-size: 1.5em;
+
 	&.common { color: $common; }
 	&.uncommon { color: $uncommon; }
 	&.rare { color: $rare; }
 	&.legendary { color: $legendary; }
+
+	/* Fontawesome's "Triangle" icon is not free - use fa-play and rotate */
+	&.rare svg {
+		transform: rotate(30deg) translateY(33%);
+	}
 }

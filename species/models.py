@@ -18,12 +18,14 @@ from wagtail.snippets.models import register_snippet
 @register_snippet
 class Species(index.Indexed, ClusterableModel):
 
-	name  = models.CharField(max_length=255)
-	color = models.CharField(max_length=255, blank=True)
+	name   = models.CharField(max_length=255)
+	color  = models.CharField(max_length=255, blank=True)
+	emblem = models.ForeignKey('image.CustomImage',  null=True, blank=True,  on_delete=models.SET_NULL, related_name="species_emblem")
 
 	panels = [
 		FieldPanel('name', classname='full title'),
 		FieldPanel('color'),
+		ImageChooserPanel('emblem'),
 		InlinePanel('subspecies', label="Subspecies"),
 	]
 
@@ -32,6 +34,15 @@ class Species(index.Indexed, ClusterableModel):
 
 	def background(self):
 		return self.subspecies.get(name="Standard").background
+
+	def emblem_(self):
+		if(self.emblem):
+			return format_html(
+				'<img src="{}" class="species-thumbnail" />',
+				self.emblem.file.url,
+			)
+		else:
+			return None
 
 	def thumbnail(self):
 		return self.subspecies.get(name="Standard").thumbnail()
@@ -95,7 +106,7 @@ class SubSpecies(Orderable):
 class SpeciesAdmin(ModelAdmin):
 	model         = Species
 	menu_icon     = 'group'
-	list_display  = ('thumbnail', 'name', 'subspecies_')
+	list_display  = ('thumbnail', 'name', 'subspecies_', 'emblem_')
 	search_fields = ['name', 'subspecies__name']
 	list_display_add_buttons = 'name'
 

@@ -6,19 +6,24 @@
 	data-species="{{trait.species}}"
 	data-sex="{{trait.sex}}"
 	data-rarity="{{trait.rarity}}">
+
+
 	<div class="trait-img">
+		<div class="trait-emblem">
+			{% image trait.emblem original %}
+		</div>
 		{% image trait.image width-400 height-400 %}
 	</div>
+
 	<p class="trait-description">
+
 		<span class="trait-rarity {{trait.rarity}}" title="{{trait.rarity}}">
-			<i class="fa fa-circle"></i>
+			{{trait.rarity_icon}}
 		</span>
+
 		<span class="trait-name">&nbsp;{{trait}}&nbsp;</span>
-		<span class="trait-sex" title="{{trait.sex}}">
-			{% if trait.sex == 'x' %}<i class="fa fa-transgender"></i>{% endif %}
-			{% if trait.sex == 'f' %}<i class="fa fa-venus"></i>{% endif %}
-			{% if trait.sex == 'm' %}<i class="fa fa-mars"></i>{% endif %}
-		</span>
+
+		<span class="trait-sex {{trait.sex}}" title="{{trait.sex}}">{{trait.sex_icon}}</span>
 	</p>
 	<p style="display:none" class="search-string">
 		{{trait}} {{trait.type}} {{trait.sex|sex}} {{trait.species}} {{trait.rarity}}

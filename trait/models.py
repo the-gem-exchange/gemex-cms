@@ -186,7 +186,7 @@ class TraitTypeAdmin(ModelAdmin):
 class TraitAdmin(ModelAdmin):
 	model         = Trait
 	list_display  = ('thumbnail', 'name', 'type', 'species', 'rarity_', 'sex_')
-	search_fields = ['name', 'type__name', 'type__plural', 'species__name', 'species__species__name', 'rarity', 'sex']
+	search_fields = ['name', 'type__name', 'species__name', 'species__species__name', 'rarity', 'sex']
 	list_display_add_buttons = 'name'
 	menu_icon  = 'view'
 

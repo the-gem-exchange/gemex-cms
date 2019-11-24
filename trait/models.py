@@ -95,9 +95,37 @@ class Trait(index.Indexed, ClusterableModel):
 
 	def thumbnail(self):
 		return format_html(
-			'<img class="trait-thumbnail" src="{}" />',
+			'<img class="trait-thumbnail {}" src="{}" />',
+			self.rarity,
 			self.image.file.url,
 		)
+
+	def rarity_icon(self):
+		return format_html(
+		'<i class="icon icon-fa-circle fa fa-circle {}"></i> {}',
+		self.rarity,
+		self.rarity.capitalize()
+	)
+	rarity_icon.admin_order_field = 'rarity'
+
+	def rarity_weighted(self):
+		if self.rarity == 'common':
+			return 1
+		if self.rarity == 'uncommon':
+			return 2
+		if self.rarity == 'rare':
+			return 3
+		if self.rarity == 'legendary':
+			return 4
+
+	def sex_icon(self):
+		if(self.sex == 'm'):
+			return format_html('<i class="icon icon-fa-mars fa fa-mars"></i>&nbsp;&nbsp;Masculine')
+		if(self.sex == 'f'):
+			return format_html('<i class="icon icon-fa-venus fa fa-venus"></i>&nbsp;&nbsp;Feminine')
+		if(self.sex == 'x'):
+			return format_html('<i class="icon icon-fa-transgender fa fa-transgender"></i>&nbsp;&nbsp;Unisex')
+	sex_icon.admin_order_field = 'sex'
 
 	def __str__(self):
 		if(self.name):
@@ -106,7 +134,7 @@ class Trait(index.Indexed, ClusterableModel):
 			return self.species.name
 
 	class Meta:
-		ordering = ["rarity", "name"]
+		ordering = ["name"]
 
 # ===== ModelAdmin Models =====
 
@@ -117,7 +145,7 @@ class TraitTypeAdmin(ModelAdmin):
 
 class TraitAdmin(ModelAdmin):
 	model         = Trait
-	list_display  = ('thumbnail', 'name', 'type', 'species', 'rarity', 'sex')
+	list_display  = ('thumbnail', 'name', 'type', 'species', 'rarity_icon', 'sex_icon')
 	search_fields = ['name', 'type__name', 'species__name', 'species__species__name', 'rarity', 'sex']
 	list_display_add_buttons = 'name'
 	menu_icon  = 'view'

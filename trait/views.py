@@ -35,9 +35,9 @@ def trait_page(request):
 	for type in trait_types:
 		obj = {
 			'type':   TraitType.objects.get(id=type.id),
-			'traits': traits.filter(type__id=type.id)
+			'traits': sorted(traits.filter(type__id=type.id), key=lambda trait: trait.rarity_weighted())
 		}
-		if(obj['traits'].count() > 0):
+		if(len(obj['traits']) > 0):
 			traits_by_type.append(obj)
 
 	data = {

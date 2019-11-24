@@ -23,7 +23,6 @@ from wagtail.snippets.models import register_snippet
 # ===== Choices =====
 
 RARITIES = [
-	('none',      'None'),
 	('common',    'Common'),
 	('uncommon',  'Uncommon'),
 	('rare',      'Rare'),
@@ -68,7 +67,7 @@ class Trait(index.Indexed, ClusterableModel):
 	image   = models.ForeignKey('image.CustomImage',  null=True, blank=True,  on_delete=models.SET_NULL)
 	type    = models.ForeignKey('trait.TraitType',    null=True, blank=True,  on_delete=models.SET_NULL)
 	species = models.ForeignKey('species.SubSpecies', null=True, blank=True,  on_delete=models.SET_NULL)
-	rarity  = models.CharField(choices=RARITIES,      null=True, blank=False, default='none', max_length=16)
+	rarity  = models.CharField(choices=RARITIES,      null=True, blank=False, default='common', max_length=16)
 	sex     = models.CharField(choices=SEXES,         null=True, blank=False, default='x',    max_length=1)
 
 	panels = [
@@ -187,7 +186,7 @@ class TraitTypeAdmin(ModelAdmin):
 class TraitAdmin(ModelAdmin):
 	model         = Trait
 	list_display  = ('thumbnail', 'name', 'type', 'species', 'rarity_', 'sex_')
-	search_fields = ['name', 'type__name', 'species__name', 'species__species__name', 'rarity', 'sex']
+	search_fields = ['name', 'type__name', 'type__plural', 'species__name', 'species__species__name', 'rarity', 'sex']
 	list_display_add_buttons = 'name'
 	menu_icon  = 'view'
 

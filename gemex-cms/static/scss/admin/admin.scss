@@ -1,0 +1,218 @@
+@import '../colors.scss';
+
+header, .page-explorer .listing .index, .breadcrumb{
+	background: #1a1a1a;
+	color: #ccc;
+}
+
+.breadcrumb li a:after,
+.breadcrumb li span:after{
+	color: #fff;
+}
+
+.tab-nav {
+	&.merged {
+		background: #1a1a1a;
+	}
+
+	li a {
+		background: #333;
+		border-top: .3em solid #333;
+
+		&:hover{
+			border-top: .3em solid #555;
+		}
+	}
+}
+
+
+.nav-search input{
+	border-radius: 500px;
+}
+
+.icon.icon-one-column::before,
+.icon.icon-two-columns::before,
+.icon.icon-three-columns::before {
+	content: "";
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 50px auto;
+	opacity: 0.8;
+}
+
+.icon.icon-one-column::before {
+	background-image: url('/static/img/icons/columns.svg');
+}
+
+.icon.icon-two-columns::before {
+	background-image: url('/static/img/icons/columns2-left.svg');
+}
+
+.icon.icon-three-columns::before {
+	background-image: url('/static/img/icons/columns3.svg');
+}
+
+.Draftail-Toolbar {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	flex-wrap: wrap;
+
+	.Draftail-ToolbarGroup {
+		display: flex;
+		align-items: center;
+
+		&:nth-last-child(1)::after,
+		&::before {
+			display: none!important;
+		}
+
+		&::after {
+			content: "";
+			display: inline-block;
+			width: 1px;
+			height: 1rem;
+			vertical-align: middle;
+			margin: 0 .125rem;
+			background-color: #666;
+		}
+	}
+}
+
+.columns {
+	&.one-column    label,
+	&.two-columns   label,
+	&.three-columns label {
+		display: none;
+	}
+
+	&.one-column > .field {
+		width: 100%;
+		float: left;
+		padding: 0 .25em !important;
+	}
+
+	&.two-columns   > .field:nth-child(1),
+	&.three-columns > .field:nth-child(1) {
+		width: 100%;
+	}
+
+	&.two-columns > .field {
+		width: 50%;
+		float: left;
+		padding: 0 .25em !important;
+	}
+
+	&.three-columns > .field  {
+		width: 33.3%;
+		float: left;
+		padding: 0 .25em !important;
+	}
+}
+
+.row-options {
+	padding: 1em 0 2em;
+}
+
+.column-options {
+	> .field + .field {
+		padding-top: 0!important;
+	}
+
+	.struct-block > .field {
+		height: 0;
+		overflow: hidden;
+		transition: 0.3s height ease-in-out;
+	}
+
+	.struct-block.show > .field {
+		height: 110px;
+	}
+}
+
+.trait-thumbnail {
+	max-width: 75px;
+	display: block;
+	border-radius: 50%;
+	border: 2px solid #000;
+
+	&.common { border-color: $common; }
+	&.uncommon { border-color: $uncommon; }
+	&.rare { border-color: $rare; }
+	&.legendary { border-color: $legendary; }
+}
+
+i {
+	&.common,
+	&.uncommon,
+	&.rare,
+	&.legendary {
+		font-size: 2em;
+	}
+
+	&.common { color: $common; }
+	&.uncommon { color: $uncommon; }
+	&.rare { color: $rare; }
+	&.legendary { color: $legendary; }
+}
+
+$icon-size: 1.75em;
+.fa-mars,
+.fa-venus,
+.fa-transgender {
+	position: relative;
+	padding-right: $icon-size;
+
+	&::before {
+		z-index: 5;
+		color: #fff;
+		position: absolute;
+		text-align: center;
+		line-height: $icon-size;
+		width: $icon-size;
+		vertical-align: middle;
+	}
+
+	&::after {
+		font-weight: 700;
+		background: #a020f0;
+		border-radius: 50%;
+		width: $icon-size;
+		height: $icon-size;
+		content: '';
+		position: absolute;
+		display: inline-block;
+	}
+}
+
+.fa-mars::after {
+	background: $male;
+}
+.fa-venus::after {
+	background: $female;
+}
+.fa-transgender::after {
+	background: $nonbinary;
+}
+
+.species-thumbnail {
+	max-width: 100px;
+}
+
+.multi-field.trait-type .add-button,
+.multi-field.trait-type .add-button fieldset {
+	padding: 0;
+}
+
+.fields li.no-label label{
+	display: none;
+}
+
+footer{
+	margin: 0;
+	width: calc(100% - 180px);
+
+	@media screen and (max-width:799px){
+		width:100%;
+	}
+}

@@ -11,6 +11,14 @@ gulp.task('sass:main', function () {
 		.pipe(gulp.dest('./gemex-cms/static/css/'));
 });
 
+gulp.task('sass:admin', function () {
+	return gulp.src('./gemex-cms/static/scss/admin/admin.scss')
+		.pipe(sass().on('error', sass.logError))
+		.pipe(csso()) // Minify CSS
+		.pipe(gulp.dest('./gemex-cms/static/css/'));
+});
+
 gulp.task('watch', function () {
 	gulp.watch('**/*.scss', gulp.series('sass:main'));
+	gulp.watch('**/*.scss', gulp.series('sass:admin'));
 });

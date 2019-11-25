@@ -181,6 +181,7 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+FILE_UPLOAD_TEMP_DIR = os.path.join(BASE_DIR, 'tmp')
 
 # Wagtail settings
 
@@ -190,4 +191,4 @@ WAGTAILIMAGES_MAX_UPLOAD_SIZE = 1024 * 1024 * 25   # 25mb
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
-BASE_URL = 'http://thegemexchange.net'
+BASE_URL = 'https://thegemexchange.net'

@@ -55,9 +55,7 @@ class TraitType(index.Indexed, ClusterableModel):
 			return self.name + "s"
 
 	def count(self):
-		count = Trait.objects.filter(type=self)
-		print("COUNT", self.name, count)
-		return count.count()
+		return Trait.objects.filter(type=self).count()
 
 	def __str__(self):
 		return self.name

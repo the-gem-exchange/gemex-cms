@@ -54,6 +54,11 @@ class TraitType(index.Indexed, ClusterableModel):
 		else:
 			return self.name + "s"
 
+	def count(self):
+		count = Trait.objects.filter(type=self)
+		print("COUNT", self.name, count)
+		return count.count()
+
 	def __str__(self):
 		return self.name
 
@@ -180,7 +185,7 @@ class Trait(index.Indexed, ClusterableModel):
 
 class TraitTypeAdmin(ModelAdmin):
 	model         = TraitType
-	list_display  = ('name', 'plural')
+	list_display  = ('name', 'plural', 'count')
 	search_fields = ['name', 'plural']
 
 class TraitAdmin(ModelAdmin):
@@ -191,3 +196,4 @@ class TraitAdmin(ModelAdmin):
 	menu_icon  = 'view'
 
 modeladmin_register(TraitAdmin)
+modeladmin_register(TraitTypeAdmin)

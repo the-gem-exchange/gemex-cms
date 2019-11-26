@@ -1,3 +1,7 @@
+import importlib
+# Use importlib to import from 'gemex-cms' because it's a hyphenated name
+choices = importlib.import_module('.choices', 'gemex-cms')
+
 from django import forms
 from django.conf import settings
 from django.core.exceptions import ValidationError
@@ -19,21 +23,6 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.images.models import Image
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
-
-# ===== Choices =====
-
-RARITIES = [
-	('common',    'Common'),
-	('uncommon',  'Uncommon'),
-	('rare',      'Rare'),
-	('legendary', 'Legendary'),
-]
-
-SEXES = [
-	('x', 'Unisex'),
-	('f', 'Feminine'),
-	('m', 'Masculine'),
-]
 
 # ===== Snippet Models =====
 
@@ -67,11 +56,11 @@ class TraitType(index.Indexed, ClusterableModel):
 class Trait(index.Indexed, ClusterableModel):
 
 	name    = models.CharField(max_length=255)
-	image   = models.ForeignKey('image.CustomImage',  null=True, blank=True,  on_delete=models.SET_NULL)
-	type    = models.ForeignKey('trait.TraitType',    null=True, blank=True,  on_delete=models.SET_NULL)
-	species = models.ForeignKey('species.SubSpecies', null=True, blank=True,  on_delete=models.SET_NULL)
-	rarity  = models.CharField(choices=RARITIES,      null=True, blank=False, default='common', max_length=16)
-	sex     = models.CharField(choices=SEXES,         null=True, blank=False, default='x',    max_length=1)
+	image   = models.ForeignKey('image.CustomImage',     null=True, blank=True,  on_delete=models.SET_NULL)
+	type    = models.ForeignKey('trait.TraitType',       null=True, blank=True,  on_delete=models.SET_NULL)
+	species = models.ForeignKey('species.SubSpecies',    null=True, blank=True,  on_delete=models.SET_NULL)
+	rarity  = models.CharField(choices=choices.RARITIES, null=True, blank=False, default='common', max_length=16)
+	sex     = models.CharField(choices=choices.SEXES,    null=True, blank=False, default='x',    max_length=1)
 
 	panels = [
 		FieldPanel('name', classname='full title'),

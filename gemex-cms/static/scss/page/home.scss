@@ -260,6 +260,10 @@ $btn-color: rgba(153,102,204,0.9);
 		position:    relative;
 		display:     flex;
 
+		&:not(.home-section-1){
+			z-index: 1;
+		}
+
 		h2, h3 {
 			font-size: 35px;
 			letter-spacing: 1px;

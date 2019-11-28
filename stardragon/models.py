@@ -2,7 +2,10 @@ import importlib
 # Use importlib to import from 'gemex-cms' because it's a hyphenated name
 choices = importlib.import_module('.choices', 'gemex-cms')
 
+import datetime
+
 from django.db import models
+from django.utils.html import format_html
 
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
@@ -30,6 +33,7 @@ class Stardragon(index.Indexed, ClusterableModel):
 	design_type = models.CharField(choices=DESIGN_TYPES, null=True, blank=False, default='official', max_length=255)
 
 	name        = models.CharField(max_length=255)
+	base        = models.CharField(max_length=255, blank=True)
 	buyer_email = models.CharField(max_length=255, blank=True)
 
 	price = models.IntegerField(default=0)
@@ -59,14 +63,16 @@ class Stardragon(index.Indexed, ClusterableModel):
 
 		MultiFieldPanel([
 			# HelpPanel(content=""),
+			FieldPanel('base'),
 			FieldPanel('rarity'),
 			FieldPanel('sex'),
 			InlinePanel('species', label='Species'),
-			InlinePanel('traits', label='Traits'),
-			InlinePanel('images', label='Images'),
-			InlinePanel('colors', label='Colors'),
-			InlinePanel('links', label='Links'),
-		], heading="Stardragon Info", classname="collapsible"),
+			InlinePanel('traits',  label='Traits'),
+			InlinePanel('images',  label='Images'),
+			InlinePanel('colors',  label='Colors'),
+			InlinePanel('links',   label='Links'),
+		], heading="Stardragon Info",
+		classname="collapsible"),
 
 		MultiFieldPanel([
 			# HelpPanel(content=""),
@@ -74,38 +80,60 @@ class Stardragon(index.Indexed, ClusterableModel):
 			FieldPanel('purchase_date'),
 			FieldPanel('price'),
 			FieldPanel('paid'),
-		], heading="Purchase Info", classname="collapsible collapsed"),
+		], heading="Purchase Info",
+		classname="collapsible collapsed"),
 
 		MultiFieldPanel([
 			# HelpPanel(content=""),
 			FieldPanel('serial_number'),
 			FieldPanel('buyer_email'),
-		], heading="Make Your Own Info", classname="collapsible collapsed"),
+		], heading="Make Your Own Info",
+		classname="collapsible collapsed"),
 
 		MultiFieldPanel([
 			# HelpPanel(content=""),
 			InlinePanel('designers', label="Designer"),
 			FieldPanel('post_date'),
 			FieldPanel('approved'),
-		], heading="Publishing Info", classname="collapsible"),
+		], heading="Publishing Info",
+		classname="collapsible"),
 	]
 
 	# ========== Methods ==========
 
+	# TODO: Apply watermark
 	def thumbnail(self):
-		# grab image[0] and apply watermark
-		# return format_html(<img src="rendition with watermark">)
-		pass
+		image = self.images.first()
+		if image:
+			return format_html(
+				'<img class="species-thumbnail" src="{}" />',
+				image.image.file.url,
+			)
+		else:
+			return None
 
+	def species_(self):
+		count = self.species.count()
+		if  count == 1:
+			return self.species.first().species.name
+		elif count > 1:
+			return "Hybrid"
+		else:
+			return None
+
+	# Determine if a Stardragon shows to anonymous users
+	# Must be marked as paid and aprroved
+	# If a post date is set, it should be in the past
 	def is_public(self):
-		#if paid == true and approved == true and sale_date in the past
-		pass
+		if self.post_date:
+			posted = self.post_date < datetime.date.today()
+		else:
+			posted = True
+		return self.paid and self.approved and posted
 
 	# If it has more than one species, it's a hybrid
-	# If all subspecies have the same parent species, it's not a hybrid
 	def is_hybrid(self):
-		# return len(self.species.all().distinct(species)) > 1
-		pass
+		return len(self.species.all()) > 1
 
 	def __str__(self):
 		return self.name
@@ -152,9 +180,9 @@ class StardragonImage(Orderable):
 class StardragonSpecies(Orderable):
 	stardragon = ParentalKey('Stardragon', related_name='species', on_delete=models.CASCADE)
 
-	subspecies = models.ForeignKey('species.SubSpecies', null=True, blank=True, on_delete=models.SET_NULL)
+	species = models.ForeignKey('species.Species', null=True, blank=True, on_delete=models.SET_NULL)
 
-	panels = [FieldPanel('subspecies')]
+	panels = [FieldPanel('species')]
 
 
 class StardragonTrait(Orderable):
@@ -185,7 +213,8 @@ class StardragonDesigner(Orderable):
 class StardragonAdmin(ModelAdmin):
 	model         = Stardragon
 	menu_icon     = 'user'
-	list_display  = ('name','design_type')
+	list_display  = ('thumbnail', 'name','design_type', 'species_', 'is_public')
 	search_fields = ['name', 'design_type']
+	list_display_add_buttons = 'name'
 
 modeladmin_register(StardragonAdmin)

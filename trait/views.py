@@ -21,12 +21,14 @@ def trait_page(request):
 		traits   = species.traits()
 		title    += ' - ' + species.name + ' ' + species.species.name + 's'
 		parent_species = species.species
+
 	elif species_name:
 		species  = Species.objects.get(name__icontains=species_name)
 		subtypes = species.subspecies.all()
 		traits   = species.traits()
 		title    += ' - ' + species.name + 's'
 		parent_species = species
+
 	else:
 		subtypes = SubSpecies.objects.all()
 		traits   = Trait.objects.all()

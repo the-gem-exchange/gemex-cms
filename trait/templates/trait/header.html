@@ -52,7 +52,7 @@
 		</nav>
 
 		<div class="species-info">
-			<h3>{{traits|length}} Trait{{traits|length|pluralize}}
+			<h3>{{traits.count}} Trait{{traits.count|pluralize}}
 				{% if species == parent_species %}
 					| {{subtypes.count|add:-1}} Subtype{{subtypes.count|add:-1|pluralize}}
 				{% endif %}
@@ -78,7 +78,7 @@
 	</div>
 	<div class="grid">
 		<div class="col-12">
-			<h1>Traits Compendium</h1>
+			<h1>Traits Compendium ({{traits.count}} Trait{{traits.count|pluralize}})</h1>
 		</div>
 	</div>
 {% endif %}

@@ -1,11 +1,11 @@
 {% load i18n wagtailadmin_tags %}
 
-<li class="icon icon-fa-book">
-    <a href="/admin/pages/{{root_id}}/">
+<li class="icon icon-fa-user">
+	<a href="/admin/stardragon/stardragon/">
         {% blocktrans count counter=count with count|intcomma as total %}
-            <span>{{ total }}</span> Comic Page
+            <span>{{ total }}</span> Stardragon
         {% plural %}
-            <span>{{ total }}</span> Comic Pages
+            <span>{{ total }}</span> Stardragons
         {% endblocktrans %}
     </a>
 </li>

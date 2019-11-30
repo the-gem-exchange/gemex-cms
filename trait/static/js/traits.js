@@ -46,6 +46,21 @@ $('.trait').on('click', function(){
 	});
 });
 
+function fadeInImages(){
+	$('.species-thumbnail').each(function(){
+		$(this).imagesLoaded(function(){
+			$($(this)[0].elements[0]).addClass('show');
+		});
+	});
+
+	$('.background').each(function(){
+		$(this).imagesLoaded(function(){
+			$($(this)[0].elements[0]).addClass('show');
+		});
+	});
+}
+
 $(document).ready(function(){
+	fadeInImages();
 	$('.traits').liveFilter('.filter-traits', '.trait', {filterChildSelector:'.search-string'});
 })

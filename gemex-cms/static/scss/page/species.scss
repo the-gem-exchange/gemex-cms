@@ -1,6 +1,7 @@
 body.species-page {
 	background: #333;
 	overflow-x: hidden;
+	align-items: stretch;
 }
 
 .species-container {
@@ -34,16 +35,12 @@ body.species-page {
 	width: auto;
 	filter: drop-shadow(1px 1px 5px #000);
 	z-index: 1;
-	opacity: 0;
-	transition: opacity 0.3s ease-in-out;
-
-	&.show{
-		opacity: 1;
-	}
 }
 
 .species-list {
 	padding-top: 44px;
+	flex-grow: 1;
+	height: auto;
 }
 
 .species-item {

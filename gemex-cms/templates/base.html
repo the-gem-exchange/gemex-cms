@@ -44,7 +44,9 @@
 
 		<div id="content">
 			{% block content %}{% endblock %}
-			{% include "navigation/footer.html" %}
+			{% block footer %}
+				{% include "navigation/footer.html" %}
+			{% endblock %}
 		</div>
 
 		{# Global javascript #}
@@ -55,8 +57,8 @@
 		<script type="text/javascript" src="{% static 'js/vendor/imagesLoaded.min.js' %}"></script>
 
 		{# Global JS #}
-		<script type="text/javascript" src="/static/js/thegemexchange.js"></script>
-		<script type="text/javascript" src="/static/js/navigation.js"></script>
+		<script type="text/javascript" src="{% static 'js/thegemexchange.js' %}?v={{VERSION}}"></script>
+		<script type="text/javascript" src="{% static 'js/navigation.js' %}?v={{VERSION}}"></script>
 
 		{% block extra_js %}{% endblock %}
 	</body>

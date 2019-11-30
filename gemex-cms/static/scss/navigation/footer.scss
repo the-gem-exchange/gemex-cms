@@ -1,10 +1,11 @@
-footer{
-	display: flex;
-	flex-direction: row;
+footer.grid {
 	font-family: "Futura";
 	text-transform: uppercase;
-	background: $nav-background-color;
-	
+	background-color: $nav-background-color;
+	text-align: center;
+	max-width: 100%;
+	overflow: hidden;
+
 	a{
 		color:#EEE;
 	}

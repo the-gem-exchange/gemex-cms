@@ -53,6 +53,7 @@ function fadeInImages(){
 			$($(this)[0].elements[0]).addClass('show');
 		});
 	});
+
 	$('.species-thumbnail').each(function(){
 		$(this).imagesLoaded(function(){
 			$($(this)[0].elements[0]).addClass('show');

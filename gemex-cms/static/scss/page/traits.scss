@@ -1,5 +1,4 @@
 .traits-page {
-
 	p {
 		font-family: "Frenchpress";
 		font-size:   22px;
@@ -65,6 +64,7 @@
 					inset 0px -10px 10px -10px #000;
 		transition: 0.3s ease height;
 		height:     100vh;
+		min-height: 100vh;
 		overflow:   hidden;
 
 		.background {
@@ -77,11 +77,18 @@
 			background:          transparent;
 			background-repeat:   no-repeat;
 			background-position: center;
+			background-color: #333;
 
 			position: relative;
 			overflow: hidden;
 
 			z-index: -1;
+
+			opacity: 0;
+
+			&.show{
+				opacity: 1;
+			}
 
 			> img {
 				min-width:  100%;

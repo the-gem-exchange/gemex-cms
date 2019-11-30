@@ -3,6 +3,7 @@ $comic-header-height: 150px;
 #comic-header{
 	width:    100%;
 	height:   $comic-header-height;
+	min-height: $comic-header-height;
 	display:  block;
 	overflow: hidden;
 	position: relative;
@@ -79,6 +80,12 @@ $comic-header-height: 150px;
 	text-align: center;
 	max-width: 1000px;
 	width: 100%;
+	height: auto;
+	flex-grow: 1;
+}
+
+.comic-wrapper {
+	flex-grow: 1;
 }
 
 .comic-navigation {

@@ -18,6 +18,13 @@ body.species-page {
 		left: 0;
 		min-width: 100%;
 		max-width: unset;
+
+		opacity: 0;
+		transition: opacity 0.3s ease-in-out;
+
+		&.show{
+			opacity: 1;
+		}
 	}
 }
 
@@ -27,6 +34,12 @@ body.species-page {
 	width: auto;
 	filter: drop-shadow(1px 1px 5px #000);
 	z-index: 1;
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out;
+
+	&.show{
+		opacity: 1;
+	}
 }
 
 .species-list {
@@ -36,7 +49,8 @@ body.species-page {
 .species-item {
 	position: static;
 	margin-bottom: 60px;
-	height: 200px;
+	height: 250px;
+	overflow-x: hidden;
 
 	&.open {
 		height: 600px;
@@ -99,11 +113,21 @@ body.species-page {
 
 	background: #FFF;
 	margin-top: 75px;
+	transition: background 0.5s ease-in-out;
 
 	&.closed{
 		height: 0;
 		padding: 0;
 		overflow: hidden;
+		background: transparent;
+
+		.subspecies-item {
+			opacity: 0;
+		}
+
+		.subspecies-list-container::before{
+			border-bottom-color: transparent;
+		}
 	}
 
 	.subspecies-list-container {
@@ -126,8 +150,18 @@ body.species-page {
 			border-width: 15px;
 
 			pointer-events: none;
+			transition: border-bottom-color 0.3s ease-in-out;
 		}
 	}
+}
+
+.subspecies-list .col-auto{
+	&:nth-child(1) .subspecies-item{ transition-delay: 0.05s }
+	&:nth-child(2) .subspecies-item{ transition-delay: 0.10s }
+	&:nth-child(3) .subspecies-item{ transition-delay: 0.15s }
+	&:nth-child(4) .subspecies-item{ transition-delay: 0.20s }
+	&:nth-child(5) .subspecies-item{ transition-delay: 0.25s }
+	&:nth-child(6) .subspecies-item{ transition-delay: 0.30s }
 }
 
 .subspecies-item {
@@ -135,7 +169,8 @@ body.species-page {
 	text-align: center;
 	width: 200px;
 	margin: auto;
-
+	transition: 0.35s opacity ease-in-out;
+	opacity: 1;
 
 	.species-thumbnail {
 		position: absolute;
@@ -143,7 +178,6 @@ body.species-page {
 		top: 0;
 		height: 200px;
 		max-width: unset;
-
 		transform: translate(-50%);
 	}
 

@@ -16,6 +16,7 @@ $btn-color: rgba(153,102,204,0.9);
 	position:           relative;
 	perspective:        1px;
 	perspective-origin: 0 100%;
+	background:         #333;
 }
 
 .home-jump-links {
@@ -84,6 +85,13 @@ $btn-color: rgba(153,102,204,0.9);
 }
 
 #homepage-title{
+	opacity:        0;
+	transition:     0.3s opacity ease-in-out;
+
+	&.show {
+		opacity: 1;
+	}
+
 	.title-container {
 		max-width: 1200px;
 		margin: 0 auto;
@@ -206,16 +214,23 @@ $btn-color: rgba(153,102,204,0.9);
 }
 
 #parallax-background {
-	z-index:         -2;
-	position:        fixed;
-	height:          100vh;
+	z-index: -2;
+	position: fixed;
+	height: 100vh;
 	width: 100%;
 	transform-style: preserve-3d;
+
+	&.show img {
+		opacity: 1;
+	}
 
 	img {
 		@media screen and (max-width: 766px) {
 			object-position: 25%; // Show the interesting part of the image on mobile!
 		}
+
+		opacity: 0;
+		transition: 0.4s opacity ease-in-out;
 
 		object-fit: cover;
 		min-width: 100%;
@@ -224,13 +239,34 @@ $btn-color: rgba(153,102,204,0.9);
 		transform-origin: 0 100%;
 		bottom: 0;
 
-		&:nth-child(1) { transform: translateZ(-10px) scale(11) }
-		&:nth-child(2) { transform: translateZ(-8px)  scale(9)  }
-		&:nth-child(3) { transform: translateZ(-6px)  scale(7)  }
-		&:nth-child(4) { transform: translateZ(-3px)  scale(4)  }
-		&:nth-child(5) { transform: translateZ(-2px)  scale(3)  }
-		&:nth-child(6) { transform: translateZ(-1px)  scale(2)  }
-		&:nth-child(7) { transform: translateZ(0) }
+		&:nth-child(1) {
+			transform: translateZ(-10px) scale(11);
+			transition-delay: 0.35s;
+		}
+		&:nth-child(2) {
+			transform: translateZ(-8px)  scale(9);
+			transition-delay: 0.30s;
+		}
+		&:nth-child(3) {
+			transform: translateZ(-6px)  scale(7);
+			transition-delay: 0.25s;
+		}
+		&:nth-child(4) {
+			transform: translateZ(-3px)  scale(4);
+			transition-delay: 0.20s;
+		}
+		&:nth-child(5) {
+			transform: translateZ(-2px)  scale(3);
+			transition-delay: 0.15s;
+		}
+		&:nth-child(6) {
+			transform: translateZ(-1px)  scale(2);
+			transition-delay: 0.10s;
+		}
+		&:nth-child(7) {
+			transform: translateZ(0);
+			transition-delay: 0.05s;
+		}
 	}
 }
 

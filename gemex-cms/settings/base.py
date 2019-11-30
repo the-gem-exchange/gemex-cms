@@ -169,9 +169,10 @@ STATICFILES_FINDERS = [
 	'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
-STATICFILES_DIRS = [
-	os.path.join(PROJECT_DIR, 'static'),
-]
+# Unneeded - produces a ton of 'Found another file with the destination path' warnings on collectstatic
+# STATICFILES_DIRS = [
+# 	os.path.join(PROJECT_DIR, 'static'),
+# ]
 
 # ManifestStaticFilesStorage is recommended in production, to prevent outdated
 # Javascript / CSS assets being served from cache (e.g. after a Wagtail upgrade).

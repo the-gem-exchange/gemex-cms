@@ -26,6 +26,6 @@
 {% endblock %}
 
 {% block extra_js %}
-	<script type="text/javascript" src="{% static 'js/vendor/fontsLoaded.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/home.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/vendor/fontsLoaded.js' %}?v={{VERSION}}"></script>
+	<script type="text/javascript" src="{% static 'js/home.js' %}?v={{VERSION}}"></script>
 {% endblock %}

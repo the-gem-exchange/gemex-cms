@@ -5,6 +5,7 @@ choices = importlib.import_module('.choices', 'gemex-cms')
 import datetime
 
 from django.db import models
+from django.utils import timezone
 from django.utils.html import format_html
 
 from modelcluster.fields import ParentalKey
@@ -126,7 +127,7 @@ class Stardragon(index.Indexed, ClusterableModel):
 	# If a post date is set, it should be in the past
 	def is_public(self):
 		if self.post_date:
-			posted = self.post_date < datetime.date.today()
+			posted = self.post_date < timezone.now()
 		else:
 			posted = True
 		return self.paid and self.approved and posted

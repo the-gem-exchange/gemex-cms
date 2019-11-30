@@ -26,6 +26,9 @@ html, body {
 	margin: 0;
 	display: flex;
 	flex-direction: column;
+	height: auto;
+	min-height: 100vh;
+	align-items: stretch;
 }
 
 body {
@@ -36,6 +39,11 @@ body {
 
 #content {
 	overflow-x: hidden;
+	height: auto;
+	display: flex;
+	flex-flow: column;
+	flex-grow: 1;
+	align-items: stretch;
 }
 
 ul {
@@ -67,6 +75,15 @@ a {
 .info-sheet, .info-sheet img {
 	width: 100%;
 	display: block;
+}
+
+.species-thumbnail {
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out;
+
+	&.show{
+		opacity: 1;
+	}
 }
 
 hr {
@@ -129,6 +146,7 @@ header, footer{
 
 .grid {
 	max-width: 1140px;
+	width: 100%;
 }
 
 #nav-spacer{

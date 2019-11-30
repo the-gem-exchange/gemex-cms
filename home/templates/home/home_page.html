@@ -17,8 +17,13 @@
 				{% include_block block %}
 			</div>
 		{% endfor %}
+		{% include "navigation/footer.html" %}
 	</div>
 {% endblock content %}
+
+{% block footer %}
+	{# Remove footer from it's default position - import within homepage-content instead #}
+{% endblock %}
 
 {% block extra_js %}
 	<script type="text/javascript" src="{% static 'js/vendor/fontsLoaded.js' %}"></script>

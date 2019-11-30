@@ -15,6 +15,8 @@ import os
 
 from config import *
 
+VERSION = '2.1'
+
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
@@ -104,6 +106,7 @@ TEMPLATES = [
 			'context_processors': [
 				'django.template.context_processors.debug',
 				'django.template.context_processors.request',
+				'gemex-cms.context_processors.export_vars',
 				'django.contrib.auth.context_processors.auth',
 				'django.contrib.messages.context_processors.messages',
 			],

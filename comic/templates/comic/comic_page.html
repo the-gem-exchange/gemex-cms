@@ -8,15 +8,19 @@
 {% block content %}
 	{% include "comic/header.html" %}
 
-	<div class="grid comic-grid">
+	<div class="grid">
 		<div class="col-12">
 			{% include "comic/navigation.html" %}
 		</div>
-		<div class="col-12 no-padding">
+	</div>
+	<div class="grid comic-grid">
+		<div class="col-12 comic-wrapper no-padding">
 			<a href="/comic/{{next_page}}/">
 				{% image page.comic width-800 %}
 			</a>
 		</div>
+	</div>
+	<div class="grid">
 		<div class="col-12">
 			{% include "comic/navigation.html" %}
 		</div>
@@ -25,5 +29,5 @@
 {% endblock %}
 
 {% block extra_js %}
-	<script type="text/javascript" src="/static/js/comic.js"></script>
+	<script type="text/javascript" src="{% static 'js/comic.js' %}?v={{VERSION}}"></script>
 {% endblock %}

@@ -19,3 +19,8 @@
 		{% endfor %}
 	</div>
 {% endblock content %}
+
+{% block extra_js %}
+	<script type="text/javascript" src="{% static 'js/vendor/fontsLoaded.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/home.js' %}"></script>
+{% endblock %}

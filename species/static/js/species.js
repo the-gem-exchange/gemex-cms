@@ -28,8 +28,13 @@ function showSubspecies(parent){
 	$('.expand-subspecies').each(function(){
 		if(this == parent && $(this).next('.subspecies-list').hasClass('closed')){
 			let container_height = getSpeciesItemHeight(this);
+
 			$(this).closest('.species-item').css({'height':container_height});
 			$(this).next('.subspecies-list').removeClass('closed');
+
+			$('html, body').animate({
+				scrollTop: ($(this).offset().top - 60),
+			}, 300);
 		}
 		else{
 			hideSubspecies(this);
@@ -38,8 +43,21 @@ function showSubspecies(parent){
 }
 
 function hideSubspecies(parent){
-	$(parent).closest('.species-item').css({'height':200});
+	$(parent).closest('.species-item').css({'height':250});
 	$(parent).next('.subspecies-list').addClass('closed');
+}
+
+function fadeInImages(){
+	$('.species-background').each(function(){
+		$(this).imagesLoaded(function(){
+			$($(this)[0].elements[0]).addClass('show');
+		});
+	});
+	$('.species-thumbnail').each(function(){
+		$(this).imagesLoaded(function(){
+			$($(this)[0].elements[0]).addClass('show');
+		});
+	});
 }
 
 $(document).ready(function(){
@@ -52,6 +70,8 @@ $(document).ready(function(){
 			showSubspecies(this);
 		}
 	});
+
+	fadeInImages();
 
 	$(window).resize(function(){
 		resizeSpeciesItem();

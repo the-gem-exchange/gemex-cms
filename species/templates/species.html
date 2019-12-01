@@ -22,7 +22,7 @@
 					<div class="subspecies-list-container grid">
 						{% for subspecies in s.subspecies.all %}
 							<div class="col-auto">
-								<a href="/traits/?species={{subspecies.species.name}}&subspecies={{subspecies.name}}">
+								<a href="/traits/?species={{subspecies.species.name}}{% if subspecies.name|lower != 'standard' %}&subspecies={{subspecies.name}}{% endif %}">
 									<div class="subspecies-item">
 										{{subspecies.thumbnail}}
 										<div class="species-container">

@@ -1,31 +1,41 @@
 {% load wagtailimages_tags menu_tags %}
-<div
-	class="trait {{trait.rarity}} col-6 col-sm-3"
-	data-name="{{trait}}"
-	data-type="{{trait.type}}"
-	data-species="{{trait.species}}"
-	data-sex="{{trait.sex}}"
-	data-rarity="{{trait.rarity}}">
+<div class="trait-container col-12 col-xs-6 col-sm-3">
+	<div
+		class="trait {{trait.rarity}}"
+		data-name="{{trait.name}}"
+		data-type="{{trait.type}}"
+		data-species="{{trait.species}}"
+		data-sex="{{trait.sex}}"
+		data-rarity="{{trait.rarity}}">
 
-	<!-- <div class="trait-emblem">
-		{% image trait.emblem width-100 %}
-	</div> -->
+		<span class="trait-sex {{trait.sex}}" title="{{trait.get_sex_display}}">{{trait.sex_icon}}</span>
 
-	<div class="trait-img">
-		{% image trait.image width-400 height-400 %}
-	</div>
-
-	<p class="trait-description">
-
-		<span class="trait-rarity {{trait.rarity}}" title="{{trait.rarity}}">
+		<span class="trait-rarity {{trait.rarity}}" title="{{trait.get_rarity_display}}">
 			{{trait.rarity_icon}}
 		</span>
 
-		<span class="trait-name">&nbsp;{{trait.name}}&nbsp;</span>
+		<div class="trait-emblem">
+			{% image trait.emblem width-100 title=trait.species.species %}
+		</div>
 
-		<span class="trait-sex {{trait.sex}}" title="{{trait.sex}}">{{trait.sex_icon}}</span>
-	</p>
+		<div class="trait-title">
+			{{trait.name}}
+		</div>
+
+		<div class="trait-img">
+			{% image trait.image width-400 height-400 %}
+		</div>
+
+		<p class="trait-description">
+			<span>{{trait.get_rarity_display}} {{trait.type}}</span>
+			<br>
+			<span>{{trait.species}}</span>
+		</p>
+
+
+	</div>
+
 	<p style="display:none" class="search-string">
-		{{trait.name}} {{trait.type}} {{trait.sex|sex}} {{trait.species}} {{trait.rarity}}
+		{{trait.name}} {{trait.type}} {{trait.type.plural}} {{trait.sex|sex}} {{trait.species}} {{trait.rarity}}
 	</p>
 </div>

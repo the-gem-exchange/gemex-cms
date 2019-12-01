@@ -1,7 +1,9 @@
 {% for trait_type in traits_by_type %}
 <div class="grid">
 	<div class="col-12">
-		<h3>{{trait_type.type.plural}} ({{trait_type.traits|length}})</h3>
+		<h3>
+			<span>{{trait_type.type.plural}} ({{trait_type.traits|length}})</span>
+		</h3>
 	</div>
 </div>
 <div class="grid traits">

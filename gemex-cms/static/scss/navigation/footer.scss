@@ -3,7 +3,7 @@ footer.grid {
 	text-transform: uppercase;
 	background-color: $nav-background-color;
 	text-align: center;
-	max-width: 100%;
+	max-width: 100% !important;
 	overflow: hidden;
 
 	a{

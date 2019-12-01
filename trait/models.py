@@ -37,6 +37,11 @@ class TraitType(index.Indexed, ClusterableModel):
 		FieldPanel('plural_name', classname='full'),
 	]
 
+	search_fields = [
+		index.SearchField('name', partial_match=True),
+		index.SearchField('plural_name', partial_match=True),
+	]
+
 	def plural(self):
 		if self.plural_name:
 			return self.plural_name
@@ -74,14 +79,17 @@ class Trait(index.Indexed, ClusterableModel):
 		FieldPanel('sex'),
 	]
 
-	api_fields = [
-		'__str__',
-		'name',
-		'image',
-		'type',
-		'species',
-		'rarity',
-		'sex'
+	search_fields = [
+		index.SearchField('name', partial_match=True),
+		index.SearchField('get_sex_display', partial_match=True),
+		index.SearchField('rarity', partial_match=True),
+		index.RelatedFields('type', [
+			index.SearchField('name', partial_match=True),
+			index.SearchField('plural_name', partial_match=True),
+		]),
+		index.RelatedFields('species', [
+			index.SearchField('name', partial_match=True),
+		]),
 	]
 
 	def emblem(self):
@@ -156,14 +164,18 @@ class Trait(index.Indexed, ClusterableModel):
 	# Admin column
 	def sex_(self):
 		return self.sex_icon(show_text=True)
-
 	sex_.admin_order_field = 'sex'
 
+	def sex_str_(self):
+		if self.sex == 'x':
+			return 'Unisex'
+		if self.sex == 'f':
+			return 'Female'
+		if self.sex == 'm':
+			return 'Male'
+
 	def __str__(self):
-		if(self.name):
-			return self.name
-		else:
-			return self.species.name
+		return '{} | {} | {} | {} | {}'.format(self.name, self.type, self.species, self.sex_str_(), self.rarity)
 
 	class Meta:
 		ordering = ["name"]

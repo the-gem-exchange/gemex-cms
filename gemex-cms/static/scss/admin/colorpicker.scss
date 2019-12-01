@@ -1,0 +1,95 @@
+.use-colorpicker{
+	div.input{
+		display: flex;
+		input{
+			border-right: none;
+			border-top-right-radius:    0;
+			border-bottom-right-radius: 0;
+		}
+		.sp-replacer{
+			border-radius: 6px;
+			border: 1px solid #e6e6e6;
+			border-left: none;
+			border-top-left-radius:    0;
+			border-bottom-left-radius: 0;
+			background: #FAFAFA;
+			&.focused{
+				background:   #f2fcfc; // Wagtail Light Green
+				border-color: #00b0b1; // Wagtail Green
+				.sp-preview{ border-color: #00b0b1; }
+				.sp-dd{ color: #00b0b1; }
+			}
+
+			display:flex;
+			flex-direction: row;
+			min-width: 50px;
+			.sp-preview{
+				border-color: #e6e6e6;
+				width:  25px;
+				height: 25px;
+				margin: auto;
+			}
+			.sp-dd{
+				margin:  auto;
+				padding: 8px 2px;
+				color:   #e6e6e6;
+			}
+		}
+	}
+}
+
+// Match input error status
+li.error.use-colorpicker .sp-replacer,
+li.error .use-colorpicker .sp-replacer{
+	border-color:     #cd3238!important; // Wagtail error red
+	background-color: #fee7e8!important; //Wagtail error light red
+	.sp-preview{
+		border-color: #cd3238!important;
+	}
+	.sp-dd{
+		color: #cd3238!important;
+	}
+}
+
+// Match input hover status
+.focused .use-colorpicker{
+	div.input{
+		.sp-replacer:not(.focused){
+			background: #FFF;
+		}
+	}
+}
+
+// The picker itself
+.sp-container{
+	background:    #FAFAFA;
+	border-color:  #e6e6e6;
+	border-radius: 6px;
+
+	.sp-color, .sp-alpha{
+		border-color: #e6e6e6;
+	}
+
+	input.sp-input, a.sp-cancel, button.sp-choose{
+		font-family:    Amazon Ember;
+		text-transform: uppercase;
+		font-size:      .9em;
+	}
+	input.sp-input{
+		background: #fafafa;
+		border: 1px solid #e6e6e6;
+		&:focus{
+			background: #f2fcfc;
+			border:     1px solid #00b0b1;
+		}
+	}
+	a.sp-cancel{ color: #007d7e!important; }
+	button.sp-choose{
+		border-radius: 3px;
+		background-color: #007d7e;
+		border: 1px solid #007d7e;
+		color: #FFF;
+		text-shadow: none;
+		background-image: none;
+	}
+}

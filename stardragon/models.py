@@ -17,10 +17,11 @@ from wagtail.core.models import Orderable
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
+from wagtail.snippets.edit_handlers import SnippetChooserPanel
 
 DESIGN_TYPES = [
 	('official', 'Official'),
-	('slot',     'Slot'),
+	('slot',     'MYO Slot'),
 	('myo',      'Make Your Own'),
 ]
 
@@ -55,6 +56,8 @@ class Stardragon(index.Indexed, ClusterableModel):
 	post_date     = models.DateTimeField(blank=True, null=True) # Date it goes live
 	purchase_date = models.DateTimeField(blank=True, null=True) # Date the MYO was purchased
 
+	notes = models.TextField(blank=True)
+
 	# ========== Panels ==========
 
 	panels = [
@@ -67,10 +70,15 @@ class Stardragon(index.Indexed, ClusterableModel):
 			FieldPanel('base'),
 			FieldPanel('rarity'),
 			FieldPanel('sex'),
+			HelpPanel(content="<hr style='margin:0;' />"),
 			InlinePanel('species', label='Species'),
+			HelpPanel(content="<hr style='margin:0;' />"),
 			InlinePanel('traits',  label='Traits'),
+			HelpPanel(content="<hr style='margin:0;' />"),
 			InlinePanel('images',  label='Images'),
+			HelpPanel(content="<hr style='margin:0;' />"),
 			InlinePanel('colors',  label='Colors'),
+			HelpPanel(content="<hr style='margin:0;' />"),
 			InlinePanel('links',   label='Links'),
 		], heading="Stardragon Info",
 		classname="collapsible"),
@@ -93,6 +101,7 @@ class Stardragon(index.Indexed, ClusterableModel):
 
 		MultiFieldPanel([
 			# HelpPanel(content=""),
+			FieldPanel('notes'),
 			InlinePanel('designers', label="Designer"),
 			FieldPanel('post_date'),
 			FieldPanel('approved'),
@@ -191,7 +200,7 @@ class StardragonTrait(Orderable):
 
 	trait = models.ForeignKey('trait.Trait', null=True, blank=True, on_delete=models.SET_NULL)
 
-	panels = [FieldPanel('trait')]
+	panels = [SnippetChooserPanel('trait', 'trait.Trait')]
 
 
 class StardragonColorPalette(Orderable):
@@ -199,7 +208,7 @@ class StardragonColorPalette(Orderable):
 
 	color = models.CharField(max_length=255, blank=True)
 
-	panels = [FieldPanel('color')]
+	panels = [FieldPanel('color', classname='use-colorpicker')]
 
 
 class StardragonDesigner(Orderable):

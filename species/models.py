@@ -64,6 +64,7 @@ class Species(index.Indexed, ClusterableModel):
 
 class SubSpecies(Orderable):
 	species     = ParentalKey(Species, on_delete=models.CASCADE, related_name='subspecies')
+
 	name        = models.CharField(max_length=255)
 	description = models.TextField(blank=True)
 	image       = models.ForeignKey('image.CustomImage',  null=True, blank=True,  on_delete=models.SET_NULL, related_name="species_image")

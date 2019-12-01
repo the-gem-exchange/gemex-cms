@@ -1,4 +1,5 @@
 @import '../colors.scss';
+@import './colorpicker.scss';
 
 header, .page-explorer .listing .index, .breadcrumb{
 	background: #1a1a1a;
@@ -24,7 +25,6 @@ header, .page-explorer .listing .index, .breadcrumb{
 		}
 	}
 }
-
 
 .nav-search input{
 	border-radius: 500px;

@@ -125,7 +125,7 @@ class Stardragon(index.Indexed, ClusterableModel):
 	def species_(self):
 		count = self.species.count()
 		if  count == 1:
-			return self.species.first().species.name
+			return self.species.first().species
 		elif count > 1:
 			return "Hybrid"
 		else:

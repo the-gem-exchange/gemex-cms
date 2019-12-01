@@ -62,5 +62,5 @@ function fadeInImages(){
 
 $(document).ready(function(){
 	fadeInImages();
-	$('.traits').liveFilter('.filter-traits', '.trait', {filterChildSelector:'.search-string'});
+	$('.traits').liveFilter('.filter-traits', '.trait-container', {filterChildSelector:'.search-string'});
 })

@@ -124,6 +124,13 @@
 			background: $nav-background-color;
 			min-width: 500px;
 
+			.species-emblem{
+				height: 72px;
+				width: auto;
+				display: inline;
+				float: left;
+			}
+
 			&.center {
 				left: 50%;
 				top: 50%;
@@ -152,11 +159,14 @@
 			.title {
 				bottom: 2em;
 				top: unset;
-				min-width: auto;
 				max-width: 100%;
+				min-width: 100%;
 
 				h1 {
 					font-size: 1.5em;
+				}
+				.species-emblem{
+					height: 1.5em;
 				}
 			}
 
@@ -185,6 +195,33 @@
 
 	.traits-content {
 		background: #FFF;
+
+		h3 {
+			color: #fff;
+			width: auto;
+			float: left;
+			padding: .5em;
+			margin: .5em 0;
+			position: relative;
+			font-size: 1.5em;
+
+			span {
+				position: relative;
+				z-index: 2;
+			}
+
+			&::after {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: -10em;
+				right: -5em;
+				bottom: 0;
+				background: #333;
+				transform: skew(-20deg);
+				z-index: 1;
+			}
+		}
 	}
 
 	.trait-filters {
@@ -208,15 +245,23 @@
 		.trait {
 			text-align: center;
 			text-transform: capitalize;
+			border: 6px solid #efefef;
+			padding: .5em 1em;
+			position: relative;
+			border-radius: 5px;
+			overflow: hidden;
+			color: #fff;
+			background: #333;
 
 			.trait-img {
 				width: 100%;
 				height: 0;
 				padding-bottom: calc(100% - 10px);
-				border-radius: 50%;
+				border-radius: 5px;
 				border:        5px solid transparent;
 				transition:    all .5s ease;
 				overflow:      hidden;
+				background:    #fff;
 
 			}
 
@@ -227,14 +272,13 @@
 			&:hover {
 				.trait-img {
 					border-color: transparent;
-					border-radius: 0;
-				}
-				.trait-emblem img {
-					opacity: 0;
+					// border-radius: 0;
 				}
 			}
 
 			&.common {
+				border-color: $common;
+
 				.trait-img {
 					border-color: $common;
 				}
@@ -242,6 +286,8 @@
 			}
 
 			&.uncommon {
+				border-color: $uncommon;
+
 				.trait-img {
 					border-color: $uncommon;
 				}
@@ -249,6 +295,8 @@
 			}
 
 			&.rare {
+				border-color: $rare;
+
 				.trait-img {
 					border-color: $rare;
 				}
@@ -256,6 +304,8 @@
 			}
 
 			&.legendary {
+				border-color: $legendary;
+
 				.trait-img {
 					border-color: $legendary;
 				}
@@ -268,27 +318,40 @@
 }
 
 .trait-emblem {
-	position: absolute;
-	top: 0;
-	left: 0;
-	max-width: 2em;
 	overflow: hidden;
-	max-height: 2em;
-	margin: 15px;
+	position: absolute;
+	top: .5em;
+	right: .5em;
+
+	img{
+		display: block;
+		max-width: 1.5em;
+		max-height: 1.5em;
+	}
 }
 
-.trait-name {
-	padding: 0 .5em;
-	font-size: 1.2em;
+.trait-description {
+	font-size: 20px;
+	margin-bottom: 2em;
+}
+
+.trait-title {
+	text-align: left;
+	font-size: 1.5em;
+	padding-right: 1em;
+	width: 100%;
+	font-family: "Futura";
 }
 
 .trait-sex {
 	color: #FFF;
-	position: relative;
+	position: absolute;
 	width: 1.5em;
 	height: 1.5em;
 	display: inline-block;
-	margin-bottom: -5px;
+
+	bottom: .5em;
+	right: .5em;
 
 	&.m::after { background-color: $male; }
 	&.f::after { background-color: $female; }
@@ -316,6 +379,10 @@
 
 .trait-rarity {
 	font-size: 1.5em;
+	position: absolute;
+	bottom: .5rem;
+	left: .5rem;
+	line-height: 1;
 
 	&.common { color: $common; }
 	&.uncommon { color: $uncommon; }
@@ -324,6 +391,6 @@
 
 	/* Fontawesome's "Triangle" icon is not free - use fa-play and rotate */
 	&.rare svg {
-		transform: rotate(30deg) translateY(33%);
+		transform: rotate(30deg) translateY(15%);
 	}
 }

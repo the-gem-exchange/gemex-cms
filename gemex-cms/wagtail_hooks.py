@@ -6,21 +6,63 @@ import wagtail.admin.rich_text.editors.draftail.features as draftail_features
 from wagtail.admin.rich_text.converters.html_to_contentstate import InlineStyleElementHandler
 from wagtail.core import hooks
 
+# ========== CSS ==========
+
 @hooks.register('insert_global_admin_css')
 def global_admin_color_picker_css():
 	return format_html('<link rel="stylesheet" href="{}">', static('/css/vendor/spectrum.css'))
 
 @hooks.register('insert_global_admin_css')
+def code_editor_css():
+	return format_html(
+		"""
+		<link rel="stylesheet" href={}>
+		<link rel="stylesheet" href={}>
+		""",
+		static('admin/css/codemirror-dracula-theme.css'),
+		'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.9.0/codemirror.css'
+	)
+
+
+@hooks.register('insert_global_admin_css')
 def global_admin_css():
 	return format_html('<link rel="stylesheet" href={}>',static('css/admin.css'))
 
-@hooks.register('insert_global_admin_js')
-def global_admin_color_picker_js():
-	return format_html('<script type="text/javascript" src="{}"></script>', static('/js/vendor/spectrum.js'))
+
+# ========== JS ==========
 
 @hooks.register('insert_global_admin_js')
+def global_admin_color_picker_js():
+	return format_html(
+		'<script type="text/javascript" src="{}"></script>',
+		static('/js/vendor/spectrum.js')
+	)
+
+@hooks.register('insert_global_admin_js')
+def code_editor_js():
+	return format_html(
+		"""
+		<script type="text/javascript" src="{}"></script>
+		<script type="text/javascript" src="{}"></script>
+		<script type="text/javascript" src="{}"></script>
+		<script type="text/javascript" src="{}"></script>
+		""",
+		'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.9.0/codemirror.js',
+		'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.9.0/mode/xml/xml.js',
+		'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.9.0/mode/htmlmixed/htmlmixed.js',
+		static('admin/js/code-editor.js')
+	)
+
+# Note - this always goes last
+@hooks.register('insert_global_admin_js')
 def custom_admin_js():
-	return format_html('<script type="text/javascript" src="{}"></script>', static('admin/js/custom-admin.js'))
+	return format_html(
+		'<script type="text/javascript" src="{}"></script>',
+		static('admin/js/custom-admin.js')
+	)
+
+
+# ========== Admin Menu ============
 
 # Hide "Snippets" menu - we'll be using ModelAdmin menus instead
 # "Images" and "Documents" will be under the "Files" folder

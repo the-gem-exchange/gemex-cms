@@ -3,5 +3,9 @@ body.basic-page {
 
 	.grid {
 		max-width: 650px;
+
+		&.basic-page-content{
+			flex-grow: 1;
+		}
 	}
 }

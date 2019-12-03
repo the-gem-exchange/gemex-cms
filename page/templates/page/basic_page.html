@@ -9,7 +9,11 @@
 			<h1>{{page.title}}</h1>
 		</div>
 	</div>
-	{% for block in page.content %}
-		{% include_block block %}
-	{% endfor %}
+	<div class="grid basic-page-content">
+		<div class="col-12">
+			{% for block in page.content %}
+				{% include_block block %}
+			{% endfor %}
+		</div>
+	</div>
 {% endblock %}

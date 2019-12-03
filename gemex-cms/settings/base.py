@@ -15,7 +15,7 @@ import os
 
 from config import *
 
-VERSION = '2.3'
+VERSION = '2.4'
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 	'corsheaders',
 
 	'wagtailfontawesome',
+	'wagalytics',
 
 	'wagtail.contrib.forms',
 	'wagtail.contrib.redirects',

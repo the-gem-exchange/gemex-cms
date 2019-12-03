@@ -4,3 +4,7 @@ SECRET_KEY = ''
 # AWS Credentials
 AWS_ACCESS_KEY_ID     = ''
 AWS_SECRET_ACCESS_KEY = ''
+
+# Google Analytics Config
+GA_KEY_FILEPATH = 'google-analytics.json'
+GA_VIEW_ID      = 'ga:XXXXXX'

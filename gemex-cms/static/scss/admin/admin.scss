@@ -11,6 +11,11 @@ header, .page-explorer .listing .index, .breadcrumb{
 	color: #fff;
 }
 
+// Tables
+.listing .title {
+	white-space: nowrap;
+}
+
 .tab-nav {
 	&.merged {
 		background: #1a1a1a;
@@ -151,9 +156,8 @@ i {
 	}
 
 	&.common { color: $common; }
-	&.uncommon { color: $uncommon; }
-	&.rare {
-		color: $rare;
+	&.uncommon {
+		color: $uncommon;
 		position: relative;
 		padding-right: 1em;
 		padding-left: .25em;
@@ -163,6 +167,7 @@ i {
 			transform: rotate(30deg) translateY(33%);
 		}
 	}
+	&.rare { color: $rare; }
 	&.legendary { color: $legendary; }
 }
 

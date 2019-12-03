@@ -16,6 +16,13 @@ header, .page-explorer .listing .index, .breadcrumb{
 	white-space: nowrap;
 }
 
+// Side nav
+.nav-main {
+	li#footer {
+		padding: 1px; // Pad to match height of content editor footer
+	}
+}
+
 .tab-nav {
 	&.merged {
 		background: #1a1a1a;
@@ -225,7 +232,10 @@ $icon-size: 1.75em;
 
 footer{
 	margin: 0;
-	width: calc(100% - 180px);
+	width: calc(100% - 200px); // 200px = sidebar width
+	background: #1a1a1a;
+	box-shadow: none;
+	border-radius: 0;
 
 	@media screen and (max-width:799px){
 		width:100%;

@@ -1,4 +1,4 @@
-from wagtail.core import blocks
+from wagtail.core             import blocks
 from wagtail.images.blocks    import ImageChooserBlock
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.snippets.blocks  import SnippetChooserBlock
@@ -9,6 +9,7 @@ class FullSizeImage(blocks.StructBlock):
 	class Meta:
 		template = 'blocks/info_sheet.html'
 		form_classname = "info-sheet"
+
 
 class ColumnOptions(blocks.StructBlock):
 	column_options = blocks.StructBlock([
@@ -24,6 +25,7 @@ class RowOptions(blocks.StructBlock):
 
 	class Meta:
 		form_classname = "row-options"
+
 
 class OneColumn(blocks.StructBlock):
 	row_options = RowOptions(required=False)
@@ -72,10 +74,11 @@ class ThreeColumns(blocks.StructBlock):
 
 
 class HTMLBlock(blocks.StructBlock):
-	html_content = blocks.TextBlock()
+	html_content = blocks.TextBlock(classname="code-editor")
 
 	class Meta:
 		template = 'blocks/blocks_html.html'
+
 
 stream_blocks = [
 	('HTML',            HTMLBlock(icon='fa-code')),

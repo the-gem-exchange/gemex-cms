@@ -245,13 +245,14 @@
 		.trait {
 			text-align: center;
 			text-transform: capitalize;
-			border: 6px solid #efefef;
-			padding: .5em 1em;
+			border: 5px solid #efefef;
+			padding: 1.5em 1em;
 			position: relative;
 			border-radius: 5px;
 			overflow: hidden;
 			color: #fff;
 			background: #333;
+			height: 100%;
 
 			.trait-img {
 				width: 100%;
@@ -335,15 +336,17 @@
 
 .trait-description {
 	font-size: 20px;
-	margin-bottom: 2em;
 }
 
 .trait-title {
-	text-align: left;
 	font-size: 1.5em;
-	padding-right: 1em;
 	width: 100%;
 	font-family: "Futura";
+	line-height: 1;
+	min-height: 3em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .trait-sex {
@@ -394,6 +397,6 @@
 
 	/* Fontawesome's "Triangle" icon is not free - use fa-play and rotate */
 	&.rare svg {
-		transform: rotate(30deg) translateY(15%);
+		transform: rotate(30deg) translate(18%, 8%);
 	}
 }

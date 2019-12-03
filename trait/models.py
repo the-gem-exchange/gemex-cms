@@ -106,9 +106,9 @@ class Trait(index.Indexed, ClusterableModel):
 		if self.rarity == 'legendary':
 			icon = 'fa-star'
 		elif self.rarity == 'rare':
-			icon = 'fa-play'
-		elif self.rarity == 'uncommon':
 			icon = 'fa-square'
+		elif self.rarity == 'uncommon':
+			icon = 'fa-play'
 		else:
 			icon = 'fa-circle'
 

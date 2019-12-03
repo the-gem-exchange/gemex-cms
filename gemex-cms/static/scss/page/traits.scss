@@ -396,7 +396,7 @@
 	&.legendary { color: $legendary; }
 
 	/* Fontawesome's "Triangle" icon is not free - use fa-play and rotate */
-	&.rare svg {
+	&.uncommon svg {
 		transform: rotate(30deg) translate(18%, 8%);
 	}
 }

@@ -22,7 +22,7 @@ sudo git checkout .
 sudo git pull
 
 echo "Installing Python dependencies..."
-pip3 install -r requirements.txt --quiet
+sudo pip3 install -r requirements.txt --quiet
 
 echo "Gathering static files..."
 sudo python3 manage.py collectstatic --noinput

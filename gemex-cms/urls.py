@@ -14,16 +14,20 @@ from search import views as search_views
 
 from trait.views import trait_page
 
+from bot.views import get_command
+
 urlpatterns = [
-    url(r'^django-admin/', admin.site.urls),
+	url(r'^django-admin/', admin.site.urls),
 
-    url(r'^admin/', include(wagtailadmin_urls)),
-    url(r'^documents/', include(wagtaildocs_urls)),
+	url(r'^admin/', include(wagtailadmin_urls)),
+	url(r'^documents/', include(wagtaildocs_urls)),
 
-    url(r'^search/$', search_views.search, name='search'),
+	url(r'^search/$', search_views.search, name='search'),
 
-    # API Endpoints
-    url(r'^api/', api_router.urls),
+	# API Endpoints
+	url(r'^api/', api_router.urls),
+
+	url(r'^bot-commands/(?P<command>\w+)/$', get_command),
 
 	url(r'^comic/(?P<page_number>\d+)/$', comic_page),
 

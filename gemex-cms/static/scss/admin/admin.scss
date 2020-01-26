@@ -154,6 +154,15 @@ header, .page-explorer .listing .index, .breadcrumb{
 	&.legendary { border-color: $legendary; }
 }
 
+.discord-message {
+	max-width: 500px;
+	background-color: #36393f;
+	border: 1px solid #2f3136;
+	color: #dcddde;
+	padding: 1em;
+	border-radius: 5px;
+}
+
 i {
 	&.common,
 	&.uncommon,

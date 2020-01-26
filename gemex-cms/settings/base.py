@@ -33,6 +33,7 @@ INSTALLED_APPS = [
 	'species',
 	'trait',
 	'stardragon',
+	'bot',
 
 	# Pages
 	'page',

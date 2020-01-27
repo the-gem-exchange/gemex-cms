@@ -32,9 +32,22 @@ def get_command(request, command):
 		)
 
 	else:
-		data = get_object_or_404(BotCommand, command=command)
+		data  = get_object_or_404(BotCommand, command=command)
+		image = data.get_image()
 
-		if data.type =='text' and data.text:
+		if data.text and image:
+				return JsonResponse({
+					'command': data.command,
+					'text':    data.text,
+					'image':   image
+				},
+				safe=False,
+				json_dumps_params={
+					'ensure_ascii':False
+				}
+			)
+
+		elif data.text:
 			return JsonResponse(
 				{
 					'command': data.command,
@@ -46,10 +59,8 @@ def get_command(request, command):
 				}
 			)
 
-		if data.type == 'image':
-			image = data.get_image()
-			if image:
-				return JsonResponse({
-					'command': data.command,
-					'image':   image.image.file.url
-				})
+		elif image:
+			return JsonResponse({
+				'command': data.command,
+				'image':   image
+			})

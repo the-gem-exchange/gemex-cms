@@ -18,6 +18,24 @@ def markdown_to_html(text):
 	text = text.replace('\\n','<br>') # Markdown lib doesn't convert newlines to <br>'s for some reason
 	return markdown(text)
 
+def get_all_commands():
+	commands = BotCommand.objects.order_by('command').all() # All commands in alphabetical order
+	reply    = ''
+
+	# Try to get the intro text message from the site, otherwise fall back to a standard intro
+	try:
+		commands_message = BotCommand.objects.get(command='commands')
+		if commands_message:
+			reply += commands_message.text + '\\n\\n'
+	except:
+		reply += 'Available commands for Discord Chan:\\n\\n'
+
+	# Build the list in markdown with newline characters
+	for c in commands:
+		reply += c._command()+'\\n'
+
+	return reply
+
 @register_snippet
 class BotCommand(index.Indexed, ClusterableModel):
 
@@ -36,7 +54,13 @@ class BotCommand(index.Indexed, ClusterableModel):
 
 	def _message(self):
 		image = self.get_image()
-		if not image and not self.text:
+		if self.command == 'commands':
+			text = markdown_to_html(get_all_commands())
+			return format_html(
+				'<div class="discord-message">{}</div>',
+				format_html(text)
+			)
+		elif not image and not self.text:
 			return None
 		elif self.text and image:
 			text  = markdown_to_html(self.text)

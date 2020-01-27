@@ -14,61 +14,67 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 
+def markdown_to_html(text):
+	text = text.replace('\\n','<br>') # Markdown lib doesn't convert newlines to <br>'s for some reason
+	return markdown(text)
 
 @register_snippet
 class BotCommand(index.Indexed, ClusterableModel):
 
 	command = models.CharField(max_length=255)
 
-	type = models.CharField(
-		choices=[
-			('text',  'Text'),
-			('image', 'Image')
-		],
-		null=True,
-		blank=False,
-		default='text',
-		max_length=255
-	)
-
 	text = models.TextField(blank=True, help_text="Supports markdown formatting.")
 
 	panels = [
 		FieldPanel('command'),
-		FieldPanel('type'),
 		FieldPanel('text'),
 		InlinePanel('image', label="Image (Upload multiple for a random image)"),
 	]
 
-	# For modeladmin column view
 	def _command(self):
 		return "!" + self.command
 
-	# For modeladmin column view
 	def _message(self):
-		if not self.image and not self.text:
+		image = self.get_image()
+		if not image and not self.text:
 			return None
-		if self.type == 'text':
-			text = self.text.replace('\\n','<br>') # Markdown lib doesn't convert newlines to <br>'s for some reason
+		elif self.text and image:
+			text  = markdown_to_html(self.text)
 			return format_html(
-				'<div class="discord-message">' + markdown(text) + '</div>'
+				'<div class="discord-message">{}<br>{}</div>',
+				format_html(text),
+				self._image()
 			)
-		if self.type == 'image':
-			image = self.get_image()
-			return format_html(
-				'<img class="species-thumbnail" src="{}" />',
-				image.image.file.url if image else None,
-			)
+		elif self.text:
+			return self._text()
+		elif image:
+			return self._image()
+		else:
+			return None
+
+	def _text(self):
+		return format_html(
+			'<div class="discord-message">' + markdown_to_html(self.text) + '</div>'
+		)
+
+	def _image(self):
+		image = self.get_image()
+		return format_html(
+			'<img class="species-thumbnail" src="{}" />',
+			image,
+		)
 
 	def __str__(self):
-		return self.command
+		return self._command()
 
 	def get_image(self):
 		if self.image.count() == 1:
-			return self.image.first()
+			return self.image.first().get_url()
 		elif self.image.count() > 1:
 			# pick a random image
-			return self.image.order_by('?').first()
+			return self.image.order_by('?').first().get_url()
+		else:
+			return None
 
 	class Meta:
 		ordering = ["command"]
@@ -90,6 +96,9 @@ class BotCommandImage(Orderable):
 		ImageChooserPanel('image'),
 	]
 
+	def get_url(self):
+		if self.image:
+			return self.image.file.url
 
 class BotCommandAdmin(ModelAdmin):
 	model         = BotCommand

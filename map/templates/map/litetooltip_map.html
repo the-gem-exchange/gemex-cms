@@ -6,37 +6,38 @@
 		<img src="{{settings.map.MapSettings.map_image.file.url}}" data-width="1600" data-height="1098" />
 
 		{% for node in nodes %}
-
-			{#  HTML generated here: https://www.inabrains.com/tooltip/image-hotspot-creator.html #}
-			{% map_node_html node.node_html|safe as data %}
-			<div
-					class="hotspot"
-					style="{{data.attrs.style}}"
-					id="{{data.attrs.id}}"
-					data-location="bottom"
-					data-template="{{data.attrs.data_template}}"
-					data-templatename="{{data.attrs.data_templatename}}"
-					data-opacity="0.8"
-					data-backcolor="#000000"
-					data-textcolor="#FFFFFF"
-					data-textalign="{{data.attrs.data_textalign}}"
-					data-margin="5"
-					data-padding="10"
-					data-width="{{data.attrs.data_width}}"
-					data-delay="{{data.attrs.data_delay}}"
-					data-trigger="hover"
-					data-issticky="true"
-					data-hotspot-x="{{data.attrs.data_hotspot_x}}"
-					data-hotspot-y="{{data.attrs.data_hotspot_y}}"
-					data-hotspot-blink="false"
-					data-hotspot-bgcolor="{{data.attrs.data_bgcolor}}"
-					data-hotspot-bordercolor="{{data.attrs.data_bordercolor}}"
-					data-hotspot-borderradius="{{data.attrs.data_borderradius}}">
-					<div class="data-container">
-					<h1>{{node.title}}</h1>
-					{{node.description|richtext}}
+			{% if node.node_html %}
+				{#  HTML generated here: https://www.inabrains.com/tooltip/image-hotspot-creator.html #}
+				{% map_node_html node.node_html|safe as data %}
+				<div
+						class="hotspot"
+						style="{{data.attrs.style}}"
+						id="{{data.attrs.id}}"
+						data-location="bottom"
+						data-template="{{data.attrs.data_template}}"
+						data-templatename="{{data.attrs.data_templatename}}"
+						data-opacity="0.8"
+						data-backcolor="#000000"
+						data-textcolor="#FFFFFF"
+						data-textalign="{{data.attrs.data_textalign}}"
+						data-margin="5"
+						data-padding="10"
+						data-width="{{data.attrs.data_width}}"
+						data-delay="{{data.attrs.data_delay}}"
+						data-trigger="hover"
+						data-issticky="true"
+						data-hotspot-x="{{data.attrs.data_hotspot_x}}"
+						data-hotspot-y="{{data.attrs.data_hotspot_y}}"
+						data-hotspot-blink="false"
+						data-hotspot-bgcolor="{{data.attrs.data_bgcolor}}"
+						data-hotspot-bordercolor="{{data.attrs.data_bordercolor}}"
+						data-hotspot-borderradius="{{data.attrs.data_borderradius}}">
+						<div class="data-container">
+						<h1>{{node.title}}</h1>
+						{{node.description|richtext}}
+					</div>
 				</div>
-			</div>
+			{% endif %}
 		{% endfor %}
 
 	</div>

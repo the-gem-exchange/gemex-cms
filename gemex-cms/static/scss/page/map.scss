@@ -13,10 +13,6 @@ img.map-overlay.show {
 	opacity:1;
 }
 
-img.map-background {
-
-}
-
 .hotspot {
 	width:         25px;
 	height:        25px;
@@ -26,7 +22,32 @@ img.map-background {
 	opacity:       0.9!important;
 }
 
-.litetooltip-hotspot-wrapper img,
+.hotspot.hotspot.image-hotspot {
+	width: 150px !important;
+	height: 150px !important;
+	border-radius: 0;
+	border: none;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	transform: translate(-50%, -50%);
+	animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+	0% {
+		transform: translate(-50%, -50%);
+	}
+	50% {
+		transform: translate(-50%, -55%);
+	}
+	100% {
+		transform: translate(-50%, -50%);
+	}
+}
+
+img.map-background,
 .litetooltip-hotspot-wrapper {
 	width:     100% !important;
 	max-width: 100% !important;

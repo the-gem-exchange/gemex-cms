@@ -8,13 +8,12 @@ from wagtail.documents import urls as wagtaildocs_urls
 
 from .api import api_router
 
+from bot.views import get_command
 from comic.views import comic_page
+from trait.views import trait_page
+from map.views import map_page
 
 from search import views as search_views
-
-from trait.views import trait_page
-
-from bot.views import get_command
 
 urlpatterns = [
 	url(r'^django-admin/', admin.site.urls),
@@ -24,12 +23,13 @@ urlpatterns = [
 
 	url(r'^search/$', search_views.search, name='search'),
 
-	# API Endpoints
 	url(r'^api/', api_router.urls),
 
 	url(r'^bot-commands/(?P<command>\w+)/$', get_command),
 
 	url(r'^comic/(?P<page_number>\d+)/$', comic_page),
+
+	url(r'^map/$', map_page),
 
 	url(r'^traits/$', trait_page),
 

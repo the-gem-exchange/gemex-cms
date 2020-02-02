@@ -9,6 +9,9 @@ db.sqlite3
 config.py
 google-analytics.json
 
+# Licensed Vendor Files (only commit minified)
+litetooltip.js
+
 # Logs
 debug.log
 

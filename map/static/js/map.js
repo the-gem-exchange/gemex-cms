@@ -6,4 +6,13 @@ $(document).ready(function(){
 			title: $(this).find('.data-container').html()
 		});
 	});
+
+	// Show overlay image
+	$('[id*="hotspot_"]')
+		.mouseenter(function() {
+			$("#"+$(this)[0]['id']+"__background").addClass('show');
+		})
+		.mouseleave(function() {
+			$("#"+$(this)[0]['id']+"__background").removeClass('show');
+		});
 });

@@ -25,6 +25,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 INSTALLED_APPS = [
 	'search',
 	'gemex-cms',
+	'map',
 
 	# Files
 	'image',
@@ -61,6 +62,7 @@ INSTALLED_APPS = [
 	'wagtail.admin',
 	'wagtail.core',
 
+	'wagtail.contrib.settings',
 	'wagtail.contrib.styleguide',
 
 	'modelcluster',
@@ -111,6 +113,7 @@ TEMPLATES = [
 				'gemex-cms.context_processors.export_vars',
 				'django.contrib.auth.context_processors.auth',
 				'django.contrib.messages.context_processors.messages',
+				'wagtail.contrib.settings.context_processors.settings',
 			],
 		},
 	},

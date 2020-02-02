@@ -53,6 +53,12 @@ class MapLocation(index.Indexed, ClusterableModel):
 		help_text="A transparent layer over the whole map that is related to this location."
 	)
 
+	type = [
+		('continent', 'Continent'),
+		('ocean',     'Ocean'),
+		('hidden',    'Hidden (No dot)')
+	]
+
 	def __str__(self):
 		return self.title
 

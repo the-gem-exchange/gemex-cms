@@ -6,49 +6,13 @@
 
 {% block body_class %}mappage{% endblock %}
 
-{% block content %}
+{% block extra_css %}
 	<link rel="stylesheet" href="{% static 'css/vendor/litetooltip.min.css' %}">
+{% endblock %}
 
-	<style media="screen">
-		#joarca-map {
-			width: 100%;
-		}
-
-		map{
-			position: relative;
-		}
-
-		.overlay{
-			position: fixed;
-			width:    5px;
-			height:   5px;
-			border:   5px solid red;
-		}
-
-		.hotspot {
-			width: 25px;
-			height: 25px;
-			background: #cc0000;
-			border: 1px solid #FFF;
-			border-radius: 50%;
-			opacity: 0.8;
-		}
-
-		.litetooltip-hotspot-wrapper img,
-		.litetooltip-hotspot-wrapper {
-			width: 100% !important;
-			max-width: 100% !important;
-		}
-
-		.litetooltip-wrapper {
-			max-width: 500px;
-		}
-	</style>
-
+{% block content %}
 	<div id="nav-spacer"></div>
-
 	{% include 'map/litetooltip_map.html' %}
-
 {% endblock %}
 
 {% block extra_js %}

@@ -29,7 +29,8 @@ def map_node_html(html, image=None):
 	attrs = div.attrs
 
 	if image:
-		attrs['style'] = attrs['style'][:-1] + "background-image: url('" + image.file.url + "');"
+		attrs['style'] = attrs['style'] + " background-image:url('" + image.file.url + "');"
+		print(attrs['style'])
 
 	return {
 		'coords': html,

@@ -19,13 +19,21 @@
 
 		{% for node in nodes %}
 			{% if node.node_html %}
-				{#  HTML generated here: https://www.inabrains.com/tooltip/image-hotspot-creator.html #}
 				{% map_node_html node.node_html|safe node.node_image as data %}
 
 				{% if node.node_image %}
 					<div
-						class="hotspot image-hotspot"
+						class="hotspot {{node.type}} image-hotspot"
 						data-opacity="1"
+						data-width="auto"
+
+						data-hotspot-borderradius=""
+						data-hotspot-bgcolor=""
+						data-hotspot-bordercolor=""
+				{% elif node.type == 'hidden' %}
+					<div
+						class="hotspot {{node.type}}"
+						data-opacity="0"
 						data-width="auto"
 
 						data-hotspot-borderradius=""
@@ -33,7 +41,7 @@
 						data-hotspot-bordercolor=""
 				{% else %}
 					<div
-						class="hotspot"
+						class="hotspot {{node.type}}"
 						data-opacity="0.8"
 						data-width="{{data.attrs.data_width}}"
 
@@ -42,7 +50,7 @@
 						data-hotspot-bordercolor="#FFFFFF"
 				{% endif %}
 						id="{{data.attrs.id}}"
-						style="{{data.attrs.style}}"
+						style="{{data.attrs.style}}; z-index:{{forloop.counter|add:1000}}!important; {% if node.rotate %}transform:rotate({{node.rotate}}deg){% endif %}"
 
 						data-template="{{data.attrs.data_template}}"
 						data-templatename="{{data.attrs.data_templatename}}"
@@ -64,10 +72,17 @@
 						data-hotspot-y="{{data.attrs.data_hotspot_y}}"
 						data-hotspot-blink="false"
 					>
-						<div class="data-container">
-							<h1>{{node.title}}</h1>
-							{{node.description|richtext}}
-						</div>
+						{% if node.type != 'hidden' %}
+							<div class="node-title">
+								{{node.title}}
+							</div>
+							{% if node.type != 'continent' and node.type != 'ocean' %}
+								<div class="data-container">
+									<h1>{{node.title}}</h1>
+									{{node.description|richtext}}
+								</div>
+							{% endif %}
+						{% endif %}
 					</div>
 			{% endif %}
 		{% endfor %}

@@ -4,36 +4,103 @@ img.map-overlay {
 	right: 0;
 	top: 0;
 	bottom: 0;
+	pointer-events: none;
 
 	opacity: 0;
 	transition: all 0.2s ease-in-out;
 }
 
 img.map-overlay.show {
-	opacity:1;
+	opacity:.75;
 }
 
-.hotspot {
+.litetooltip-hotspot-container .hotspot {
 	width:         25px;
 	height:        25px;
 	background:    #D4aF37;
 	border:        3px solid #a37e1c;
 	border-radius: 50%;
 	opacity:       0.9!important;
+
+	.node-title {
+		opacity:    1;
+		transition: 0.2s ease-in-out all;
+		display:    block;
+		float:      left;
+		text-align: center;
+	}
+
+	&.hotspot.standard {
+		&:hover .node-title {
+			width:      300%;
+			font-size:  14px;
+			margin-top: 100%;
+			opacity:    0;
+			transform:  translateX(-50%);
+			position:   absolute;
+			display:    block;
+		}
+
+		.node-title {
+			display: none;
+		}
+	}
+
+	&.hotspot.hidden {
+		background: transparent !important;
+		border:     none !important;
+	}
+
+	&.hotspot.ocean {
+		background: transparent !important;
+		border:     none !important;
+
+		.node-title {
+			font-size:   2vw;
+			font-family: "Verbena";
+			line-height: 1;
+			color:       rgb(65, 137, 148);
+			text-shadow: 0px 0px 3px #FFF;
+		}
+	}
+
+	&.hotspot.continent {
+		background: transparent!important;
+		border:     none !important;
+
+		.node-title {
+			text-align:  center;
+			font-size:   4vw;
+			font-family: "Verbena";
+			line-height: .75;
+			color:       #333;
+			text-shadow: 0px 0px 3px #FFF;
+		}
+
+		&:hover .node-title,
+		.node-title:hover,
+		.node-title.active {
+			color:       #FFF;
+			text-shadow: 0px 0px 2.5px #AAA;
+		}
+	}
+
+	&.hotspot.image-hotspot {
+		width: 6.25% !important;
+		height: 9.107468123861565% !important;
+		border-radius: 0 !important;
+		border: none !important;
+
+		background-color:    transparent;
+		background-repeat:   no-repeat;
+		background-position: center;
+		background-size:     contain;
+
+		transform: translate(-50%, -50%);
+		animation: float 3s ease-in-out infinite;
+	}
 }
 
-.hotspot.hotspot.image-hotspot {
-	width: 6.25% !important;
-	height: 9.107468123861565% !important;
-	border-radius: 0;
-	border: none;
-	background-color: transparent;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: contain;
-	transform: translate(-50%, -50%);
-	animation: float 3s ease-in-out infinite;
-}
 
 @keyframes float {
 	0% {
@@ -52,10 +119,6 @@ img.map-background,
 .litetooltip-hotspot-wrapper {
 	width:     100% !important;
 	max-width: 100% !important;
-}
-
-.litetooltip-hotspot-container .hotspot {
-	z-index: 1000!important;
 }
 
 .litetooltip-wrapper {

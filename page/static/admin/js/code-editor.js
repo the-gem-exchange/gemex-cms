@@ -5,7 +5,8 @@ function initCodeEditor(){
 			indentWithTabs: true,
 			lineNumbers:    true,
 			theme:          'dracula',
-			mode:           'htmlmixed'
+			mode:           'htmlmixed',
+			lineWrapping:   true,
 		});
 	});
 }

@@ -1,5 +1,7 @@
 from django import template
 
+from bs4 import BeautifulSoup # Documentation: https://www.crummy.com/software/BeautifulSoup/bs4/doc/
+
 register = template.Library()
 
 @register.simple_tag()
@@ -19,3 +21,14 @@ def sex(value):
 	if value == 'x':
 		return 'Unisex'
 	return ''
+
+@register.simple_tag()
+def map_node_html(html):
+	soup = BeautifulSoup(html+"</div>", 'html5lib')
+	div  = soup.div
+	attrs = div.attrs
+
+	return {
+		'coords': html,
+		'attrs':  attrs
+	}

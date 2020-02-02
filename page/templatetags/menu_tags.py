@@ -23,10 +23,13 @@ def sex(value):
 	return ''
 
 @register.simple_tag()
-def map_node_html(html):
+def map_node_html(html, image=None):
 	soup = BeautifulSoup(html+"</div>", 'html5lib')
 	div  = soup.div
 	attrs = div.attrs
+
+	if image:
+		attrs['style'] = attrs['style'][:-1] + "background-image: url('" + image.file.url + "');"
 
 	return {
 		'coords': html,

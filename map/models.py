@@ -58,11 +58,13 @@ class MapLocation(index.Indexed, ClusterableModel):
 
 	type = models.CharField(
 		choices=[
-			('standard',  'Standard'),
+			('capitol',   'Capitol'),
 			('continent', 'Continent'),
-			('ocean',     'Ocean'),
 			('hidden',    'Hidden'),
+			('ocean',     'Ocean'),
 			('none',      'Not on map'),
+			('standard',  'Standard'),
+			('turtle',    'Turtle'),
 		],
 		null=True,
 		blank=False,

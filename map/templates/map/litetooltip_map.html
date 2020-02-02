@@ -50,7 +50,7 @@
 						data-hotspot-bordercolor="#FFFFFF"
 				{% endif %}
 						id="{{data.attrs.id}}"
-						style="{{data.attrs.style}}; z-index:{{forloop.counter|add:1000}}!important; {% if node.rotate %}transform:rotate({{node.rotate}}deg){% endif %}"
+						style="{{data.attrs.style}}; z-index:{{forloop.counter|add:1000}}!important;"
 
 						data-template="{{data.attrs.data_template}}"
 						data-templatename="{{data.attrs.data_templatename}}"
@@ -73,10 +73,10 @@
 						data-hotspot-blink="false"
 					>
 						{% if node.type != 'hidden' %}
-							<div class="node-title">
+							<div class="node-title" style="{% if node.rotate %}transform:rotate({{node.rotate}}deg){% endif %}">
 								{{node.title}}
 							</div>
-							{% if node.type != 'continent' and node.type != 'ocean' %}
+							{% if node.description or node.type == 'standard' %}
 								<div class="data-container">
 									<h1>{{node.title}}</h1>
 									{{node.description|richtext}}

@@ -33,7 +33,9 @@ class MapSettings(ClusterableModel, BaseSetting):
 class MapLocation(index.Indexed, ClusterableModel):
 	title       = models.CharField(max_length=255, help_text="The name as it appears on the map.")
 	description = RichTextField(blank=True)
-	node_html   = models.TextField(blank=True)
+	node_html   = models.TextField(
+		blank=True,
+	)
 	node_image  = models.ForeignKey(
 		'image.CustomImage',
 		null=True,

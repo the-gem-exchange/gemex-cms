@@ -11,6 +11,16 @@ header, .page-explorer .listing .index, .breadcrumb{
 	color: #fff;
 }
 
+// Code Editor / CodeMirror
+.code-editor {
+	.CodeMirror {
+		max-width:   100%;
+		overflow:    hidden;
+		font-size:   14px;
+		line-height: 1.75;
+	}
+}
+
 // Tables
 .listing .title {
 	white-space: nowrap;

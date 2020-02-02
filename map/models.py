@@ -68,8 +68,8 @@ from wagtail.contrib.modeladmin.options import ModelAdmin, modeladmin_register
 class MapLocationAdmin(ModelAdmin):
 	model         = MapLocation
 	menu_icon     = 'site'
-	list_display  = ('title',)
-	search_fields = ['title']
+	list_display  = ('title', 'description')
+	search_fields = ['title', 'description']
 	list_display_add_buttons = 'title'
 
 modeladmin_register(MapLocationAdmin)

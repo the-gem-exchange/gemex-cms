@@ -7,12 +7,12 @@ function initLiteTooltip(){
 }
 
 function showAllOverlays(){
-	$('[id*="__background"]').addClass('show');
+	// $('[id*="__background"]').addClass('show');
 	$('.continent .node-title').addClass('active');
 }
 
 function hideAllOverlays(){
-	$('[id*="__background"]').removeClass('show');
+	// $('[id*="__background"]').removeClass('show');
 	$('.continent .node-title').removeClass('active');
 }
 

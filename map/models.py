@@ -64,6 +64,7 @@ class MapLocation(index.Indexed, ClusterableModel):
 			('ocean',     'Ocean'),
 			('none',      'Not on map'),
 			('standard',  'Standard'),
+			('text',      'Text'),
 			('turtle',    'Turtle'),
 		],
 		null=True,

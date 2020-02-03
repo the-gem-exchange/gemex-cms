@@ -23,26 +23,35 @@ img.map-overlay.show {
 	opacity:       0.9!important;
 
 	.node-title {
-		opacity:    1;
-		transition: 0.2s ease-in-out all;
-		display:    block;
-		float:      left;
-		text-align: center;
+		font-family: "Verbena";
+		opacity:     1;
+		transition:  0.2s linear all;
+		display:     block;
+		float:       left;
+		text-align:  center;
+	}
+
+	.data-container {
+		line-height: 1.5;
 	}
 
 	&.hotspot.standard {
-		&:hover .node-title {
-			width:      300%;
-			font-size:  14px;
-			margin-top: 100%;
+		.node-title {
 			opacity:    0;
-			transform:  translateX(-50%);
-			position:   absolute;
-			display:    block;
 		}
+	}
+
+	&.hotspot.text{
+		background: transparent !important;
+		border:     none !important;
 
 		.node-title {
-			display: none;
+			font-size:   1.5vw;
+			position:    absolute;
+			display:     block;
+			color:       #333;
+			line-height: 1;
+			text-shadow: 1px 1px 0 #FFF;
 		}
 	}
 
@@ -57,10 +66,9 @@ img.map-overlay.show {
 
 		.node-title {
 			font-size:   2vw;
-			font-family: "Verbena";
 			line-height: 1;
 			color:       rgb(65, 137, 148);
-			text-shadow: 0px 0px 3px #FFF;
+			text-shadow: 1px 1px 0px #FFF;
 		}
 	}
 
@@ -71,23 +79,22 @@ img.map-overlay.show {
 		.node-title {
 			text-align:  center;
 			font-size:   4vw;
-			font-family: "Verbena";
 			line-height: .75;
 			color:       #333;
-			text-shadow: 0px 0px 3px #FFF;
+			text-shadow: 1px 1px 0px #FFF;
 		}
 
 		&:hover .node-title,
 		.node-title:hover,
 		.node-title.active {
 			color:       #FFF;
-			text-shadow: 0px 0px 2.5px #AAA;
+			text-shadow: 1px 1px 0px #333;
 		}
 	}
 
 	&.hotspot.image-hotspot.capitol {
-		width:  2.9375% !important; 
-		height: 4.280510018214937% !important; 
+		width:  2.9375% !important;
+		height: 4.280510018214937% !important;
 	}
 
 	&.hotspot.image-hotspot.turtle {

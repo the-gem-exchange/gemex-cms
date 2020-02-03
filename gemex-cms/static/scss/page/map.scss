@@ -28,7 +28,10 @@ img.map-overlay.show {
 		transition:  0.2s linear all;
 		display:     block;
 		float:       left;
+
 		text-align:  center;
+		text-shadow: 1px  1px 1px #FFF,
+					-1px -1px 1px #FFF;
 	}
 
 	.data-container {
@@ -46,12 +49,11 @@ img.map-overlay.show {
 		border:     none !important;
 
 		.node-title {
-			font-size:   1.5vw;
+			font-size:   1.75vw;
 			position:    absolute;
 			display:     block;
 			color:       #333;
-			line-height: 1;
-			text-shadow: 1px 1px 0 #FFF;
+			line-height: 0.9;
 		}
 	}
 
@@ -68,7 +70,6 @@ img.map-overlay.show {
 			font-size:   2vw;
 			line-height: 1;
 			color:       rgb(65, 137, 148);
-			text-shadow: 1px 1px 0px #FFF;
 		}
 	}
 
@@ -81,7 +82,6 @@ img.map-overlay.show {
 			font-size:   4vw;
 			line-height: .75;
 			color:       #333;
-			text-shadow: 1px 1px 0px #FFF;
 		}
 
 		&:hover .node-title,
@@ -98,7 +98,7 @@ img.map-overlay.show {
 	}
 
 	&.hotspot.image-hotspot.turtle {
-		width: 6.25% !important;
+		width:  6.25% !important;
 		height: 9.107468123861565% !important;
 	}
 
@@ -110,6 +110,7 @@ img.map-overlay.show {
 		background-repeat:   no-repeat;
 		background-position: center;
 		background-size:     contain;
+
 		transform: translate(-50%, -50%);
 
 		.node-title {

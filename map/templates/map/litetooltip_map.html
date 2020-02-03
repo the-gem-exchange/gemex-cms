@@ -18,55 +18,55 @@
 
 		{% for node in nodes %}
 			{% if node.type != 'none' %}
-			<div
-				id="{{node.node_id}}"
-				class="hotspot {{node.type}} {% if node.node_image %}image-hotspot{% endif %}"
-				style="width:{{node.width}};
-					   height:{{node.height}};
-					   top:{{node.y}};
-					   left:{{node.x}};
-					   background-image:url('{{node.node_image.file.url}}');
-					   z-index:{{forloop.counter|add:1000}}!important;"
+				<div
+					id="{{node.node_id}}"
+					class="hotspot {{node.type}} {% if node.node_image %}image-hotspot{% endif %}"
+					style="width:{{node.width}};
+						   height:{{node.height}};
+						   top:{{node.y}};
+						   left:{{node.x}};
+						   background-image:url('{{node.node_image.file.url}}');
+						   z-index:{{forloop.counter|add:1000}}!important;"
 
-				data-template=""
-				data-templatename=""
+					data-template=""
+					data-templatename=""
 
-				data-location="bottom"
-				data-opacity=""
+					data-location="bottom"
+					data-opacity="0.8"
 
-				data-backcolor="#000000"
-				data-textcolor="#FFFFFF"
-				data-textalign="left"
+					data-backcolor="#000000"
+					data-textcolor="#FFFFFF"
+					data-textalign="left"
 
-				data-margin="5"
-				data-padding="15"
+					data-margin="5"
+					data-padding="15"
 
-				data-delay=""
-				data-trigger="hover"
-				data-issticky="true"
+					data-delay=""
+					data-trigger="hover"
+					data-issticky="true"
 
-				data-hotspot-x=""
-				data-hotspot-y=""
-				data-hotspot-borderradius=""
-				data-hotspot-bgcolor=""
-				data-hotspot-bordercolor=""
-				data-hotspot-blink="false"
-			>
-				{% if node.type != 'hidden' %}
+					data-hotspot-x=""
+					data-hotspot-y=""
+					data-hotspot-borderradius=""
+					data-hotspot-bgcolor=""
+					data-hotspot-bordercolor=""
+					data-hotspot-blink="false"
+				>
+					{% if node.type != 'hidden' %}
 
-					<div class="node-title" style="{% if node.rotate %}transform:rotate({{node.rotate}}deg){% endif %}">
-						{{node.title}}
-					</div>
-
-					{% if node.description or node.type == 'standard' %}
-						<div class="data-container">
-							<h1>{{node.title}}</h1>
-							{{node.description|richtext}}
+						<div class="node-title" style="{% if node.rotate %}transform:rotate({{node.rotate}}deg){% endif %}">
+							{{node.title}}
 						</div>
-					{% endif %}
 
-				{% endif %}
-			</div>
+						{% if node.description or node.type == 'standard' %}
+							<div class="data-container">
+								<h1>{{node.title}}</h1>
+								{{node.description|richtext}}
+							</div>
+						{% endif %}
+
+					{% endif %}
+				</div>
 			{% endif %}
 		{% endfor %}
 

@@ -1,8 +1,12 @@
+from bs4 import BeautifulSoup # Documentation: https://www.crummy.com/software/BeautifulSoup/bs4/doc/
+
 from django.db import models
 from django.utils.html import format_html
 
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
+
+import re
 
 from wagtail.admin.edit_handlers import InlinePanel, FieldPanel, HelpPanel, MultiFieldPanel
 from wagtail.contrib.settings.models import BaseSetting, register_setting
@@ -36,8 +40,14 @@ class MapLocation(index.Indexed, ClusterableModel):
 	title       = models.CharField(max_length=255, help_text="The name as it appears on the map.")
 	description = RichTextField(blank=True)
 
+	node_id = models.CharField(blank=True, max_length=255)
+	x = models.CharField(blank=True, max_length=255)
+	y = models.CharField(blank=True, max_length=255)
+	width  = models.CharField(blank=True, max_length=255)
+	height = models.CharField(blank=True, max_length=255)
+	rotate = models.CharField(blank=True, max_length=10, help_text="Rotates the icon/title on the map, in degrees (180, -45, 90, etc)")
+
 	node_html = models.TextField(blank=True)
-	rotate    = models.CharField(blank=True, max_length=10, help_text="Rotates the icon/title on the map, in degrees (180, -45, 90, etc)")
 
 	node_image  = models.ForeignKey(
 		'image.CustomImage',
@@ -110,14 +120,55 @@ class MapLocation(index.Indexed, ClusterableModel):
 		FieldPanel('title'),
 		FieldPanel('type'),
 		FieldPanel('description'),
-		FieldPanel('rotate'),
 
-		FieldPanel('node_html', classname="code-editor"),
-		HelpPanel(content='HTML can be generated <a target="_blank" href="https://www.inabrains.com/tooltip/image-hotspot-creator.html">here</a>'),
+		MultiFieldPanel([
+			FieldPanel('node_id'),
+			FieldPanel('rotate'),
+			FieldPanel('width'),
+			FieldPanel('height'),
+			FieldPanel('x'),
+			FieldPanel('y'),
+		], heading="Positioning"),
+
+		MultiFieldPanel([
+			FieldPanel('node_html', classname="code-editor"),
+			HelpPanel(content='Paste HTML code here to overwrite settings. HTML can be generated <a target="_blank" href="https://www.inabrains.com/tooltip/image-hotspot-creator.html">here</a>.'),
+		], heading="Code"),
 
 		ImageChooserPanel('node_image'),
 		ImageChooserPanel('overlay_image'),
 	]
+
+	def save(self):
+		# If code exists, overwrite existing coords
+		if self.node_html:
+			# Extract attrs from div
+			soup = BeautifulSoup(self.node_html+"</div>", 'html5lib')
+			div  = soup.div
+			attrs = div.attrs
+
+
+			self.node_id = attrs.get('id', self.node_id)
+
+			# Extract styles
+			rx     = re.compile(r'(?:width|height|top|left):[^;]+;?')
+			styles = rx.findall(self.node_html)
+
+			# Assign found styles to fields
+			for style in styles:
+				if 'width' in style:
+					self.width = style.replace(';','').replace('width:','').strip(' ')
+				if 'height' in style:
+					self.height = style.replace(';','').replace('height:','').strip(' ')
+				if 'left' in style:
+					self.x = style.replace(';','').replace('left:','').strip(' ')
+				if 'top' in style:
+					self.y = style.replace(';','').replace('top:','').strip(' ')
+
+			self.node_html = ''
+
+			super(MapLocation, self).save()
+
 
 from wagtail.contrib.modeladmin.options import ModelAdmin, modeladmin_register
 class MapLocationAdmin(ModelAdmin):

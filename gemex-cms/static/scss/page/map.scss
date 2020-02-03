@@ -30,24 +30,33 @@ img.map-overlay.show {
 		float:       left;
 
 		text-align:  center;
-		text-shadow: 1px  1px 1px #FFF,
-					-1px -1px 1px #FFF;
+		text-shadow: -1px -1px 0 #FFF,
+					  1px -1px 0 #FFF,
+					 -1px  1px 0 #FFF,
+					  1px  1px 0 #FFF;
 	}
 
 	.data-container {
 		line-height: 1.5;
 	}
 
+	&.hotspot.hidden,
+	&.hotspot.ocean,
+	&.hotspot.continent,
+	&.hotspot.text,
+	&.hotspot.image-hotspot {
+		background-color: transparent !important;
+		border:           none !important;
+		border-radius:    none !important;
+	}
+
 	&.hotspot.standard {
 		.node-title {
-			opacity:    0;
+			opacity: 0;
 		}
 	}
 
 	&.hotspot.text{
-		background: transparent !important;
-		border:     none !important;
-
 		.node-title {
 			font-size:   1.75vw;
 			position:    absolute;
@@ -57,15 +66,7 @@ img.map-overlay.show {
 		}
 	}
 
-	&.hotspot.hidden {
-		background: transparent !important;
-		border:     none !important;
-	}
-
 	&.hotspot.ocean {
-		background: transparent !important;
-		border:     none !important;
-
 		.node-title {
 			font-size:   2vw;
 			line-height: 1;
@@ -74,9 +75,6 @@ img.map-overlay.show {
 	}
 
 	&.hotspot.continent {
-		background: transparent!important;
-		border:     none !important;
-
 		.node-title {
 			text-align:  center;
 			font-size:   4vw;
@@ -88,52 +86,38 @@ img.map-overlay.show {
 		.node-title:hover,
 		.node-title.active {
 			color:       #FFF;
-			text-shadow: 1px 1px 0px #333;
+			text-shadow: -1px -1px 0 #333,
+						  1px -1px 0 #333,
+						 -1px  1px 0 #333,
+						  1px  1px 0 #333;
 		}
 	}
 
 	&.hotspot.image-hotspot.capitol {
-		width:  2.9375% !important;
+		width:  2.9375%            !important;
 		height: 4.280510018214937% !important;
 	}
 
 	&.hotspot.image-hotspot.turtle {
-		width:  6.25% !important;
+		width:  6.25%              !important;
 		height: 9.107468123861565% !important;
+		animation: float 3s ease-in-out infinite;
 	}
 
 	&.hotspot.image-hotspot {
-		border-radius: 0 !important;
-		border: none !important;
-
-		background-color:    transparent;
 		background-repeat:   no-repeat;
 		background-position: center;
 		background-size:     contain;
-
 		transform: translate(-50%, -50%);
 
-		.node-title {
-			opacity: 0;
-		}
-	}
-
-	&.hotspot.turtle {
-		animation: float 3s ease-in-out infinite;
+		.node-title { opacity: 0; }
 	}
 }
 
-
 @keyframes float {
-	0% {
-		transform: translate(-50%, -50%);
-	}
-	50% {
-		transform: translate(-50%, -55%);
-	}
-	100% {
-		transform: translate(-50%, -50%);
-	}
+	0%   { transform: translate(-50%, -50%); }
+	50%  { transform: translate(-50%, -55%); }
+	100% { transform: translate(-50%, -50%); }
 }
 
 img.map-overlay,

@@ -1,9 +1,99 @@
 @import '../colors.scss';
+@import '../typography.scss';
 @import './colorpicker.scss';
 
 header, .page-explorer .listing .index, .breadcrumb{
 	background: #1a1a1a;
 	color: #ccc;
+}
+
+header {
+	background-image: url(https://static.thegemexchange.net/media/images/background_tropical_starsweepers.original.jpg);
+	background-size:  100%;
+	box-shadow:       inset 0 0 100px 100px rgba(0,0,0,0.5);
+
+	background-attachment: fixed;
+
+	.col1{
+		display: flex;
+
+		.avatar {
+			display: flex;
+			flex-direction: column;
+			align-self: center;
+			margin: auto;
+		}
+	}
+
+	h1 {
+		font-family: "Verbena";
+		color:       #000 !important;
+		text-shadow: -1px -1px 0 #FFF,
+					  1px -1px 0 #FFF,
+					 -1px  1px 0 #FFF,
+					  1px  1px 0 #FFF;
+	}
+
+	.button {
+		background: #333;
+		transition: 0.3s ease-in-out;
+
+		&:hover, &:focus, &:active {
+			background: #666;
+		}
+	}
+
+	> .row {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		flex-wrap: nowrap;
+
+		.left, .right {
+			display: flex;
+			float: none !important;
+		}
+
+		.left {
+			flex: auto;
+
+			.col {
+				display: flex;
+				justify-content: flex-start;
+			}
+
+		}
+
+		form {
+			float:   none;
+			display: flex;
+			flex:    auto;
+
+			* {
+				width: 100%;
+				max-width: 100%;
+			}
+
+			input {
+				background: rgba(125, 125, 125, 0.5)!important;
+				border-radius: 500px;
+				color: #fff;
+				letter-spacing: 1px;
+
+				&::placeholder{
+					opacity: .9;
+				}
+			}
+
+			ul.fields {
+				display: flex;
+			}
+		}
+
+		.right {
+			justify-self: flex-end;
+		}
+	}
 }
 
 .breadcrumb li a:after,
@@ -28,6 +118,9 @@ header, .page-explorer .listing .index, .breadcrumb{
 
 // Side nav
 .nav-main {
+	.menu-active > a {
+		border-left-color: #CCC;
+	}
 	li#footer {
 		padding: 1px; // Pad to match height of content editor footer
 	}

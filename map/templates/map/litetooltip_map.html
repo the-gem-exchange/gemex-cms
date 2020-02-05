@@ -20,12 +20,11 @@
 			{% if node.type != 'none' %}
 				<div
 					id="{{node.node_id}}"
-					class="hotspot {{node.type}} {% if node.node_image %}image-hotspot{% endif %}"
+					class="hotspot {{node.type}} {% if node.node_image.count > 0 %}image-hotspot{% endif %}"
 					style="width:{{node.width}};
 						   height:{{node.height}};
 						   top:{{node.y}};
 						   left:{{node.x}};
-						   background-image:url('{{node.node_image.file.url}}');
 						   z-index:{{forloop.counter|add:1000}}!important;"
 
 					data-template=""
@@ -53,6 +52,12 @@
 					data-hotspot-blink="false"
 				>
 					{% if node.type != 'hidden' %}
+
+						<div class="node-image">
+							{% for x in node.node_image.all %}
+							{% image x.image original %}
+							{% endfor %}
+						</div>
 
 						<div class="node-title" style="{% if node.rotate %}transform:rotate({{node.rotate}}deg){% endif %}">
 							{{node.title}}

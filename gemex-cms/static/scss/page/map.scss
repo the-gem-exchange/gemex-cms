@@ -36,6 +36,23 @@ img.map-overlay.show {
 					  1px  1px 0 #FFF;
 	}
 
+	.node-image {
+		// position: relative;
+		// height: 100%;
+		// width: 100%;
+
+		img {
+
+			max-height: 100%;
+			width:auto;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%,-50%);
+
+		}
+	}
+
 	.data-container {
 		line-height: 1.5;
 	}
@@ -93,22 +110,37 @@ img.map-overlay.show {
 		}
 	}
 
-	&.hotspot.image-hotspot.capitol {
-		width:  2.9375%            !important;
-		height: 4.280510018214937% !important;
-	}
-
 	&.hotspot.image-hotspot.turtle {
-		width:  6.25%              !important;
-		height: 9.107468123861565% !important;
-		animation: float 3s ease-in-out infinite;
+		width: 5.25% !important;
+		height: 12.107% !important;
+		filter: drop-shadow(1px 60px 10px rgba(0,0,0,.44));
+
+		img {
+			animation: float 5s ease infinite;
+
+			&:hover{
+				animation-play-state: paused;
+			}
+
+			&:nth-child(1){
+				z-index: 3;
+			}
+			&:nth-child(2){
+				z-index: 2;
+				animation-direction: reverse;
+			}
+			&:nth-child(3){
+				animation-delay: .3s;
+				z-index: 1;
+			}
+		}
 	}
 
 	&.hotspot.image-hotspot {
 		background-repeat:   no-repeat;
 		background-position: center;
 		background-size:     contain;
-		transform: translate(-50%, -50%);
+		transform:           translate(-50%, -50%);
 
 		.node-title { opacity: 0; }
 	}
@@ -116,7 +148,7 @@ img.map-overlay.show {
 
 @keyframes float {
 	0%   { transform: translate(-50%, -50%); }
-	50%  { transform: translate(-50%, -55%); }
+	50%  { transform: translate(-50%, -60%); }
 	100% { transform: translate(-50%, -50%); }
 }
 

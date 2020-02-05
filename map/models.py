@@ -48,15 +48,8 @@ class MapLocation(index.Indexed, ClusterableModel):
 	rotate = models.CharField(blank=True, max_length=10, help_text="Rotates the icon/title on the map, in degrees (180, -45, 90, etc)")
 
 	node_html = models.TextField(blank=True)
+	node_css = models.TextField(blank=True)
 
-	node_image  = models.ForeignKey(
-		'image.CustomImage',
-		null=True,
-		blank=True,
-		on_delete=models.SET_NULL,
-		related_name="node_image",
-		help_text="Replaces the dot with an image."
-	)
 	overlay_image = models.ForeignKey(
 		'image.CustomImage',
 		null=True,
@@ -68,7 +61,6 @@ class MapLocation(index.Indexed, ClusterableModel):
 
 	type = models.CharField(
 		choices=[
-			('capitol',   'Capitol'),
 			('continent', 'Continent'),
 			('hidden',    'Hidden'),
 			('ocean',     'Ocean'),
@@ -99,10 +91,11 @@ class MapLocation(index.Indexed, ClusterableModel):
 		)
 
 	def _image(self):
-		if self.node_image:
+		layer = MapLocationImage.objects.filter(location=self).first()
+		if layer and layer.image:
 			return format_html(
 				'<img class="species-thumbnail" src="{}" />',
-				self.node_image.file.url,
+				layer.image.file.url,
 			)
 		else:
 			return None
@@ -133,9 +126,15 @@ class MapLocation(index.Indexed, ClusterableModel):
 		MultiFieldPanel([
 			FieldPanel('node_html', classname="code-editor"),
 			HelpPanel(content='Paste HTML code here to overwrite settings. HTML can be generated <a target="_blank" href="https://www.inabrains.com/tooltip/image-hotspot-creator.html">here</a>.'),
+			FieldPanel('node_css', classname="code-editor"),
+			HelpPanel(content='Inline styles for this node.'),
 		], heading="Code"),
 
-		ImageChooserPanel('node_image'),
+		MultiFieldPanel([
+			InlinePanel('node_image'),
+			HelpPanel(content='Replace the dot with an image. Can be multiple layers.'),
+		], heading="Node Replacement Image"),
+
 		ImageChooserPanel('overlay_image'),
 	]
 
@@ -143,10 +142,9 @@ class MapLocation(index.Indexed, ClusterableModel):
 		# If code exists, overwrite existing coords
 		if self.node_html:
 			# Extract attrs from div
-			soup = BeautifulSoup(self.node_html+"</div>", 'html5lib')
-			div  = soup.div
+			soup  = BeautifulSoup(self.node_html+"</div>", 'html5lib')
+			div   = soup.div
 			attrs = div.attrs
-
 
 			self.node_id = attrs.get('id', self.node_id)
 
@@ -167,7 +165,25 @@ class MapLocation(index.Indexed, ClusterableModel):
 
 			self.node_html = ''
 
-			super(MapLocation, self).save()
+		super(MapLocation, self).save()
+
+
+class MapLocationImage(Orderable):
+
+	location = ParentalKey(MapLocation, on_delete=models.CASCADE, related_name='node_image')
+
+	image  = models.ForeignKey(
+ 		'image.CustomImage',
+ 		null=True,
+ 		blank=True,
+ 		on_delete=models.SET_NULL,
+ 		related_name="node_image",
+ 		help_text="Replaces the dot with an image."
+ 	)
+
+	panels = [
+		ImageChooserPanel('image')
+	]
 
 
 from wagtail.contrib.modeladmin.options import ModelAdmin, modeladmin_register

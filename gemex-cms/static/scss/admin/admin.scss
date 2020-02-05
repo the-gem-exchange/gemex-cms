@@ -101,6 +101,84 @@ header {
 	}
 }
 
+.modal-content header{
+	padding-bottom: 5em;
+}
+
+section.summary {
+	background-color: #333;
+	color: #FFF;
+
+	margin: 0;
+	padding-top: 1em;
+	padding-bottom: 1em;
+
+	ul.stats {
+		display: flex;
+		justify-content: flex-start;
+		padding: 0;
+		flex-flow: row nowrap;
+
+		li {
+			float: none;
+			display: flex;
+			padding: 1.5em;
+			margin: 0;
+			justify-content: flex-start;
+			white-space: nowrap;
+			flex-grow: 1;
+			min-width: 160px;
+			max-width: 25%;
+
+			a {
+				display: flex;
+				flex-direction: column;
+				width: auto;
+				flex-grow: 1;
+				color: #ccc;
+
+				span {
+					display: inline;
+					font-size: 2em;
+				}
+			}
+
+			&::before {
+				opacity:   0.66;
+				font-size: 3em;
+			}
+		}
+
+		/* Overrides "display:table" */
+		&::before {
+			content: unset;
+			display: none;
+		}
+
+		/* Fill empty space in last row */
+		&::after {
+			content: " ";
+			flex: auto;
+			display: flex;
+		}
+	}
+}
+
+
+.panel-upgrade-notification .help-block {
+	background: #999;
+	color: #eee;
+
+	&:before {
+		color: #333;
+	}
+
+	a {
+		color: #333;
+		font-weight: bold;
+	}
+}
+
 .breadcrumb li a:after,
 .breadcrumb li span:after{
 	color: #fff;

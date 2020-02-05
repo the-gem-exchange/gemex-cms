@@ -96,9 +96,9 @@ function initAdmin(){
 	initColorpickers();
 	initColumnSettings();
 	listenForChanges();
-	initCodeEditor();
 }
 
 $(document).ready(function(){
+	initCodeEditor();
 	initAdmin();
 });

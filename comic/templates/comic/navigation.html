@@ -1,21 +1,40 @@
 <div class="comic-navigation">
 
-	<a title="First" href="/comic/1/" {% if page.page_number == 1 %}class="disabled"{% endif %}>
-		<i class="fas fa-angle-double-left"></i>
-	</a>
+	{% if archive %}
+		<a title="First Page" href="/comic/archive/1/" {% if pages.number == 1 %}class="disabled"{% endif %}>
+			<i class="fas fa-angle-double-left"></i>
+		</a>
+		<a title="Previous Page" {% if pages.has_previous %}href="/comic/archive/{{pages.previous_page_number}}/" class="previous-page"{% else %}class="disabled"{% endif %}>
+			<i class="fas fa-angle-left"></i>
+		</a>
+	{% else %}
+		<a title="First Page" href="/comic/1/" {% if page.page_number == 1 %}class="disabled"{% endif %}>
+			<i class="fas fa-angle-double-left"></i>
+		</a>
+		<a title="Previous Page" {% if prev_page %}href="/comic/{{prev_page}}/" class="previous-page"{% else %}class="disabled"{% endif %}>
+			<i class="fas fa-angle-left"></i>
+		</a>
+	{% endif %}
 
-	<a title="Previous" {% if prev_page %}href="/comic/{{prev_page}}/" class="previous-page"{% else %}class="disabled"{% endif %}>
-		<i class="fas fa-angle-left"></i>
-	</a>
+	<span>
+		<a href="/comic/archive" title="Tales of Jo'Arca Comic Archive">Archive</a>
+	</span>
 
-	<span>Page {{page.page_number}}</span>
+	{% if archive %}
+		<a title="Next Page" {% if pages.has_next %}href="/comic/archive/{{pages.next_page_number}}/" class="next-page"{% else %}class="disabled"{% endif %}>
+			<i class="fas fa-angle-right"></i>
+		</a>
+		<a title="Last Page" href="/comic/archive/{{pages.paginator.num_pages}}/" {% if pages.number == page_count %}class="disabled"{% endif %}>
+			<i class="fas fa-angle-double-right"></i>
+		</a>
+	{% else %}
+		<a title="Next Page" {% if next_page %}href="/comic/{{next_page}}/" class="next-page"{% else %}class="disabled"{% endif %}>
+			<i class="fas fa-angle-right"></i>
+		</a>
 
-	<a title="Next" {% if next_page %}href="/comic/{{next_page}}/" class="next-page"{% else %}class="disabled"{% endif %}>
-		<i class="fas fa-angle-right"></i>
-	</a>
-
-	<a title="Last" href="/comic/{{page_count}}/" {% if page.page_number == page_count %}class="disabled"{% endif %}>
-		<i class="fas fa-angle-double-right"></i>
-	</a>
+		<a title="Last Page" href="/comic/{{page_count}}/" {% if page.page_number == page_count %}class="disabled"{% endif %}>
+			<i class="fas fa-angle-double-right"></i>
+		</a>
+	{% endif %}
 
 </div>

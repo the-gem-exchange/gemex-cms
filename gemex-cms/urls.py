@@ -9,7 +9,7 @@ from wagtail.documents import urls as wagtaildocs_urls
 from .api import api_router
 
 from bot.views import get_command
-from comic.views import comic_page
+from comic.views import comic_page, comic_archive
 from trait.views import trait_page
 from map.views import map_page
 
@@ -26,6 +26,9 @@ urlpatterns = [
 	url(r'^api/', api_router.urls),
 
 	url(r'^bot-commands/(?P<command>\w+)/$', get_command),
+
+	url(r'^comic/archive/$', comic_archive),
+	url(r'^comic/archive/(?P<page_number>\d+)/$', comic_archive),
 
 	url(r'^comic/(?P<page_number>\d+)/$', comic_page),
 

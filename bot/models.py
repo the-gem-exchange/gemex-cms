@@ -84,7 +84,7 @@ class BotCommand(index.Indexed, ClusterableModel):
 	def _image(self):
 		image = self.get_image()
 		return format_html(
-			'<img class="species-thumbnail" src="{}" />',
+			'<div class="discord-message"><img src="{}" /></div>',
 			image,
 		)
 

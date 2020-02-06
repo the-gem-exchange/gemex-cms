@@ -15,7 +15,7 @@ import os
 
 from config import *
 
-VERSION = '2.7'
+VERSION = '2.7.1'
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)

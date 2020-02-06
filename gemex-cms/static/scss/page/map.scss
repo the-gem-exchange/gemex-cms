@@ -20,7 +20,8 @@ img.map-overlay.show {
 	background:    #D4aF37;
 	border:        3px solid #a37e1c;
 	border-radius: 50%;
-	opacity:       0.9!important;
+	transition:    opacity 0.3s ease-in-out;
+	opacity:       0.9;
 
 	.node-title {
 		font-family: "Verbena";
@@ -92,6 +93,11 @@ img.map-overlay.show {
 	}
 
 	&.hotspot.continent {
+
+		&#hotspot_dragonsback .node-title{
+			font-size:   1.75vw;
+		}
+
 		.node-title {
 			text-align:  center;
 			font-size:   4vw;

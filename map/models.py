@@ -50,15 +50,6 @@ class MapLocation(index.Indexed, ClusterableModel):
 	node_html = models.TextField(blank=True)
 	node_css = models.TextField(blank=True)
 
-	overlay_image = models.ForeignKey(
-		'image.CustomImage',
-		null=True,
-		blank=True,
-		on_delete=models.SET_NULL,
-		related_name="overlay_image",
-		help_text="A transparent layer over the whole map that is related to this location."
-	)
-
 	type = models.CharField(
 		choices=[
 			('continent', 'Continent'),
@@ -101,11 +92,16 @@ class MapLocation(index.Indexed, ClusterableModel):
 			return None
 
 	def _overlay(self):
-		if self.overlay_image:
-			return format_html(
-				'<img style="max-width:300px; border: 1px solid #333;" src="{}" />',
-				self.overlay_image.file.url,
-			)
+		layers = MapLocationOverlay.objects.filter(location=self)
+		if layers:
+			html = '<div class="map-overlay-thumbnail">'
+			for layer in layers:
+				html += format_html(
+					'<img style="max-width:300px; border: 1px solid #333;" src="{}" />',
+					layer.image.file.url,
+				)
+			html += '</div>'
+			return format_html(html)
 		else:
 			return None
 
@@ -135,7 +131,11 @@ class MapLocation(index.Indexed, ClusterableModel):
 			HelpPanel(content='Replace the dot with an image. Can be multiple layers.'),
 		], heading="Node Replacement Image"),
 
-		ImageChooserPanel('overlay_image'),
+
+		MultiFieldPanel([
+			InlinePanel('overlay_image'),
+			HelpPanel(content='Overlays for the entire map, activated on hover. Should match the resolution of the map image.'),
+		], heading="Overlay Image"),
 	]
 
 	def save(self):
@@ -178,7 +178,23 @@ class MapLocationImage(Orderable):
  		blank=True,
  		on_delete=models.SET_NULL,
  		related_name="node_image",
- 		help_text="Replaces the dot with an image."
+ 	)
+
+	panels = [
+		ImageChooserPanel('image')
+	]
+
+
+class MapLocationOverlay(Orderable):
+
+	location = ParentalKey(MapLocation, on_delete=models.CASCADE, related_name='overlay_image')
+
+	image  = models.ForeignKey(
+ 		'image.CustomImage',
+ 		null=True,
+ 		blank=True,
+ 		on_delete=models.SET_NULL,
+ 		related_name="overlay_image",
  	)
 
 	panels = [

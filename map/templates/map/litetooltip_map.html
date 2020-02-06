@@ -3,18 +3,7 @@
 <div class="litetooltip-hotspot-wrapper">
 	<div class="litetooltip-hotspot-container" style="padding-bottom: 68.625%">
 
-		{% for node in nodes %}
-			{% if node.overlay_image %}
-				<img
-					src="{{node.overlay_image.file.url}}"
-					id="{{node.node_id}}__background"
-					class="map-overlay"
-					style="z-index:{{forloop.counter|add:3}};"
-				>
-			{% endif %}
-		{% endfor %}
-
-		<img src="{{settings.map.MapSettings.map_image.file.url}}" class="map-background" data-width="1600" data-height="1098" />
+		{% include 'map/map_layers.html' %}
 
 		{% for node in nodes %}
 			{% if node.type != 'none' %}
@@ -55,7 +44,7 @@
 
 						<div class="node-image">
 							{% for x in node.node_image.all %}
-							{% image x.image original %}
+								{% image x.image original %}
 							{% endfor %}
 						</div>
 

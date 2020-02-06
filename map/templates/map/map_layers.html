@@ -1,0 +1,16 @@
+{% for node in nodes %}
+	{% with forloop.counter|add:3 as node_index %}
+		{% if node.overlay_image %}
+			{# Reverse the image loop so the highest z-index is applied to the top layer #}
+			{% for x in node.overlay_image.all reversed %}
+				<img
+					src="{{x.image.file.url}}"
+					class="{{node.node_id}}__background map-overlay"
+					style="z-index:{{node_index|add:forloop.counter}};"
+				>
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+{% endfor %}
+
+<img src="{{settings.map.MapSettings.map_image.file.url}}" class="map-background" data-width="1600" data-height="1098" />

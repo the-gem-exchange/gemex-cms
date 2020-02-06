@@ -6,23 +6,26 @@ function initLiteTooltip(){
 	});
 }
 
-function showAllOverlays(){
-	// $('[id*="__background"]').addClass('show');
-	$('.continent .node-title').addClass('active');
+function showAllContinents(){
+	$('.continent .node-title').addClass('active'); // Highlight text
+
+	// Hide non-continents
+	$('.hotspot:not(.continent):not(.ocean)').css({'opacity': 0});
 }
 
-function hideAllOverlays(){
-	// $('[id*="__background"]').removeClass('show');
+function hideAllContinents(){
 	$('.continent .node-title').removeClass('active');
+
+	$('.hotspot:not(.continent):not(.ocean)').css({'opacity': 1});
 }
 
 function initCompass(){
 	$('#hotspot_compass')
 		.mouseenter(function() {
-			showAllOverlays();
+			showAllContinents();
 		})
 		.mouseleave(function() {
-			hideAllOverlays();
+			hideAllContinents();
 		});
 }
 
@@ -30,10 +33,10 @@ function initMapOverlays(){
 	// Show overlay image
 	$('[id*="hotspot_"]')
 		.mouseenter(function() {
-			$("#"+$(this)[0]['id']+"__background").addClass('show');
+			$("."+$(this)[0]['id']+"__background").addClass('show');
 		})
 		.mouseleave(function() {
-			$("#"+$(this)[0]['id']+"__background").removeClass('show');
+			$("."+$(this)[0]['id']+"__background").removeClass('show');
 		});
 }
 

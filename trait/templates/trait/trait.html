@@ -8,6 +8,13 @@
 		data-sex="{{trait.sex}}"
 		data-rarity="{{trait.rarity}}">
 
+		<div class="trait-select">
+			<label>
+				<input type="checkbox" class="selected">
+				<span class="checkmark"></span>
+			</label>
+		</div>
+
 		<span class="trait-sex {{trait.sex}}" title="{{trait.get_sex_display}}">{{trait.sex_icon}}</span>
 
 		<span class="trait-rarity {{trait.rarity}}" title="{{trait.get_rarity_display}}">

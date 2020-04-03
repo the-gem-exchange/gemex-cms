@@ -3,8 +3,7 @@ from .base import *
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# SECURITY WARNING: define the correct hosts in production!
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['thegemexchange.net', 'localhost']
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 

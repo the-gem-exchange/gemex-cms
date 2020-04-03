@@ -3,7 +3,7 @@ from .base import *
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['thegemexchange.net', 'localhost']
+ALLOWED_HOSTS = ['thegemexchange.net', 'localhost', 'ec2-13-58-247-166.us-east-2.compute.amazonaws.com']
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
